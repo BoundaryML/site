@@ -18,7 +18,7 @@ import {
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
-import { Icons } from '../todo/(marketing)/_components/icons';
+// import { Icons } from '../todo/(marketing)/_components/icons';
 
 const INITIAL_WIDTH = '70rem';
 const MAX_WIDTH = '900px';
@@ -193,7 +193,7 @@ function MobileMenuContent({
             <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between">
                 <Link className="flex items-center gap-3" href="/">
-                  <Icons.logo className="size-7 md:size-10" />
+                  {/* <Icons.logo className="size-7 md:size-10" /> */}
                   <p className="text-lg font-semibold text-primary">BAML</p>
                 </Link>
                 <button
