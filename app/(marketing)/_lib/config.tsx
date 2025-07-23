@@ -5,6 +5,11 @@ import { cn } from '@/lib/utils';
 // import { SecondBentoAnimation } from '@/todo/(marketing)/_components/second-bento-animation';
 // import { SecurityShieldBackground } from '@/todo/(marketing)/_components/security-shield-background';
 // import { ThirdBentoAnimation } from '@/todo/(marketing)/_components/third-bento-animation';
+// import { FirstBentoAnimation } from '@/todo/(marketing)/_components/first-bento-animation';
+// import { FourthBentoAnimation } from '@/todo/(marketing)/_components/fourth-bento-animation';
+// import { SecondBentoAnimation } from '@/todo/(marketing)/_components/second-bento-animation';
+// import { SecurityShieldBackground } from '@/todo/(marketing)/_components/security-shield-background';
+// import { ThirdBentoAnimation } from '@/todo/(marketing)/_components/third-bento-animation';
 
 export const Highlight = ({
   children,
@@ -68,28 +73,28 @@ export const siteConfig = {
       'Build AI applications with type safety, generate TypeScript types, and validate your schemas.',
     items: [
       {
-        content: null /* <FirstBentoAnimation /> */,
+        // content: <FirstBentoAnimation />,
         description:
           'Define AI interfaces with confidence. Write BAML schemas that generate TypeScript types automatically.',
         id: 1,
         title: 'Type-Safe AI Interfaces',
       },
       {
-        content: null /* <SecondBentoAnimation /> */,
+        // content: <SecondBentoAnimation />,
         description:
           'Built-in support for OpenAI, Anthropic, and other AI providers. Easy to extend for custom providers.',
         id: 2,
         title: 'AI Provider Integrations',
       },
       {
-        content: null /* <ThirdBentoAnimation /> */,
+        // content: <ThirdBentoAnimation />,
         description:
           'Generate TypeScript types and runtime validation from your BAML schemas automatically.',
         id: 3,
         title: 'Automatic Type Generation',
       },
       {
-        content: null /* <FourthBentoAnimation once={false} /> */,
+        // content: <FourthBentoAnimation once={false} />,
         description:
           'Validate your AI schemas and catch errors at compile time with comprehensive type checking.',
         id: 4,
@@ -297,7 +302,7 @@ export const siteConfig = {
       'Where type safety meets AI development—designed to protect your AI applications and empower your development.',
     items: [
       {
-        content: null /* <SecurityShieldBackground /> */,
+        // content: <SecurityShieldBackground />,
         description:
           'Build AI applications without leaving your editor. Keep your focus on code while maintaining type safety throughout your AI development process.',
         id: 1,
