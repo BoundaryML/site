@@ -52,7 +52,7 @@ export function SiteHeader() {
       opacity: 0,
       scale: 1,
     },
-  };
+  } as const;
 
   const mobileLinkVar = {
     initial: {
@@ -67,7 +67,7 @@ export function SiteHeader() {
       },
       y: 0,
     },
-  };
+  } as const;
 
   const containerVariants = {
     open: {
@@ -75,7 +75,7 @@ export function SiteHeader() {
         staggerChildren: 0.06,
       },
     },
-  };
+  } as const;
 
   const [hamburgerMenuIsOpen, setHamburgerMenuIsOpen] = useState(false);
 

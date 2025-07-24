@@ -11,9 +11,9 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { Button } from '../components/button';
-import { ScrollArea } from '../components/scroll-area';
-import { cn } from '../lib/utils';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
 
 type TreeViewElement = {
   id: string;

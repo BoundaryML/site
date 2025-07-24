@@ -4,7 +4,7 @@ import { FileIcon } from 'lucide-react';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { codeToHtml } from 'shiki';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 
 export type CodeBlockProps = {
   children?: React.ReactNode;

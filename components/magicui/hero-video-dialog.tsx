@@ -5,7 +5,7 @@ import { Play, XIcon } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 
 type AnimationStyle =
   | 'from-bottom'

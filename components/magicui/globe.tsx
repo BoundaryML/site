@@ -4,7 +4,7 @@ import createGlobe, { type COBEOptions } from 'cobe';
 import { useMotionValue, useSpring } from 'motion/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useMemo, useRef } from 'react';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 
 const MOVEMENT_DAMPING = 1400;
 

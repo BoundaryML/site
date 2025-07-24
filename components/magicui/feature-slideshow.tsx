@@ -4,7 +4,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { motion, useInView } from 'motion/react';
 import type React from 'react';
 import { forwardRef, type ReactNode, useEffect, useRef, useState } from 'react';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 
 type AccordionItemProps = {
   children: React.ReactNode;

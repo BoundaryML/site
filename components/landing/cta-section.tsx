@@ -1,9 +1,5 @@
-"use client";
+'use client';
 
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Marquee from "@/components/magicui/marquee";
-import { motion, useAnimation, useInView } from "motion/react";
 import {
   BarChart,
   ChevronRight,
@@ -12,45 +8,49 @@ import {
   HeartHandshake,
   Rss,
   Shield,
-} from "lucide-react";
-import { useEffect, useId, useRef, useState } from "react";
+} from 'lucide-react';
+import { motion, useAnimation, useInView } from 'motion/react';
+import { type JSX, useEffect, useId, useRef, useState } from 'react';
+import Marquee from '@/components/magicui/marquee';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const tiles = [
   {
+    bg: (
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-orange-600 via-rose-600 to-violet-600 opacity-70 blur-[20px] filter" />
+    ),
     icon: <HeartHandshake className="size-full" />,
-    bg: (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-orange-600 via-rose-600 to-violet-600 opacity-70 blur-[20px] filter"></div>
-    ),
   },
   {
+    bg: (
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 opacity-70 blur-[20px] filter" />
+    ),
     icon: <Globe className="size-full" />,
-    bg: (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 opacity-70 blur-[20px] filter"></div>
-    ),
   },
   {
+    bg: (
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-green-500 via-teal-500 to-emerald-600 opacity-70 blur-[20px] filter" />
+    ),
     icon: <File className="size-full" />,
-    bg: (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-green-500 via-teal-500 to-emerald-600 opacity-70 blur-[20px] filter"></div>
-    ),
   },
   {
+    bg: (
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 opacity-70 blur-[20px] filter" />
+    ),
     icon: <Shield className="size-full" />,
-    bg: (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-600 opacity-70 blur-[20px] filter"></div>
-    ),
   },
   {
+    bg: (
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-orange-600 via-rose-600 to-violet-600 opacity-70 blur-[20px] filter" />
+    ),
     icon: <Rss className="size-full" />,
-    bg: (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-orange-600 via-rose-600 to-violet-600 opacity-70 blur-[20px] filter"></div>
-    ),
   },
   {
-    icon: <BarChart className="size-full" />,
     bg: (
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 opacity-70 blur-[20px] filter"></div>
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2 overflow-visible rounded-full bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 opacity-70 blur-[20px] filter" />
     ),
+    icon: <BarChart className="size-full" />,
   },
 ];
 
@@ -81,24 +81,24 @@ const Card = (card: { icon: JSX.Element; bg: JSX.Element }) => {
     if (inView) {
       controls.start({
         opacity: 1,
-        transition: { delay: Math.random() * 2, ease: "easeOut", duration: 1 },
+        transition: { delay: Math.random() * 2, duration: 1, ease: 'easeOut' },
       });
     }
   }, [controls, inView]);
 
   return (
     <motion.div
-      key={id}
-      ref={ref}
-      initial={{ opacity: 0 }}
       animate={controls}
       className={cn(
-        "relative size-20 cursor-pointer overflow-hidden rounded-2xl border p-4",
+        'relative size-20 cursor-pointer overflow-hidden rounded-2xl border p-4',
         // light styles
-        "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
+        'bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]',
         // dark styles
-        "transform-gpu dark:bg-transparent dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]"
+        'transform-gpu dark:bg-transparent dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]',
       )}
+      initial={{ opacity: 0 }}
+      key={id}
+      ref={ref}
     >
       {card.icon}
       {card.bg}
@@ -113,7 +113,7 @@ export default function CallToActionSection() {
   const [randomTiles4, setRandomTiles4] = useState<typeof tiles>([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       // Ensures this runs client-side
       setRandomTiles1(shuffleArray([...tiles]));
       setRandomTiles2(shuffleArray([...tiles]));
@@ -128,34 +128,34 @@ export default function CallToActionSection() {
         <div className="flex w-full flex-col items-center justify-center">
           <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
             <Marquee
-              reverse
               className="-delay-[200ms] [--duration:20s]"
               repeat={5}
+              reverse
             >
               {randomTiles1.map((review, idx) => (
                 <Card key={idx} {...review} />
               ))}
             </Marquee>
-            <Marquee reverse className="[--duration:30s]" repeat={5}>
+            <Marquee className="[--duration:30s]" repeat={5} reverse>
               {randomTiles2.map((review, idx) => (
                 <Card key={idx} {...review} />
               ))}
             </Marquee>
             <Marquee
-              reverse
               className="-delay-[200ms] [--duration:20s]"
               repeat={5}
+              reverse
             >
               {randomTiles3.map((review, idx) => (
                 <Card key={idx} {...review} />
               ))}
             </Marquee>
-            <Marquee reverse className="[--duration:30s]" repeat={5}>
+            <Marquee className="[--duration:30s]" repeat={5} reverse>
               {randomTiles4.map((review, idx) => (
                 <Card key={idx} {...review} />
               ))}
             </Marquee>
-            <Marquee reverse className="[--duration:30s]" repeat={5}>
+            <Marquee className="[--duration:30s]" repeat={5} reverse>
               {randomTiles4.map((review, idx) => (
                 <Card key={idx} {...review} />
               ))}
@@ -172,14 +172,14 @@ export default function CallToActionSection() {
                   Start your 7-day free trial. No credit card required.
                 </p>
                 <a
-                  href="/"
                   className={cn(
                     buttonVariants({
-                      size: "lg",
-                      variant: "outline",
+                      size: 'lg',
+                      variant: 'outline',
                     }),
-                    "group mt-4 rounded-[2rem] px-6"
+                    'group mt-4 rounded-[2rem] px-6',
                   )}
+                  href="/"
                 >
                   Get Started
                   <ChevronRight className="ml-1 size-4 transition-all duration-300 ease-out group-hover:translate-x-1" />
