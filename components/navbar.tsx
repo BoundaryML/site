@@ -7,16 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { siteConfig } from '@/app/(marketing)/_lib/config';
 // import { GitHubStarsButtonWrapper } from '@/components/ui/custom/github-stars-button/button-wrapper';
 import { ThemeToggle } from '@/components/custom/theme';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
 // import { Icons } from '../todo/(marketing)/_components/icons';
 
@@ -212,9 +203,7 @@ function MobileMenuContent({
                 <AnimatePresence>
                   {siteConfig.nav.links.map((item) => {
                     const isAnchor = isAnchorLink(item.href);
-                    const isActive = isAnchor
-                      ? activeSection === item.href.substring(1)
-                      : false;
+                    const isActive = false; // Remove anchor-based active state
 
                     return (
                       <motion.li
@@ -392,156 +381,19 @@ export function Navbar() {
   );
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'> & {
-    comingSoon?: boolean;
-  }
->(({ className, title, children, comingSoon, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-            className,
-          )}
-          ref={ref}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none flex items-center gap-2">
-            {title}
-            {comingSoon && <Badge variant="outline">Coming Soon</Badge>}
-          </div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = 'ListItem';
 
 function NavigationMenuSection() {
   return (
-    <NavigationMenu className="hidden md:block">
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="rounded-full">
-            Products
-          </NavigationMenuTrigger>
-          <NavigationMenuContent className="bg-background">
-            <ul className="grid gap-3 p-6 md:w-[600px] lg:w-[700px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-4">
-                <NavigationMenuLink asChild>
-                  <Link
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/10 to-primary/5 p-6 no-underline outline-none focus:shadow-md"
-                    href="/docs/getting-started"
-                  >
-                    {/* <Icons.logo className="w-full h-full mb-2" /> */}
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      BAML Platform
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Build AI applications with type safety and reliability.
-                      Define your AI interfaces with confidence.
-                    </p>
-                  </Link>
-                </NavigationMenuLink>
-              </li>
-              <ListItem
-                href="https://marketplace.visualstudio.com/items?itemName=boundaryml.baml"
-                title="VS Code Extension"
-              >
-                Write BAML files with syntax highlighting, autocomplete, and
-                validation directly in VS Code.
-              </ListItem>
-              <ListItem comingSoon href="/jetbrains" title="JetBrains Plugin">
-                Full BAML support for IntelliJ, WebStorm, and other JetBrains
-                IDEs.
-              </ListItem>
-              <ListItem href="/docs/cli" title="BAML CLI">
-                Command-line interface for BAML development. Generate types,
-                validate schemas, and more.
-              </ListItem>
-              <ListItem
-                href="https://npmjs.com/package/@boundaryml/baml"
-                title="BAML NPM Package"
-              >
-                Install BAML in your Node.js projects. Generate TypeScript types
-                and runtime validation.
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="rounded-full">
-            Solutions
-          </NavigationMenuTrigger>
-          <NavigationMenuContent className="bg-background">
-            <ul className="grid w-[500px] gap-3 p-4 md:w-[600px] md:grid-cols-2 lg:w-[700px]">
-              <ListItem
-                href="/docs/team-collaboration"
-                title="Team Collaboration"
-              >
-                Share BAML schemas across your team while maintaining type
-                safety and consistency.
-              </ListItem>
-              <ListItem
-                href="/docs/local-development"
-                title="Local Development"
-              >
-                Develop AI applications locally with full type checking and
-                validation.
-              </ListItem>
-              <ListItem href="/docs/ai-integration" title="AI Integration">
-                Integrate with OpenAI, Anthropic, and other AI providers with
-                type-safe interfaces.
-              </ListItem>
-              <ListItem href="/docs/type-safety" title="Type Safety">
-                Catch errors at compile time with generated TypeScript types and
-                runtime validation.
-              </ListItem>
-              <ListItem href="/docs/security" title="Secure Development">
-                Define secure AI interfaces with input validation and output
-                sanitization.
-              </ListItem>
-              <ListItem href="/docs/providers" title="Provider Support">
-                Built-in support for OpenAI, Anthropic, and more. Easy to extend
-                for custom providers.
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="rounded-full">
-            Resources
-          </NavigationMenuTrigger>
-          <NavigationMenuContent className="bg-background">
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-              <ListItem href="/docs" title="Documentation">
-                Get started with our comprehensive guides and API reference.
-              </ListItem>
-              <ListItem href="/comparisons" title="Comparisons">
-                See how BAML compares to other AI development tools and
-                alternatives.
-              </ListItem>
-              {/* <ListItem href="/blog" title="Blog">
-                Tips, tutorials, and updates from the BAML team.
-              </ListItem> */}
-              <ListItem
-                href="https://github.com/boundaryml/baml/releases"
-                title="Changelog"
-              >
-                Stay up to date with the latest features and improvements.
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <nav className="hidden md:flex items-center gap-6">
+      {siteConfig.nav.links.map((link) => (
+        <Link
+          key={link.id}
+          href={link.href}
+          className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+        >
+          {link.name}
+        </Link>
+      ))}
+    </nav>
   );
 }

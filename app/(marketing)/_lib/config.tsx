@@ -237,8 +237,10 @@ export const siteConfig = {
   footerLinks: [
     {
       links: [
-        { id: 1, title: 'Privacy Policy', url: '/privacy-policy' },
-        { id: 2, title: 'Terms of Service', url: '/terms-of-service' },
+        { id: 1, title: 'About Us', url: '/who-are-we' },
+        { id: 2, title: 'Why BAML?', url: '/why-the-f-did-we-make-a-language' },
+        { id: 3, title: 'Privacy Policy', url: '/privacy-policy' },
+        { id: 4, title: 'Terms of Service', url: '/tos' },
       ],
       title: 'Company',
     },
@@ -295,6 +297,16 @@ export const siteConfig = {
         { id: 11, title: 'vs GraphQL', url: '/comparisons#graphql' },
       ],
       title: 'Compare',
+    },
+    {
+      links: [
+        { id: 20, title: 'GitHub', url: 'https://github.com/boundaryml' },
+        { id: 21, title: 'Twitter', url: 'https://twitter.com/boundaryml' },
+        { id: 22, title: 'Discord', url: 'https://discord.gg/boundaryml' },
+        { id: 23, title: 'LinkedIn', url: 'https://linkedin.com/company/boundaryml' },
+        { id: 24, title: 'YouTube', url: 'https://youtube.com/@boundaryml' },
+      ],
+      title: 'Social',
     },
   ],
   growthSection: {
@@ -356,27 +368,13 @@ export const siteConfig = {
   name: 'BAML',
   nav: {
     links: [
-      { href: '#hero', id: 1, name: 'Home' },
-      {
-        href: 'https://marketplace.visualstudio.com/items?itemName=boundaryml.baml',
-        id: 3,
-        name: 'VS Code Extension',
-      },
-      {
-        href: 'https://plugins.jetbrains.com/plugin/24002-baml',
-        id: 4,
-        name: 'JetBrains Plugin',
-      },
-      {
-        href: '/docs/cli',
-        id: 5,
-        name: 'BAML CLI',
-      },
-      {
-        href: 'https://www.npmjs.com/package/@boundaryml/baml',
-        id: 6,
-        name: 'NPM Package',
-      },
+      { href: '/', id: 1, name: 'Home' },
+      { href: '/cloud', id: 2, name: 'Cloud' },
+      { href: '/blog', id: 3, name: 'Blog' },
+      { href: '/podcast', id: 4, name: 'Podcast' },
+      { href: '/play', id: 5, name: 'Playground' },
+      { href: '/solutions', id: 6, name: 'Solutions' },
+      { href: '/pricing', id: 7, name: 'Pricing' },
     ],
   },
   pricing: {
