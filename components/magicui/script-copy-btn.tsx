@@ -62,14 +62,9 @@ export function ScriptCopyBtn({
   };
 
   return (
-    <div
-      className={cn(
-        'mx-auto flex max-w-md items-center justify-center',
-        className,
-      )}
-    >
+    <div className={cn('flex max-w-lg items-center justify-center', className)}>
       <div className="w-full space-y-2">
-        <div className="mb-2 flex items-center justify-center">
+        <div className="mb-2 flex items-center">
           {showMultiplePackageOptions && (
             <div className="relative">
               <div className="inline-flex overflow-hidden rounded-md border border-border text-xs">
@@ -112,7 +107,7 @@ export function ScriptCopyBtn({
           <div className="min-w-[300px] grow font-mono">
             {highlightedCode ? (
               <div
-                className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-1.5 [&>pre]:px-4 [&>pre]:font-mono bg-background rounded ${
+                className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-1.5 [&>pre]:px-4 [&>pre]:font-mono bg-background border border-border rounded ${
                   theme === 'dark' ? 'dark' : 'light'
                 }`}
                 // biome-ignore lint/security/noDangerouslySetInnerHtml: ok
@@ -133,7 +128,7 @@ export function ScriptCopyBtn({
           >
             <span className="sr-only">{copied ? 'Copied' : 'Copy'}</span>
             <Copy
-              className={`h-4 w-4 transition-all duration-300 ${
+              className={`h-4 w-4 m-auto inset-0 transition-all duration-300 ${
                 copied ? 'scale-0' : 'scale-100'
               }`}
             />

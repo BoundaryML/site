@@ -1,155 +1,185 @@
 'use client';
 
 import { motion } from 'motion/react';
-import type React from 'react';
-import { type HTMLAttributes, useCallback, useMemo } from 'react';
+import type { RefObject } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { cn } from '@/lib/utils';
 
-interface AnimatedBeamProps extends HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-  perspective?: number;
-  beamsPerSide?: number;
-  beamSize?: number;
-  beamDelayMax?: number;
-  beamDelayMin?: number;
-  beamDuration?: number;
-  gridColor?: string;
+export interface AnimatedBeamProps {
+  className?: string;
+  containerRef: RefObject<HTMLElement | null>; // Container ref
+  fromRef: RefObject<HTMLElement | null>;
+  toRef: RefObject<HTMLElement | null>;
+  curvature?: number;
+  reverse?: boolean;
+  pathColor?: string;
+  pathWidth?: number;
+  pathOpacity?: number;
+  gradientStartColor?: string;
+  gradientStopColor?: string;
+  delay?: number;
+  duration?: number;
+  startXOffset?: number;
+  startYOffset?: number;
+  endXOffset?: number;
+  endYOffset?: number;
 }
 
-const Beam = ({
-  width,
-  x,
-  delay,
-  duration,
-}: {
-  width: string | number;
-  x: string | number;
-  delay: number;
-  duration: number;
-}) => {
-  const hue = Math.floor(Math.random() * 360);
-  const ar = Math.floor(Math.random() * 10) + 1;
-
-  return (
-    <motion.div
-      animate={{ x: '-50%', y: '-100%' }}
-      className={
-        'absolute left-[var(--x)] top-0 [aspect-ratio:1/var(--aspect-ratio)] [background:var(--background)] [width:var(--width)]'
-      }
-      initial={{ x: '-50%', y: '100cqmax' }}
-      style={
-        {
-          '--aspect-ratio': `${ar}`,
-          '--background': `linear-gradient(hsl(${hue} 80% 60%), transparent)`,
-          '--width': `${width}`,
-          '--x': `${x}`,
-        } as React.CSSProperties
-      }
-      transition={{
-        delay,
-        duration,
-        ease: 'linear',
-        repeat: Number.POSITIVE_INFINITY,
-      }}
-    />
-  );
-};
-
 export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
-  children,
-  perspective = 100,
   className,
-  beamsPerSide = 3,
-  beamSize = 5,
-  beamDelayMax = 3,
-  beamDelayMin = 0,
-  beamDuration = 3,
-  gridColor = 'var(--border)',
-  ...props
+  containerRef,
+  fromRef,
+  toRef,
+  curvature = 0,
+  reverse = false, // Include the reverse prop
+  duration = 5.5,
+  delay = 0,
+  pathColor = 'gray',
+  pathWidth = 2,
+  pathOpacity = 0.2,
+  gradientStartColor = '#75a99c',
+  gradientStopColor = '#84a6d3',
+  startXOffset = 0,
+  startYOffset = 0,
+  endXOffset = 0,
+  endYOffset = 0,
 }) => {
-  const generateBeams = useCallback(() => {
-    const beams = [];
-    const cellsPerSide = Math.floor(100 / beamSize);
-    const step = cellsPerSide / beamsPerSide;
+  const id = useId();
+  const [pathD, setPathD] = useState('');
+  const [svgDimensions, setSvgDimensions] = useState({ height: 0, width: 0 });
 
-    for (let i = 0; i < beamsPerSide; i++) {
-      const x = Math.floor(i * step);
-      const delay =
-        Math.random() * (beamDelayMax - beamDelayMin) + beamDelayMin;
-      beams.push({ delay, x });
+  // Calculate the gradient coordinates based on the reverse prop
+  const gradientCoordinates = reverse
+    ? {
+        x1: ['90%', '-10%'],
+        x2: ['100%', '0%'],
+        y1: ['0%', '0%'],
+        y2: ['0%', '0%'],
+      }
+    : {
+        x1: ['10%', '110%'],
+        x2: ['0%', '100%'],
+        y1: ['0%', '0%'],
+        y2: ['0%', '0%'],
+      };
+
+  useEffect(() => {
+    const updatePath = () => {
+      if (containerRef.current && fromRef.current && toRef.current) {
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const rectA = fromRef.current.getBoundingClientRect();
+        const rectB = toRef.current.getBoundingClientRect();
+
+        const svgWidth = containerRect.width;
+        const svgHeight = containerRect.height;
+        setSvgDimensions({ height: svgHeight, width: svgWidth });
+
+        const startX =
+          rectA.left - containerRect.left + rectA.width / 2 + startXOffset;
+        const startY =
+          rectA.top - containerRect.top + rectA.height / 2 + startYOffset;
+        const endX =
+          rectB.left - containerRect.left + rectB.width / 2 + endXOffset;
+        const endY =
+          rectB.top - containerRect.top + rectB.height / 2 + endYOffset;
+
+        const controlY = startY - curvature;
+        const d = `M ${startX},${startY} Q ${
+          (startX + endX) / 2
+        },${controlY} ${endX},${endY}`;
+        setPathD(d);
+      }
+    };
+
+    // Initialize ResizeObserver
+    const resizeObserver = new ResizeObserver((entries) => {
+      // For all entries, recalculate the path
+      for (const _entry of entries) {
+        updatePath();
+      }
+    });
+
+    // Observe the container element
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
     }
-    return beams;
-  }, [beamsPerSide, beamSize, beamDelayMax, beamDelayMin]);
 
-  const topBeams = useMemo(() => generateBeams(), [generateBeams]);
-  const rightBeams = useMemo(() => generateBeams(), [generateBeams]);
-  const bottomBeams = useMemo(() => generateBeams(), [generateBeams]);
-  const leftBeams = useMemo(() => generateBeams(), [generateBeams]);
+    // Call the updatePath initially to set the initial path
+    updatePath();
+
+    // Clean up the observer on component unmount
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [
+    containerRef,
+    fromRef,
+    toRef,
+    curvature,
+    startXOffset,
+    startYOffset,
+    endXOffset,
+    endYOffset,
+  ]);
 
   return (
-    <div className={cn('relative rounded border p-20', className)} {...props}>
-      <div
-        className={
-          'pointer-events-none absolute left-0 top-0 size-full overflow-hidden [clipPath:inset(0)] [container-type:size] [perspective:var(--perspective)] [transform-style:preserve-3d]'
-        }
-        style={
-          {
-            '--beam-size': `${beamSize}%`,
-            '--grid-color': gridColor,
-            '--perspective': `${perspective}px`,
-          } as React.CSSProperties
-        }
-      >
-        {/* top side */}
-        <div className="absolute z-20 [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [width:100cqi]">
-          {topBeams.map((beam, index) => (
-            <Beam
-              delay={beam.delay}
-              duration={beamDuration}
-              key={`top-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-            />
-          ))}
-        </div>
-        {/* bottom side */}
-        <div className="absolute top-full [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [transform-origin:50%_0%] [transform:rotateX(-90deg)] [width:100cqi]">
-          {bottomBeams.map((beam, index) => (
-            <Beam
-              delay={beam.delay}
-              duration={beamDuration}
-              key={`bottom-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-            />
-          ))}
-        </div>
-        {/* left side */}
-        <div className="absolute left-0 top-0 [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [transform-origin:0%_0%] [transform:rotate(90deg)_rotateX(-90deg)] [width:100cqh]">
-          {leftBeams.map((beam, index) => (
-            <Beam
-              delay={beam.delay}
-              duration={beamDuration}
-              key={`left-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-            />
-          ))}
-        </div>
-        {/* right side */}
-        <div className="absolute right-0 top-0 [transform-style:preserve-3d] [background-size:var(--beam-size)_var(--beam-size)] [background:linear-gradient(var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_-0.5px_/var(--beam-size)_var(--beam-size),linear-gradient(90deg,_var(--grid-color)_0_1px,_transparent_1px_var(--beam-size))_50%_50%_/var(--beam-size)_var(--beam-size)] [container-type:inline-size] [height:100cqmax] [width:100cqh] [transform-origin:100%_0%] [transform:rotate(-90deg)_rotateX(-90deg)]">
-          {rightBeams.map((beam, index) => (
-            <Beam
-              delay={beam.delay}
-              duration={beamDuration}
-              key={`right-${index}`}
-              width={`${beamSize}%`}
-              x={`${beam.x * beamSize}%`}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="relative">{children}</div>
-    </div>
+    <svg
+      className={cn(
+        'pointer-events-none absolute left-0 top-0 transform-gpu stroke-2',
+        className,
+      )}
+      fill="none"
+      height={svgDimensions.height}
+      viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
+      width={svgDimensions.width}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title className="sr-only">Animated Beam</title>
+      <path
+        d={pathD}
+        stroke={pathColor}
+        strokeLinecap="round"
+        strokeOpacity={pathOpacity}
+        strokeWidth={pathWidth}
+      />
+      <path
+        d={pathD}
+        stroke={`url(#${id})`}
+        strokeLinecap="round"
+        strokeOpacity="1"
+        strokeWidth={pathWidth}
+      />
+      <defs>
+        <motion.linearGradient
+          animate={{
+            x1: gradientCoordinates.x1,
+            x2: gradientCoordinates.x2,
+            y1: gradientCoordinates.y1,
+            y2: gradientCoordinates.y2,
+          }}
+          className="transform-gpu"
+          gradientUnits={'userSpaceOnUse'}
+          id={id}
+          initial={{
+            x1: '0%',
+            x2: '0%',
+            y1: '0%',
+            y2: '0%',
+          }}
+          transition={{
+            delay,
+            duration,
+            ease: [0.16, 1, 0.3, 1], // https://easings.net/#easeOutExpo
+            repeat: Number.POSITIVE_INFINITY,
+            repeatDelay: 0,
+          }}
+        >
+          <stop stopColor={gradientStartColor} stopOpacity="0" />
+          <stop stopColor={gradientStartColor} />
+          <stop offset="32.5%" stopColor={gradientStopColor} />
+          <stop offset="100%" stopColor={gradientStopColor} stopOpacity="0" />
+        </motion.linearGradient>
+      </defs>
+    </svg>
   );
 };

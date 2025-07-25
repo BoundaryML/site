@@ -6,7 +6,7 @@ export function QuoteSection() {
 
   return (
     <section
-      className="flex flex-col items-center justify-center gap-8 w-full p-14 bg-accent z-20"
+      className="flex flex-col items-center justify-center gap-8 w-full p-14 bg-accent/20 z-20"
       id="quote"
     >
       <blockquote className="max-w-3xl text-left px-4">

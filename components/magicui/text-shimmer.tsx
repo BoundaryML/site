@@ -13,7 +13,7 @@ const TextShimmer: FC<TextShimmerProps> = ({
   shimmerWidth = 100,
 }) => {
   return (
-    <p
+    <div
       className={cn(
         'mx-auto max-w-md text-primary',
 
@@ -32,7 +32,7 @@ const TextShimmer: FC<TextShimmerProps> = ({
       }
     >
       {children}
-    </p>
+    </div>
   );
 };
 

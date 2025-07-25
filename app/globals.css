@@ -271,3 +271,47 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Syntax highlighting styles for terminal */
+.syntax-highlighted-code {
+  position: relative;
+  z-index: 0;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  line-height: 1.5;
+  background: transparent !important;
+}
+
+.syntax-highlighted-code pre {
+  padding: 0;
+  margin: 0;
+  background: transparent !important;
+}
+
+.syntax-highlighted-code code {
+  font-family: inherit;
+  background: transparent !important;
+}
+
+/* Ensure all Shiki-generated elements have transparent backgrounds */
+.syntax-highlighted-code * {
+  background: transparent !important;
+}
+
+.syntax-highlighted-code .shiki {
+  background: transparent !important;
+}
+
+.syntax-highlighted-code .shiki * {
+  background: transparent !important;
+}
+
+/* Ensure terminal button stays above content */
+.terminal-header {
+  position: relative;
+  z-index: 10;
+}
+
+.terminal-content {
+  position: relative;
+  z-index: 0;
+}

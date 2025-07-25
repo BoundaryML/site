@@ -1,10 +1,11 @@
 'use client';
 
-import { FileIcon } from 'lucide-react';
+import { FileIcon, PlayIcon } from 'lucide-react';
 import { type MotionProps, motion } from 'motion/react';
 import { type PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Button } from '../ui/button';
 
 interface AnimatedSpanProps extends MotionProps {
   delay?: number;
@@ -102,11 +103,11 @@ export const Terminal = ({ children, className, filename }: TerminalProps) => {
   return (
     <div
       className={cn(
-        'z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background',
+        'relative z-0 h-full max-h-[400px] w-full max-w-lg rounded-xl border border-border bg-background',
         className,
       )}
     >
-      <div className="flex flex-col gap-y-2 border-b border-border p-4">
+      <div className="terminal-header relative z-10 flex flex-col gap-y-2 border-b border-border px-4 py-2">
         <div className="flex flex-row gap-x-2 items-center">
           <div className="h-2 w-2 rounded-full bg-red-500" />
           <div className="h-2 w-2 rounded-full bg-yellow-500" />
@@ -117,9 +118,22 @@ export const Terminal = ({ children, className, filename }: TerminalProps) => {
               {filename}
             </Badge>
           )}
+          <div className="ml-auto">
+            <Button
+              asChild
+              className="flex items-center justify-center gap-x-2"
+              size="sm"
+              variant="outline"
+            >
+              <a href="https://www.google.com">
+                <PlayIcon className="size-4" />
+                Try Now
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
-      <pre className="py-4 px-6 md:px-4 md:py-4">
+      <pre className="terminal-content relative z-0 py-4 px-6 md:px-4 md:py-4">
         <code className="grid gap-y-1 overflow-auto">{children}</code>
       </pre>
     </div>

@@ -1,4 +1,9 @@
 import { Globe } from 'lucide-react';
+import { FirstBentoAnimation } from '@/components/first-bento-animation';
+import { FourthBentoAnimation } from '@/components/fourth-bento-animation';
+import { HeroTerminalSection } from '@/components/landing/hero-terminal-section';
+import { SecondBentoAnimation } from '@/components/second-bento-animation';
+import { ThirdBentoAnimation } from '@/components/third-bento-animation';
 import { cn } from '@/lib/utils';
 // import { FirstBentoAnimation } from '@/todo/(marketing)/_components/first-bento-animation';
 // import { FourthBentoAnimation } from '@/todo/(marketing)/_components/fourth-bento-animation';
@@ -73,32 +78,32 @@ export const siteConfig = {
       'Build AI applications with type safety, generate TypeScript types, and validate your schemas.',
     items: [
       {
-        // content: <FirstBentoAnimation />,
+        content: <FirstBentoAnimation />,
         description:
           'Define AI interfaces with confidence. Write BAML schemas that generate TypeScript types automatically.',
         id: 1,
         title: 'Type-Safe AI Interfaces',
       },
       {
-        // content: <SecondBentoAnimation />,
+        content: <SecondBentoAnimation />,
         description:
           'Built-in support for OpenAI, Anthropic, and other AI providers. Easy to extend for custom providers.',
         id: 2,
         title: 'AI Provider Integrations',
       },
       {
-        // content: <ThirdBentoAnimation />,
+        content: <ThirdBentoAnimation />,
         description:
           'Generate TypeScript types and runtime validation from your BAML schemas automatically.',
         id: 3,
         title: 'Automatic Type Generation',
       },
       {
-        // content: <FourthBentoAnimation once={false} />,
+        content: <FourthBentoAnimation once={false} />,
         description:
-          'Validate your AI schemas and catch errors at compile time with comprehensive type checking.',
+          'Automatically retry failed requests and provide fallback responses when errors occur.',
         id: 4,
-        title: 'Schema Validation',
+        title: 'Automatic Retry and Fallback',
       },
     ],
     title: 'Empower Your AI Development',
@@ -120,9 +125,14 @@ export const siteConfig = {
         logo: 'Google',
         name: 'Google',
       },
+      {
+        id: 4,
+        logo: 'Meta',
+        name: 'Meta',
+      },
     ],
   },
-  cta: 'Get Started',
+  cta: 'Playground',
   ctaSection: {
     backgroundImage: '/agent-cta-background.png',
     button: {
@@ -200,39 +210,40 @@ export const siteConfig = {
       'Discover how BAML transforms AI development in four easy steps',
     items: [
       {
+        component: <HeroTerminalSection />,
         content:
-          'Write BAML schemas with syntax highlighting, autocomplete, and validation in VS Code.',
+          'Design robust AI schemas with intuitive syntax and instant validation directly in your favorite editor.',
         id: 1,
-        image:
-          'https://images.unsplash.com/photo-1720378042271-60aff1e1c538?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'VS Code Extension',
+        // image:
+        // 'https://images.unsplash.com/photo-1720378042271-60aff1e1c538?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Define Agents',
       },
       {
         content:
-          'Full BAML support for IntelliJ, WebStorm, and other JetBrains IDEs with advanced features.',
+          'Automatically produce language specific runtime code including types and validation logic from BAML.',
         id: 2,
         image:
           'https://images.unsplash.com/photo-1720371300677-ba4838fa0678?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'JetBrains Plugin (coming soon)',
+        title: 'Generate Runtime',
       },
       {
         content:
-          'Generate TypeScript types and runtime validation from your BAML schemas automatically.',
+          'Test and iterate on your prompts directly within the editor, enabling rapid experimentation and debugging.',
         id: 3,
         image:
           'https://images.unsplash.com/photo-1666882990322-e7f3b8df4f75?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
-        title: 'BAML CLI',
+        title: 'Iterate & Test',
       },
       {
         content:
-          'Install BAML in your Node.js projects and generate types for your AI applications.',
+          'Leverage the observability platform to monitor, evaluate, and gain actionable insights in production.',
         id: 4,
         image:
           'https://images.unsplash.com/photo-1720371300677-ba4838fa0678?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'NPM Package',
+        title: 'Observe & Evaluate',
       },
     ],
-    title: 'Simple. Type-Safe. Reliable.',
+    title: 'Complete Development Workflow',
   },
   footerLinks: [
     {
@@ -303,7 +314,11 @@ export const siteConfig = {
         { id: 20, title: 'GitHub', url: 'https://github.com/boundaryml' },
         { id: 21, title: 'Twitter', url: 'https://twitter.com/boundaryml' },
         { id: 22, title: 'Discord', url: 'https://discord.gg/boundaryml' },
-        { id: 23, title: 'LinkedIn', url: 'https://linkedin.com/company/boundaryml' },
+        {
+          id: 23,
+          title: 'LinkedIn',
+          url: 'https://linkedin.com/company/boundaryml',
+        },
         { id: 24, title: 'YouTube', url: 'https://youtube.com/@boundaryml' },
       ],
       title: 'Social',
@@ -341,8 +356,8 @@ export const siteConfig = {
       'https://boundaryml.com/docs/getting-started?utm_source=marketing-site&utm_medium=hero-cta',
     cta: {
       primary: {
-        href: '/docs/getting-started?utm_source=marketing-site&utm_medium=hero-cta',
-        text: 'Get Started',
+        href: '/playground',
+        text: 'Playground',
       },
       secondary: {
         href: '/docs',
@@ -372,9 +387,10 @@ export const siteConfig = {
       { href: '/cloud', id: 2, name: 'Cloud' },
       { href: '/blog', id: 3, name: 'Blog' },
       { href: '/podcast', id: 4, name: 'Podcast' },
-      { href: '/play', id: 5, name: 'Playground' },
-      { href: '/solutions', id: 6, name: 'Solutions' },
-      { href: '/pricing', id: 7, name: 'Pricing' },
+      { href: '/who-are-we', id: 5, name: 'Team' },
+      // { href: '/play', id: 5, name: 'Playground' },
+      // { href: '/solutions', id: 6, name: 'Solutions' },
+      // { href: '/pricing', id: 7, name: 'Pricing' },
     ],
   },
   pricing: {
@@ -383,7 +399,7 @@ export const siteConfig = {
     pricingItems: [
       {
         buttonColor: 'bg-accent text-primary',
-        buttonText: 'Get Started',
+        buttonText: 'Playground',
         description: 'Perfect for individual developers',
         features: [
           'CLI & Editor extension access',
