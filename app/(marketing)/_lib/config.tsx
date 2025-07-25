@@ -1,4 +1,4 @@
-import { Globe } from 'lucide-react';
+import { CheckCircle, Globe } from 'lucide-react';
 import { FirstBentoAnimation } from '@/components/first-bento-animation';
 import { FourthBentoAnimation } from '@/components/fourth-bento-animation';
 import { SyntaxTypingAnimation } from '@/components/magicui/syntax-typing-animation';
@@ -6,6 +6,8 @@ import { SecondBentoAnimation } from '@/components/second-bento-animation';
 import { ThirdBentoAnimation } from '@/components/third-bento-animation';
 import { VSCodeMock } from '@/components/vscode';
 import { cn } from '@/lib/utils';
+import { WordRotate } from '@/components/magicui/word-rotate';
+
 // import { FirstBentoAnimation } from '@/todo/(marketing)/_components/first-bento-animation';
 // import { FourthBentoAnimation } from '@/todo/(marketing)/_components/fourth-bento-animation';
 // import { SecondBentoAnimation } from '@/todo/(marketing)/_components/second-bento-animation';
@@ -356,11 +358,34 @@ export const siteConfig = {
             terminalHeight={200}
           />
         ),
-        content:
-          'Test and iterate on your prompts directly within the editor, enabling rapid experimentation and debugging.',
+        content: (
+          <div>
+            <pre>baml-cli generate</pre> <div className='flex flex-row gap-1 items-center'>converts BAML functions to native functions in <WordRotate className='text-secondary' words={['Python', 'TypeScript', 'Ruby', 'Go']} /></div>
+          </div>
+        ),
         id: 3,
-        title: '3. Run Agent',
+        title: (
+          <div>
+            Call your{' '}
+            <span className="line-through text-destructive">prompts</span>{' '}
+            <span className="text-secondary">functions</span>{' '}from any programming language you love
+          </div>
+        ),
       },
+      {
+        component: (
+          <div className='flex flex-row gap-2 items-center p-4'>
+            <CheckCircle className='size-10 text-green-500' /> Published
+          </div>
+        ),
+        content: (
+          <div>
+            Do nothing special for BAML. Since BAML generates native code in your language of choice, you can use it in any way you want.
+          </div>
+        ),
+        id: 4,
+        title: 'Deploy your Agent',
+      }
       // {
       //   component: <IterateTestDemo />,
       //   content:

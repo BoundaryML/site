@@ -204,7 +204,7 @@ export const VSCodeMock: React.FC<VSCodeMockProps> = ({
       </div>
 
       {/* Terminal */}
-      {showTerminal && (
+      {showTerminal && false && (
         <div
           className={clsx('border-t', border)}
           style={{ height: terminalHeight }}

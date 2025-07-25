@@ -34,10 +34,10 @@ export default async function Page() {
         {/* <VscodeLikeEditor /> */}
 
         <FeatureSection />
-        <QuoteSection />
+        {/* <QuoteSection /> */}
         <BentoSection />
         <TestimonialSection />
-        <FAQSection />
+        {/* <FAQSection /> */}
         <CTASection />
         <FooterSection />
       </main>
