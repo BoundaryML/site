@@ -1,40 +1,47 @@
-import { Navbar } from '@/components/navbar';
+import {
+  AlertTriangle,
+  Brain,
+  Code,
+  Play,
+  Rocket,
+  Shield,
+  Zap,
+} from 'lucide-react';
+import Link from 'next/link';
 import { FooterSection } from '@/components/footer-section';
+import { Navbar } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import Link from 'next/link';
-import { AlertTriangle, Code, Zap, Shield, Brain, Rocket, ExternalLink, Play } from 'lucide-react';
 
 const problems = [
   {
     icon: AlertTriangle,
-    title: "Type Safety Nightmare",
-    problem: "JSON schemas and untyped API responses everywhere",
-    solution: "First-class types for AI inputs and outputs"
+    problem: 'JSON schemas and untyped API responses everywhere',
+    solution: 'First-class types for AI inputs and outputs',
+    title: 'Type Safety Nightmare',
   },
   {
     icon: Code,
-    title: "Prompt Engineering Hell",
-    problem: "String concatenation and template literals for prompts",
-    solution: "Structured prompt composition with validation"
+    problem: 'String concatenation and template literals for prompts',
+    solution: 'Structured prompt composition with validation',
+    title: 'Prompt Engineering Hell',
   },
   {
     icon: Brain,
-    title: "No IDE Support",
-    problem: "Writing prompts in strings with no autocomplete or validation",
-    solution: "Full IDE support with syntax highlighting and IntelliSense"
+    problem: 'Writing prompts in strings with no autocomplete or validation',
+    solution: 'Full IDE support with syntax highlighting and IntelliSense',
+    title: 'No IDE Support',
   },
   {
     icon: Shield,
-    title: "Runtime Failures",
     problem: "AI responses that don't match expected formats",
-    solution: "Compile-time validation and runtime guarantees"
-  }
+    solution: 'Compile-time validation and runtime guarantees',
+    title: 'Runtime Failures',
+  },
 ];
 
 const comparisons = [
   {
-    title: "Without BAML",
     code: `// Hope the AI returns the right format 🤞
 const response = await openai.complete({
   prompt: \`Extract user info from: \${text}\`
@@ -43,10 +50,21 @@ const response = await openai.complete({
 // Runtime error waiting to happen
 const user = JSON.parse(response);
 console.log(user.name); // undefined? string? who knows!`,
-    problems: ["No type safety", "Runtime errors", "Manual parsing", "No validation"]
+    problems: [
+      'No type safety',
+      'Runtime errors',
+      'Manual parsing',
+      'No validation',
+    ],
+    title: 'Without BAML',
   },
   {
-    title: "With BAML",
+    benefits: [
+      'Full type safety',
+      'Compile-time checks',
+      'Auto parsing',
+      'Built-in validation',
+    ],
     code: `// Define once, use everywhere with confidence
 class User {
   name: string
@@ -56,8 +74,8 @@ class User {
 
 const user = await GetUserInfo(text);
 console.log(user.name); // TypeScript knows it's a string!`,
-    benefits: ["Full type safety", "Compile-time checks", "Auto parsing", "Built-in validation"]
-  }
+    title: 'With BAML',
+  },
 ];
 
 export default function WhyPage() {
@@ -72,17 +90,19 @@ export default function WhyPage() {
               Why The F*** Did We Make a Language?
             </h1>
             <p className="max-w-2xl text-lg text-muted-foreground">
-              Because building AI applications shouldn't feel like defusing a bomb. 
-              Here's the story of why we built BAML and why you'll love it.
+              Because building AI applications shouldn't feel like defusing a
+              bomb. Here's the story of why we built BAML and why you'll love
+              it.
             </p>
             <div className="flex gap-4">
               <Button asChild>
-                <Link href="/blog/why-baml">
-                  Read the Full Story
-                </Link>
+                <Link href="/blog/why-baml">Read the Full Story</Link>
               </Button>
-              <Button variant="outline" asChild>
-                <Link href="https://www.youtube.com/watch?v=baml-intro" className="flex items-center gap-2">
+              <Button asChild variant="outline">
+                <Link
+                  className="flex items-center gap-2"
+                  href="https://www.youtube.com/watch?v=baml-intro"
+                >
                   <Play className="h-4 w-4" />
                   Watch Video
                 </Link>
@@ -95,26 +115,32 @@ export default function WhyPage() {
         <section className="w-full px-4 py-20">
           <div className="mx-auto max-w-6xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">The Problem We All Face</h2>
+              <h2 className="text-3xl font-bold mb-4">
+                The Problem We All Face
+              </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Every developer building AI applications runs into the same walls. 
-                We got tired of banging our heads against them.
+                Every developer building AI applications runs into the same
+                walls. We got tired of banging our heads against them.
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               {problems.map((item) => (
-                <Card key={item.title} className="p-6">
+                <Card className="p-6" key={item.title}>
                   <div className="flex items-start gap-4">
                     <div className="h-10 w-10 rounded-lg bg-destructive/10 flex items-center justify-center flex-shrink-0">
                       <item.icon className="h-5 w-5 text-destructive" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                      <h3 className="text-xl font-semibold mb-2">
+                        {item.title}
+                      </h3>
                       <p className="text-sm text-muted-foreground mb-3">
-                        <span className="font-medium">Problem:</span> {item.problem}
+                        <span className="font-medium">Problem:</span>{' '}
+                        {item.problem}
                       </p>
                       <p className="text-sm text-primary">
-                        <span className="font-medium">Solution:</span> {item.solution}
+                        <span className="font-medium">Solution:</span>{' '}
+                        {item.solution}
                       </p>
                     </div>
                   </div>
@@ -127,11 +153,15 @@ export default function WhyPage() {
         {/* Code Comparison Section */}
         <section className="w-full px-4 py-20">
           <div className="mx-auto max-w-6xl">
-            <h2 className="text-3xl font-bold text-center mb-12">See The Difference</h2>
+            <h2 className="text-3xl font-bold text-center mb-12">
+              See The Difference
+            </h2>
             <div className="grid lg:grid-cols-2 gap-8">
               {comparisons.map((comp) => (
-                <Card key={comp.title} className="overflow-hidden">
-                  <div className={`px-6 py-4 ${comp.title === "Without BAML" ? "bg-destructive/5" : "bg-primary/5"}`}>
+                <Card className="overflow-hidden" key={comp.title}>
+                  <div
+                    className={`px-6 py-4 ${comp.title === 'Without BAML' ? 'bg-destructive/5' : 'bg-primary/5'}`}
+                  >
                     <h3 className="font-semibold text-lg">{comp.title}</h3>
                   </div>
                   <div className="p-6">
@@ -140,15 +170,25 @@ export default function WhyPage() {
                     </pre>
                     <ul className="space-y-2">
                       {comp.problems?.map((problem) => (
-                        <li key={problem} className="flex items-center gap-2 text-sm">
+                        <li
+                          className="flex items-center gap-2 text-sm"
+                          key={problem}
+                        >
                           <span className="text-destructive">✗</span>
-                          <span className="text-muted-foreground">{problem}</span>
+                          <span className="text-muted-foreground">
+                            {problem}
+                          </span>
                         </li>
                       ))}
                       {comp.benefits?.map((benefit) => (
-                        <li key={benefit} className="flex items-center gap-2 text-sm">
+                        <li
+                          className="flex items-center gap-2 text-sm"
+                          key={benefit}
+                        >
                           <span className="text-primary">✓</span>
-                          <span className="text-muted-foreground">{benefit}</span>
+                          <span className="text-muted-foreground">
+                            {benefit}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -166,28 +206,39 @@ export default function WhyPage() {
               <h2 className="text-3xl font-bold mb-8">Our Journey</h2>
               <div className="prose prose-lg dark:prose-invert">
                 <p className="text-lg text-muted-foreground mb-6">
-                  We started building AI applications in 2022, right when ChatGPT launched. 
-                  Like everyone else, we were excited about the possibilities. But the reality 
-                  hit hard.
+                  We started building AI applications in 2022, right when
+                  ChatGPT launched. Like everyone else, we were excited about
+                  the possibilities. But the reality hit hard.
                 </p>
                 <p className="text-lg text-muted-foreground mb-6">
-                  <span className="font-semibold text-foreground">Month 1:</span> "This is amazing! 
-                  We can build anything!" String concatenation everywhere. JSON.parse() on every response. 
-                  Ship it! 🚀
+                  <span className="font-semibold text-foreground">
+                    Month 1:
+                  </span>{' '}
+                  "This is amazing! We can build anything!" String concatenation
+                  everywhere. JSON.parse() on every response. Ship it! 🚀
                 </p>
                 <p className="text-lg text-muted-foreground mb-6">
-                  <span className="font-semibold text-foreground">Month 2:</span> Production errors. 
-                  Everywhere. The AI returns slightly different formats. Our parsing breaks. Customers 
-                  are angry. We add try-catch blocks around everything.
+                  <span className="font-semibold text-foreground">
+                    Month 2:
+                  </span>{' '}
+                  Production errors. Everywhere. The AI returns slightly
+                  different formats. Our parsing breaks. Customers are angry. We
+                  add try-catch blocks around everything.
                 </p>
                 <p className="text-lg text-muted-foreground mb-6">
-                  <span className="font-semibold text-foreground">Month 3:</span> We build a validation 
-                  layer. Then a type generation system. Then a prompt management system. We're building 
-                  more infrastructure than actual features.
+                  <span className="font-semibold text-foreground">
+                    Month 3:
+                  </span>{' '}
+                  We build a validation layer. Then a type generation system.
+                  Then a prompt management system. We're building more
+                  infrastructure than actual features.
                 </p>
                 <p className="text-lg text-muted-foreground mb-6">
-                  <span className="font-semibold text-foreground">Month 4:</span> F*** it. If we're 
-                  going to solve this problem, let's solve it properly. For everyone.
+                  <span className="font-semibold text-foreground">
+                    Month 4:
+                  </span>{' '}
+                  F*** it. If we're going to solve this problem, let's solve it
+                  properly. For everyone.
                 </p>
                 <p className="text-lg font-semibold text-foreground">
                   And that's how BAML was born.
@@ -202,7 +253,9 @@ export default function WhyPage() {
           <div className="mx-auto max-w-6xl">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl font-bold mb-6">Why a Language Though?</h2>
+                <h2 className="text-3xl font-bold mb-6">
+                  Why a Language Though?
+                </h2>
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-xl font-semibold mb-2 flex items-center gap-2">
@@ -210,9 +263,10 @@ export default function WhyPage() {
                       Purpose-Built for AI
                     </h3>
                     <p className="text-muted-foreground">
-                      General-purpose languages weren't designed for AI interactions. BAML is built 
-                      specifically for defining AI interfaces, with first-class support for prompts, 
-                      schemas, and validations.
+                      General-purpose languages weren't designed for AI
+                      interactions. BAML is built specifically for defining AI
+                      interfaces, with first-class support for prompts, schemas,
+                      and validations.
                     </p>
                   </div>
                   <div>
@@ -221,8 +275,9 @@ export default function WhyPage() {
                       Compile-Time Safety
                     </h3>
                     <p className="text-muted-foreground">
-                      Catch errors before they hit production. BAML's compiler validates your schemas, 
-                      prompts, and type definitions at build time, not runtime.
+                      Catch errors before they hit production. BAML's compiler
+                      validates your schemas, prompts, and type definitions at
+                      build time, not runtime.
                     </p>
                   </div>
                   <div>
@@ -231,33 +286,43 @@ export default function WhyPage() {
                       Developer Experience
                     </h3>
                     <p className="text-muted-foreground">
-                      Full IDE support, automatic code generation, and seamless integration with your 
-                      existing TypeScript/Python codebase. It just works.
+                      Full IDE support, automatic code generation, and seamless
+                      integration with your existing TypeScript/Python codebase.
+                      It just works.
                     </p>
                   </div>
                 </div>
               </div>
               <div className="bg-muted/20 rounded-lg p-8 border border-border">
-                <h3 className="font-semibold mb-4">What developers are saying:</h3>
+                <h3 className="font-semibold mb-4">
+                  What developers are saying:
+                </h3>
                 <div className="space-y-4">
                   <Card className="p-4">
                     <p className="text-sm italic mb-2">
-                      "Finally, someone who gets it. BAML is what I've been trying to build 
-                      internally for months."
+                      "Finally, someone who gets it. BAML is what I've been
+                      trying to build internally for months."
                     </p>
-                    <p className="text-xs text-muted-foreground">- Senior Engineer at Fortune 500</p>
+                    <p className="text-xs text-muted-foreground">
+                      - Senior Engineer at Fortune 500
+                    </p>
                   </Card>
                   <Card className="p-4">
                     <p className="text-sm italic mb-2">
                       "Reduced our AI-related bugs by 90%. Not exaggerating."
                     </p>
-                    <p className="text-xs text-muted-foreground">- CTO at AI Startup</p>
+                    <p className="text-xs text-muted-foreground">
+                      - CTO at AI Startup
+                    </p>
                   </Card>
                   <Card className="p-4">
                     <p className="text-sm italic mb-2">
-                      "The VS Code extension alone is worth it. Pure developer happiness."
+                      "The VS Code extension alone is worth it. Pure developer
+                      happiness."
                     </p>
-                    <p className="text-xs text-muted-foreground">- Full Stack Developer</p>
+                    <p className="text-xs text-muted-foreground">
+                      - Full Stack Developer
+                    </p>
                   </Card>
                 </div>
               </div>
@@ -268,22 +333,28 @@ export default function WhyPage() {
         {/* CTA Section */}
         <section className="w-full px-4 py-20">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Stop Fighting Your Tools?</h2>
+            <h2 className="text-3xl font-bold mb-4">
+              Ready to Stop Fighting Your Tools?
+            </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of developers who are building AI applications the right way. 
-              With type safety, reliability, and actually enjoyable developer experience.
+              Join thousands of developers who are building AI applications the
+              right way. With type safety, reliability, and actually enjoyable
+              developer experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
+              <Button asChild size="lg">
                 <Link href="/play">Try in Playground</Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button asChild size="lg" variant="outline">
                 <Link href="/docs/getting-started">Get Started</Link>
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-6">
               Still skeptical? That's healthy. Check out our{' '}
-              <Link href="/docs/comparisons" className="underline hover:text-primary">
+              <Link
+                className="underline hover:text-primary"
+                href="/docs/comparisons"
+              >
                 comparisons with alternatives
               </Link>
               .

@@ -257,7 +257,7 @@ export const siteConfig = {
     items: [
       {
         content: (
-          <div>
+          <div className="text-base lg:text-lg text-muted-foreground leading-relaxed">
             Yes, Cursor, Claude, already know BAML.
             <br />
             Yes, we made a whole VSCode extension for BAML.
@@ -287,15 +287,8 @@ export const siteConfig = {
         video: '/define-agents.mp4',
       },
       {
-        content: (
-          <div>
-            Do it in VSCode, or the editor of your choice.
-            <br />
-            Or in CI/CD
-            <br />
-            <pre>baml-cli test</pre>
-          </div>
-        ),
+        content:
+          'Do it in VSCode, or the editor of your choice. Or in CI/CD with baml-cli test',
         id: 2,
         title: (
           <div>

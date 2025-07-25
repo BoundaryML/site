@@ -3,7 +3,7 @@
 
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import { CodeBlock } from './magicui/code-block';
+import { CodeBlock, type CodeSnippet } from './magicui/code-block';
 
 // Constants for better maintainability
 const CODE_SNIPPETS = {
@@ -11,34 +11,110 @@ const CODE_SNIPPETS = {
   name: string
   title: string
 }`,
+  go: `resume := getResume()
+fmt.Println(resume.Education)`,
+  python: `resume = get_resume()
+print(resume.education)`,
+  ruby: `resume = get_resume
+puts resume.education`,
   typescript: `const resume = getResume();
 console.log(resume.education);`,
 } as const;
 
+type Language = 'typescript' | 'python' | 'ruby' | 'go';
+
+const LANGUAGE_CONFIG = {
+  go: {
+    errorMessage:
+      'resume.Education undefined (type Resume has no field or method Education)',
+    filename: 'main.go',
+    label: 'Go',
+  },
+  python: {
+    errorMessage:
+      "AttributeError: 'Resume' object has no attribute 'education'",
+    filename: 'main.py',
+    label: 'Python',
+  },
+  ruby: {
+    errorMessage: "NoMethodError: undefined method 'education' for Resume",
+    filename: 'main.rb',
+    label: 'Ruby',
+  },
+  typescript: {
+    errorMessage: "Property 'education' does not exist on type 'Resume'.",
+    filename: 'main.ts',
+    label: 'TypeScript',
+  },
+} as const;
+
 export function FirstBentoAnimation() {
   const [showError] = useState(true);
+  const [activeLanguage, setActiveLanguage] = useState<Language>('typescript');
 
-  // Add error styling to the education property
-  const renderCodeWithError = () => {
-    const lines = CODE_SNIPPETS.typescript.split('\n');
-    return (
-      <>
-        <div>{lines[0]}</div>
-        <div>
-          console.log(resume
-          <span className="error-underline">.education</span>
-          );
-        </div>
-      </>
-    );
+  // Add error styling to the education property for each language
+  const renderCodeWithError = (language: Language) => {
+    switch (language) {
+      case 'typescript':
+        return (
+          <>
+            <div>const resume = getResume();</div>
+            <div>
+              console.log(resume
+              <span className="error-underline">.education</span>
+              );
+            </div>
+          </>
+        );
+      case 'python':
+        return (
+          <>
+            <div>resume = get_resume()</div>
+            <div>
+              print(resume
+              <span className="error-underline">.education</span>)
+            </div>
+          </>
+        );
+      case 'ruby':
+        return (
+          <>
+            <div>resume = get_resume</div>
+            <div>
+              puts resume
+              <span className="error-underline">.education</span>
+            </div>
+          </>
+        );
+      case 'go':
+        return (
+          <>
+            <div>resume := getResume()</div>
+            <div>
+              fmt.Println(resume
+              <span className="error-underline">.Education</span>)
+            </div>
+          </>
+        );
+    }
   };
+
+  // Create snippets array for the multi-file CodeBlock
+  const codeSnippets: CodeSnippet[] = (
+    Object.keys(LANGUAGE_CONFIG) as Language[]
+  ).map((lang) => ({
+    code: (
+      <pre className="text-[14px] font-mono text-primary leading-relaxed p-4">
+        <code>
+          {showError ? renderCodeWithError(lang) : CODE_SNIPPETS[lang]}
+        </code>
+      </pre>
+    ),
+    filename: LANGUAGE_CONFIG[lang].filename,
+  }));
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-4 relative">
-      {/* Background gradients for visual depth */}
-      {/* <div className="pointer-events-none absolute bottom-0 left-0 h-20 w-full bg-gradient-to-t from-background to-transparent z-10" /> */}
-      {/* <div className="pointer-events-none absolute top-0 left-0 h-20 w-full " /> */}
-
       {/* BAML Schema Section */}
       <motion.div
         animate={{ opacity: 1, y: 0 }}
@@ -51,45 +127,41 @@ export function FirstBentoAnimation() {
             <code>{CODE_SNIPPETS.baml}</code>
           </pre>
         </CodeBlock>
-        <div className="text-xs text-muted-foreground mt-1 ml-2">
-          BAML schema
-        </div>
       </motion.div>
 
-      {/* TypeScript Code Section */}
+      {/* Code Section with Integrated Tabs */}
       <motion.div
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
         initial={{ opacity: 0, y: 30 }}
         transition={{ delay: 0.3, duration: 0.6 }}
       >
-        <CodeBlock className="mb-2 relative" filename="main.ts">
-          <pre className="text-[14px] font-mono text-primary leading-relaxed p-4">
-            <code>
-              {showError ? renderCodeWithError() : CODE_SNIPPETS.typescript}
-            </code>
-          </pre>
-        </CodeBlock>
+        <CodeBlock
+          className="mb-2 relative"
+          onTabChange={(index) =>
+            setActiveLanguage(
+              (Object.keys(LANGUAGE_CONFIG) as Language[])[index],
+            )
+          }
+          snippets={codeSnippets}
+        />
 
         {/* Error message */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {showError && (
             <motion.div
               animate={{ opacity: 1, y: 0 }}
               className="flex items-center gap-2 mt-2 ml-2 text-xs text-destructive font-mono"
               exit={{ opacity: 0, y: 10 }}
               initial={{ opacity: 0, y: 10 }}
+              key={activeLanguage}
               transition={{ delay: 0.2, duration: 0.4 }}
             >
               <ErrorIcon />
-              Property 'education' does not exist on type 'Resume'.
+              {LANGUAGE_CONFIG[activeLanguage].errorMessage}
             </motion.div>
           )}
         </AnimatePresence>
-
-        <div className="text-xs text-muted-foreground mt-1 ml-2">
-          TypeScript
-        </div>
       </motion.div>
 
       {/* Error underline styles */}

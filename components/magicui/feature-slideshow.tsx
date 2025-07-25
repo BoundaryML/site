@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils';
 
 type FeatureItem = {
   id: number;
-  title: string;
-  content: string;
+  title: string | React.ReactNode;
+  content: string | React.ReactNode;
   image?: string;
   video?: string;
   component?: React.ReactNode;
@@ -156,7 +156,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                     >
                       {/** biome-ignore lint/performance/noImgElement: we need to use img for the image */}
                       <img
-                        alt={item.title}
+                        alt={typeof item.title === 'string' ? item.title : ''}
                         className="w-full h-full object-cover"
                         src={item.image}
                       />

@@ -6,18 +6,34 @@ import { useEffect, useState } from 'react';
 import { codeToHtml } from 'shiki';
 import { cn } from '@/lib/utils';
 
+export type CodeSnippet = {
+  filename: string;
+  code?: React.ReactNode;
+  language?: string;
+};
+
 export type CodeBlockProps = {
   children?: React.ReactNode;
   className?: string;
   filename?: string;
+  snippets?: CodeSnippet[];
+  onTabChange?: (index: number) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 function CodeBlock({
   children,
   className,
   filename,
+  snippets,
+  onTabChange,
   ...props
 }: CodeBlockProps) {
+  const [activeTab, setActiveTab] = useState(0);
+
+  // Support backward compatibility - if filename is provided, use single file mode
+  const isMultiFile = snippets && snippets.length > 0;
+  const hasHeader = filename || isMultiFile;
+
   return (
     <div
       className={cn(
@@ -27,13 +43,45 @@ function CodeBlock({
       )}
       {...props}
     >
-      {filename && (
-        <div className="flex items-center border-b border-border bg-accent p-2 text-sm text-foreground">
-          <FileIcon className="mr-2 size-4" />
-          {filename}
+      {hasHeader && (
+        <div className="flex items-center border-b border-border bg-accent text-sm text-foreground">
+          {isMultiFile ? (
+            // Multiple files - show tabs
+            <div className="flex items-center w-full">
+              {snippets.map((snippet, index) => (
+                <button
+                  className={cn(
+                    'flex items-center px-3 py-2 hover:bg-accent-foreground/5 transition-colors border-r border-border',
+                    activeTab === index && 'bg-background',
+                  )}
+                  key={snippet.filename}
+                  onClick={() => {
+                    setActiveTab(index);
+                    onTabChange?.(index);
+                  }}
+                  type="button"
+                >
+                  <FileIcon className="mr-2 size-4" />
+                  {snippet.filename}
+                </button>
+              ))}
+            </div>
+          ) : (
+            // Single file - show filename only
+            <div className="flex items-center p-2">
+              <FileIcon className="mr-2 size-4" />
+              {filename}
+            </div>
+          )}
         </div>
       )}
-      {children}
+      {isMultiFile ? (
+        // Render the active snippet's code
+        <div className="w-full">{snippets[activeTab].code}</div>
+      ) : (
+        // Render children for backward compatibility
+        children
+      )}
     </div>
   );
 }
