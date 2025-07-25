@@ -75,7 +75,7 @@ function DesktopActionButtons() {
         Get Started
       </Link>
       <Button asChild className="hidden md:flex rounded-full" variant="outline">
-        <Link href="/docs?utm_source=marketing-site&utm_medium=navbar-docs">
+        <Link target="_blank" href="https://docs.boundaryml.com/home?utm_source=marketing-site&utm_medium=navbar-docs">
           Documentation
         </Link>
       </Button>
