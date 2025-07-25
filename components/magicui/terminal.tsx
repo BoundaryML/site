@@ -118,7 +118,7 @@ export const Terminal = ({ children, className, filename }: TerminalProps) => {
               {filename}
             </Badge>
           )}
-          <div className="ml-auto">
+          {/* <div className="ml-auto">
             <Button
               asChild
               className="flex items-center justify-center gap-x-2"
@@ -130,7 +130,7 @@ export const Terminal = ({ children, className, filename }: TerminalProps) => {
                 Try Now
               </a>
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
       <pre className="terminal-content relative z-0 py-4 px-6 md:px-4 md:py-4">

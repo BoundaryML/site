@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/performance/noImgElement: no need */
+import { Icons } from '@/components/icons';
 import { OrbitingCircles } from '@/components/magicui/orbiting-circle';
-import { Icons } from './icons';
 
 function getBrandLogoUrl(domain: string) {
   return `https://cdn.brandfetch.io/${domain}/w/60/h/60?c=1idGJK6TyS2PPBb74bA`;
@@ -27,37 +27,37 @@ export function SecondBentoAnimation() {
             speed={1}
           >
             <img
-              alt="Boat logo"
+              alt="OpenAI logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('stripe.com')}
+              src={getBrandLogoUrl('openai.com')}
             />
             <img
-              alt="Supabase logo"
+              alt="Anthropic logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('supabase.com')}
+              src={getBrandLogoUrl('anthropic.com')}
             />
             <img
-              alt="Figma logo"
+              alt="Google logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('figma.com')}
+              src={getBrandLogoUrl('google.com')}
             />
           </OrbitingCircles>
 
           <OrbitingCircles iconSize={60} index={1} speed={0.5}>
             <img
-              alt="WorkOS logo"
+              alt="Microsoft logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('workos.com')}
+              src={getBrandLogoUrl('microsoft.com')}
             />
             <img
-              alt="RunwayML logo"
+              alt="Meta logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('github.com')}
+              src={getBrandLogoUrl('meta.com')}
             />
             <img
-              alt="Gemini logo"
+              alt="Typescript logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('discord.com')}
+              src={getBrandLogoUrl('typescriptlang.org')}
             />
           </OrbitingCircles>
 
@@ -69,19 +69,19 @@ export function SecondBentoAnimation() {
             speed={0.5}
           >
             <img
-              alt="Vercel logo"
+              alt="Python logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('vercel.com')}
+              src={getBrandLogoUrl('python.org')}
             />
             <img
-              alt="Replit logo"
+              alt="Go logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('replit.com')}
+              src={getBrandLogoUrl('go.dev')}
             />
             <img
-              alt="Linear logo"
+              alt="Ruby logo"
               className="size-12 rounded-full"
-              src={getBrandLogoUrl('linear.app')}
+              src={getBrandLogoUrl('ruby-lang.org')}
             />
           </OrbitingCircles>
         </div>

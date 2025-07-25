@@ -18,12 +18,12 @@ export function FeatureSection() {
           {description}
         </p>
       </SectionHeader>
-      <div className="w-full h-full lg:h-[450px] flex items-center justify-center">
+      <div className="w-full">
         <FeatureComponent
-          collapseDelay={5000}
+          // collapseDelay={5000}
           featureItems={items}
-          lineColor="bg-secondary"
-          linePosition="bottom"
+          // lineColor="bg-secondary"
+          // linePosition="bottom"
         />
       </div>
     </section>

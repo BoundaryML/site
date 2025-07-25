@@ -9,6 +9,7 @@ import { siteConfig } from '@/app/(marketing)/_lib/config';
 import { ThemeToggle } from '@/components/custom/theme';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+
 // import { Icons } from '../todo/(marketing)/_components/icons';
 
 const INITIAL_WIDTH = '70rem';
@@ -264,7 +265,7 @@ function RightSideControls({
         className="rounded-full"
         repo="boundaryml/baml"
       /> */}
-      <ThemeToggle className="rounded-full" mode="toggle" />
+      {/* <ThemeToggle className="rounded-full" mode="toggle" /> */}
       <MobileMenuToggle isOpen={isDrawerOpen} onToggle={toggleDrawer} />
     </div>
   );
@@ -381,15 +382,14 @@ export function Navbar() {
   );
 }
 
-
 function NavigationMenuSection() {
   return (
     <nav className="hidden md:flex items-center gap-6">
       {siteConfig.nav.links.map((link) => (
         <Link
-          key={link.id}
-          href={link.href}
           className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          href={link.href}
+          key={link.id}
         >
           {link.name}
         </Link>

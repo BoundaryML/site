@@ -2,56 +2,44 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CodeBlock } from './magicui/code-block';
-import { SyntaxTypingAnimation } from './magicui/syntax-typing-animation';
 
-export function FirstBentoAnimation() {
-  // Removed unused ref, isInView, showPayload, showEvent
-  const [showError, setShowError] = useState(false);
-  const [typingDone, setTypingDone] = useState(false);
-  const theme = useTheme();
-
-  // Removed unused effect for event/payload logic
-
-  // BAML class code
-  const bamlCode = `class Resume {
+// Constants for better maintainability
+const CODE_SNIPPETS = {
+  baml: `class Resume {
   name: string
   title: string
-}`;
+}`,
+  typescript: `const resume = getResume();
+console.log(resume.education);`,
+} as const;
 
-  // TypeScript code with error (no error comment)
-  const tsCode = `const resume = getResume();
-console.log(resume.education);`;
+export function FirstBentoAnimation() {
+  const [showError] = useState(true);
 
-  // Helper to highlight .education with a squiggly underline (only in the console.log line)
-  function highlightErrorLine(code: string) {
-    // Only underline the .education part in console.log(resume.education);
-    return code.replace(
-      /(console\.log\(resume)(\.education)(\);)/,
-      '$1<span class="error-underline">$2</span>$3',
+  // Add error styling to the education property
+  const renderCodeWithError = () => {
+    const lines = CODE_SNIPPETS.typescript.split('\n');
+    return (
+      <>
+        <div>{lines[0]}</div>
+        <div>
+          console.log(resume
+          <span className="error-underline">.education</span>
+          );
+        </div>
+      </>
     );
-  }
-
-  // When typing is done, show error underline after a short delay
-  useEffect(() => {
-    if (typingDone) {
-      const timeout = setTimeout(() => setShowError(true), 600);
-      return () => clearTimeout(timeout);
-    }
-    setShowError(false);
-  }, [typingDone]);
-
-  // Removed unused event, payload
+  };
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-4 relative">
-      {/* Animated background gradient for subtle effect */}
-      <div className="pointer-events-none absolute bottom-0 left-0 h-20 w-full bg-gradient-to-t from-background to-transparent z-10" />
-      <div className="pointer-events-none absolute top-0 left-0 h-20 w-full bg-gradient-to-b from-background to-transparent z-10" />
+      {/* Background gradients for visual depth */}
+      {/* <div className="pointer-events-none absolute bottom-0 left-0 h-20 w-full bg-gradient-to-t from-background to-transparent z-10" /> */}
+      {/* <div className="pointer-events-none absolute top-0 left-0 h-20 w-full " /> */}
 
-      {/* Left: BAML class */}
+      {/* BAML Schema Section */}
       <motion.div
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
@@ -59,59 +47,31 @@ console.log(resume.education);`;
         transition={{ delay: 0.1, duration: 0.6 }}
       >
         <CodeBlock className="mb-2" filename="resume.baml">
-          <SyntaxTypingAnimation
-            className="min-h-[100px] text-[14px]"
-            code={bamlCode}
-            delay={200}
-            duration={30}
-            language="yaml"
-          />
+          <pre className="text-[14px] font-mono text-primary leading-relaxed p-4">
+            <code>{CODE_SNIPPETS.baml}</code>
+          </pre>
         </CodeBlock>
         <div className="text-xs text-muted-foreground mt-1 ml-2">
           BAML schema
         </div>
       </motion.div>
 
-      {/* Right: TypeScript code with error underline */}
+      {/* TypeScript Code Section */}
       <motion.div
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
         initial={{ opacity: 0, y: 30 }}
         transition={{ delay: 0.3, duration: 0.6 }}
       >
-        <CodeBlock className="mb-2" filename="main.ts">
-          <SyntaxTypingAnimation
-            className="min-h-[100px] text-[14px]"
-            code={tsCode}
-            delay={800}
-            duration={30}
-            language="typescript"
-            // When typing is done, trigger error underline
-            onAnimationComplete={() => setTypingDone(true)}
-          />
-          {/* Overlay error underline after typing is done */}
-          <AnimatePresence>
-            {showError && (
-              <motion.div
-                animate={{ opacity: 1, y: 0 }}
-                className="absolute left-0 right-0 top-0 pointer-events-none px-4 pt-4"
-                exit={{ opacity: 0, y: 10 }}
-                initial={{ opacity: 0, y: 10 }}
-                style={{ zIndex: 20 }}
-                transition={{ duration: 0.4 }}
-              >
-                {/* Render the code with error underline */}
-                <div
-                  className="font-mono text-[14px] leading-relaxed text-primary"
-                  // Removed unused dangerouslySetInnerHTML
-                >
-                  {highlightErrorLine(tsCode)}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+        <CodeBlock className="mb-2 relative" filename="main.ts">
+          <pre className="text-[14px] font-mono text-primary leading-relaxed p-4">
+            <code>
+              {showError ? renderCodeWithError() : CODE_SNIPPETS.typescript}
+            </code>
+          </pre>
         </CodeBlock>
-        {/* Error message below code */}
+
+        {/* Error message */}
         <AnimatePresence>
           {showError && (
             <motion.div
@@ -121,40 +81,20 @@ console.log(resume.education);`;
               initial={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.2, duration: 0.4 }}
             >
-              <svg
-                aria-label="Error icon"
-                fill="none"
-                height="16"
-                viewBox="0 0 24 24"
-                width="16"
-              >
-                <title>Error icon</title>
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M12 8v4m0 4h.01"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                />
-              </svg>
+              <ErrorIcon />
               Property 'education' does not exist on type 'Resume'.
             </motion.div>
           )}
         </AnimatePresence>
+
         <div className="text-xs text-muted-foreground mt-1 ml-2">
           TypeScript
         </div>
       </motion.div>
 
-      {/* Error underline style */}
+      {/* Error underline styles */}
       <style jsx>{`
-        .error-underline {
+        :global(.error-underline) {
           text-decoration: underline wavy red;
           text-underline-offset: 2px;
           font-weight: 600;
@@ -165,5 +105,27 @@ console.log(resume.education);`;
         }
       `}</style>
     </div>
+  );
+}
+
+// Extracted error icon component for better organization
+function ErrorIcon() {
+  return (
+    <svg
+      aria-label="Error icon"
+      fill="none"
+      height="16"
+      viewBox="0 0 24 24"
+      width="16"
+    >
+      <title>Error icon</title>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+      <path
+        d="M12 8v4m0 4h.01"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+    </svg>
   );
 }

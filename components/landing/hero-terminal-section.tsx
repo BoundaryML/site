@@ -1,34 +1,41 @@
-import { SyntaxTypingAnimation } from '@/components/magicui/syntax-typing-animation';
-import { Terminal } from '@/components/magicui/terminal';
+import {
+  AnimatedSpan,
+  Terminal,
+  TypingAnimation,
+} from '@/components/magicui/terminal';
 
-const typingText = `function AnalyzeCodebase(code: string) -> Analysis {
-  client openai/gpt-4o
-  prompt "Analyze the codebase for: {code}"
-}
-
-let result = b.AnalyzeCodebase("Find all auth endpoints")
-
-{
-  endpoints: ["/api/auth/login"],
-  issues: 1,
-  recommendations: ["Add rate limiting"]
-}
-`;
-
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableHeader,
+//   TableRow,
+// } from '@/components/ui/table';
 export function HeroTerminalSection() {
   return (
-    <div className="w-full text-left">
-      <Terminal
-        className="w-full max-w-full min-h-[360px]"
-        // filename="prompt.baml"
-      >
-        <SyntaxTypingAnimation
-          code={typingText}
-          delay={1000}
-          duration={50}
-          language="typescript"
-        />
-      </Terminal>
-    </div>
+    <Terminal className="w-full max-w-full min-h-[250px] font-mono">
+      <TypingAnimation delay={1000}>$ baml-cli generate</TypingAnimation>
+      <AnimatedSpan delay={2500}>
+        <span className="text-muted-foreground font-mono">
+          ✅ Generated Python Client
+        </span>
+      </AnimatedSpan>
+      <AnimatedSpan delay={2900}>
+        <span className="text-muted-foreground font-mono">
+          ✅ Generated TypeScript Client
+        </span>
+      </AnimatedSpan>
+      <AnimatedSpan delay={3300}>
+        <span className="text-muted-foreground font-mono">
+          ✅ Generated Go Client
+        </span>
+      </AnimatedSpan>
+      <AnimatedSpan delay={3700}>
+        <span className="text-muted-foreground font-mono">
+          ✅ Generated Ruby Client
+        </span>
+      </AnimatedSpan>
+    </Terminal>
   );
 }

@@ -180,7 +180,7 @@ export default function HeroSection() {
 
         {/* Right column - Hero image */}
         <div
-          className="relative animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px] after:absolute after:inset-0 after:z-50 after:[background:linear-gradient(to_top,var(--background)_30%,rgba(var(--background),0.1)_70%,transparent)]"
+          className="relative animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px]"
           ref={ref}
         >
           <div
@@ -195,7 +195,18 @@ export default function HeroSection() {
               duration={12}
               size={200}
             />
-
+            <div className="w-full text-left relative z-10">
+              <div className="w-full max-w-full min-h-[360px] rounded-lg overflow-hidden">
+                <iframe
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full min-h-[360px] relative z-10"
+                  frameBorder="0"
+                  src="https://www.youtube.com/embed/gxckvkNg6KM"
+                  title="BoundaryML Demo"
+                />
+              </div>
+            </div>
             {/* <img
               alt="Hero Hero"
               className="hidden relative w-full h-full rounded-[inherit] border object-contain dark:block"
@@ -206,7 +217,7 @@ export default function HeroSection() {
               className="block relative w-full h-full  rounded-[inherit] border object-contain dark:hidden"
               src="/hero-light.png"
             /> */}
-            <HeroTerminalSection />
+            {/* <HeroTerminalSection /> */}
           </div>
         </div>
       </div>

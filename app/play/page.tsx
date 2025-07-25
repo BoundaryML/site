@@ -1,12 +1,21 @@
 'use client';
 
-import { Navbar } from '@/components/navbar';
+import {
+  Code,
+  Copy,
+  Download,
+  Play,
+  Settings,
+  Share2,
+  Sparkles,
+  Terminal,
+} from 'lucide-react';
+import Link from 'next/link';
+import { useState } from 'react';
 import { FooterSection } from '@/components/footer-section';
+import { Navbar } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import Link from 'next/link';
-import { Play, Code, Copy, Download, Share2, Settings, Sparkles, Terminal } from 'lucide-react';
-import { useState } from 'react';
 
 const exampleCode = `// Define your AI interface with BAML
 class User {
@@ -19,7 +28,7 @@ function GetUserInfo(query: string) -> User {
   client GPT4
   prompt #"
     Extract user information from: {{query}}
-    
+
     Return as a User object.
   "#
 }
@@ -30,29 +39,29 @@ console.log(user.name) // TypeScript knows this is a string!`;
 
 const examples = [
   {
+    category: 'Data Extraction',
+    description: 'Parse unstructured text into typed objects',
     id: 1,
-    title: "Extract Structured Data",
-    description: "Parse unstructured text into typed objects",
-    category: "Data Extraction"
+    title: 'Extract Structured Data',
   },
   {
+    category: 'Workflows',
+    description: 'Chain multiple AI calls with type safety',
     id: 2,
-    title: "Multi-step AI Workflow",
-    description: "Chain multiple AI calls with type safety",
-    category: "Workflows"
+    title: 'Multi-step AI Workflow',
   },
   {
+    category: 'Generation',
+    description: 'Generate content with validated schemas',
     id: 3,
-    title: "Content Generation",
-    description: "Generate content with validated schemas",
-    category: "Generation"
+    title: 'Content Generation',
   },
   {
+    category: 'Classification',
+    description: 'Build reliable classification systems',
     id: 4,
-    title: "Classification Pipeline",
-    description: "Build reliable classification systems",
-    category: "Classification"
-  }
+    title: 'Classification Pipeline',
+  },
 ];
 
 export default function PlaygroundPage() {
@@ -82,8 +91,8 @@ export default function PlaygroundPage() {
               Try BAML in Your Browser
             </h1>
             <p className="max-w-2xl text-lg text-muted-foreground">
-              Experiment with BAML code, test AI prompts, and see type-safe results instantly. 
-              No installation required.
+              Experiment with BAML code, test AI prompts, and see type-safe
+              results instantly. No installation required.
             </p>
           </div>
         </section>
@@ -99,11 +108,13 @@ export default function PlaygroundPage() {
                   <div className="space-y-2">
                     {examples.map((example) => (
                       <button
-                        key={example.id}
                         className="w-full text-left p-3 rounded-md hover:bg-muted transition-colors"
+                        key={example.id}
                       >
                         <p className="font-medium text-sm">{example.title}</p>
-                        <p className="text-xs text-muted-foreground">{example.description}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {example.description}
+                        </p>
                         <span className="text-xs bg-primary/10 px-2 py-0.5 rounded-full mt-1 inline-block">
                           {example.category}
                         </span>
@@ -115,15 +126,27 @@ export default function PlaygroundPage() {
                 <Card className="p-4">
                   <h3 className="font-semibold mb-3">Quick Actions</h3>
                   <div className="space-y-2">
-                    <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                    <Button
+                      className="w-full justify-start gap-2"
+                      size="sm"
+                      variant="outline"
+                    >
                       <Copy className="h-4 w-4" />
                       Copy Code
                     </Button>
-                    <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                    <Button
+                      className="w-full justify-start gap-2"
+                      size="sm"
+                      variant="outline"
+                    >
                       <Download className="h-4 w-4" />
                       Download Example
                     </Button>
-                    <Button variant="outline" size="sm" className="w-full justify-start gap-2">
+                    <Button
+                      className="w-full justify-start gap-2"
+                      size="sm"
+                      variant="outline"
+                    >
                       <Share2 className="h-4 w-4" />
                       Share Playground
                     </Button>
@@ -138,34 +161,34 @@ export default function PlaygroundPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex gap-2">
                         <button
-                          onClick={() => setActiveTab('code')}
                           className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
-                            activeTab === 'code' 
-                              ? 'bg-background border border-border' 
+                            activeTab === 'code'
+                              ? 'bg-background border border-border'
                               : 'text-muted-foreground hover:text-foreground'
                           }`}
+                          onClick={() => setActiveTab('code')}
                         >
                           <Code className="h-4 w-4 inline mr-1" />
                           BAML Code
                         </button>
                         <button
-                          onClick={() => setActiveTab('output')}
                           className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
-                            activeTab === 'output' 
-                              ? 'bg-background border border-border' 
+                            activeTab === 'output'
+                              ? 'bg-background border border-border'
                               : 'text-muted-foreground hover:text-foreground'
                           }`}
+                          onClick={() => setActiveTab('output')}
                         >
                           <Terminal className="h-4 w-4 inline mr-1" />
                           Output
                         </button>
                       </div>
-                      <Button variant="ghost" size="sm">
+                      <Button size="sm" variant="ghost">
                         <Settings className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
-                  
+
                   <div className="p-4 min-h-[500px]">
                     {activeTab === 'code' ? (
                       <div className="font-mono text-sm">
@@ -177,7 +200,9 @@ export default function PlaygroundPage() {
                           ✓ BAML code validated successfully
                         </div>
                         <div className="mt-4">
-                          <div className="text-muted-foreground">// Output:</div>
+                          <div className="text-muted-foreground">
+                            // Output:
+                          </div>
                           <div className="mt-2">
                             {`{
   "name": "John Doe",
@@ -196,17 +221,15 @@ export default function PlaygroundPage() {
 
                 <div className="flex items-center justify-between">
                   <div className="flex gap-2">
-                    <Button 
-                      onClick={handleRun}
-                      disabled={isRunning}
+                    <Button
                       className="gap-2"
+                      disabled={isRunning}
+                      onClick={handleRun}
                     >
                       <Play className="h-4 w-4" />
                       {isRunning ? 'Running...' : 'Run Code'}
                     </Button>
-                    <Button variant="outline">
-                      Clear
-                    </Button>
+                    <Button variant="outline">Clear</Button>
                   </div>
                   <div className="text-sm text-muted-foreground">
                     Playground powered by BAML runtime v2.0
@@ -223,7 +246,8 @@ export default function PlaygroundPage() {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Playground Features</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Everything you need to experiment with BAML and build confidence before implementing
+                Everything you need to experiment with BAML and build confidence
+                before implementing
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
@@ -233,7 +257,8 @@ export default function PlaygroundPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Live Validation</h3>
                 <p className="text-muted-foreground">
-                  Get instant feedback on your BAML code with real-time syntax checking and validation.
+                  Get instant feedback on your BAML code with real-time syntax
+                  checking and validation.
                 </p>
               </Card>
               <Card className="p-6">
@@ -242,7 +267,8 @@ export default function PlaygroundPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Example Library</h3>
                 <p className="text-muted-foreground">
-                  Start with pre-built examples for common use cases and modify them to fit your needs.
+                  Start with pre-built examples for common use cases and modify
+                  them to fit your needs.
                 </p>
               </Card>
               <Card className="p-6">
@@ -251,7 +277,8 @@ export default function PlaygroundPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Share & Export</h3>
                 <p className="text-muted-foreground">
-                  Share your playground sessions with teammates or export code to use in your projects.
+                  Share your playground sessions with teammates or export code
+                  to use in your projects.
                 </p>
               </Card>
             </div>
@@ -263,13 +290,14 @@ export default function PlaygroundPage() {
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Build?</h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Install BAML in your project and start building type-safe AI applications today.
+              Install BAML in your project and start building type-safe AI
+              applications today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
+              <Button asChild size="lg">
                 <Link href="/docs/getting-started">Get Started</Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button asChild size="lg" variant="outline">
                 <Link href="https://marketplace.visualstudio.com/items?itemName=boundaryml.baml">
                   Install VS Code Extension
                 </Link>

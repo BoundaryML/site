@@ -1,9 +1,10 @@
 import { Globe } from 'lucide-react';
 import { FirstBentoAnimation } from '@/components/first-bento-animation';
 import { FourthBentoAnimation } from '@/components/fourth-bento-animation';
-import { HeroTerminalSection } from '@/components/landing/hero-terminal-section';
+import { SyntaxTypingAnimation } from '@/components/magicui/syntax-typing-animation';
 import { SecondBentoAnimation } from '@/components/second-bento-animation';
 import { ThirdBentoAnimation } from '@/components/third-bento-animation';
+import { VSCodeMock } from '@/components/vscode';
 import { cn } from '@/lib/utils';
 // import { FirstBentoAnimation } from '@/todo/(marketing)/_components/first-bento-animation';
 // import { FourthBentoAnimation } from '@/todo/(marketing)/_components/fourth-bento-animation';
@@ -49,6 +50,51 @@ export const TEAM_PRICING = {
 } as const;
 
 const url = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+const bamlCode = `class Analysis {
+  issues string[]
+}
+
+function AnalyzeCodebase(code: string) -> Analysis {
+  client openai/gpt-4o
+  prompt "Analyze the codebase for: {code}"
+}`;
+
+const bamlCodePython = `from baml_client import b
+
+result = b.AnalyzeCodebase("<html>...</html>")
+
+print(result)
+`;
+
+const bamlCodeTypescript = `import { b } from "baml_client"
+
+const result = b.AnalyzeCodebase("<html>...</html>")
+
+console.log(result)
+`;
+
+const bamlCodeRuby = `require "baml_client"
+
+result = b.AnalyzeCodebase("<html>...</html>")
+
+print(result)
+`;
+
+const bamlCodeGo = `import "baml_client"
+
+result := b.AnalyzeCodebase("<html>...</html>")
+
+fmt.Println(result)
+`;
+
+const bamlCodeJava = `import com.boundaryml.baml.client.BamlClient;
+
+BamlClient b = new BamlClient();
+
+result = b.AnalyzeCodebase("<html>...</html>")
+
+print(result)
+`;
 
 export const siteConfig = {
   benefits: [
@@ -94,9 +140,9 @@ export const siteConfig = {
       {
         content: <ThirdBentoAnimation />,
         description:
-          'Generate TypeScript types and runtime validation from your BAML schemas automatically.',
+          'Test your agents in CI/CD pipelines to ensure they are working as expected.',
         id: 3,
-        title: 'Automatic Type Generation',
+        title: 'Test Your Agents in CI/CD',
       },
       {
         content: <FourthBentoAnimation once={false} />,
@@ -210,38 +256,125 @@ export const siteConfig = {
       'Discover how BAML transforms AI development in four easy steps',
     items: [
       {
-        component: <HeroTerminalSection />,
-        content:
-          'Design robust AI schemas with intuitive syntax and instant validation directly in your favorite editor.',
+        content: (
+          <div>
+            Yes, Cursor, Claude, already know BAML.
+            <br />
+            Yes, we made a whole VSCode extension for BAML.
+          </div>
+        ),
         id: 1,
-        // image:
-        // 'https://images.unsplash.com/photo-1720378042271-60aff1e1c538?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Define Agents',
+        title: (
+          <div>
+            Define your{' '}
+            <span className="line-through text-destructive">prompts</span>{' '}
+            <span className="text-secondary">functions</span>
+          </div>
+        ),
+        // component: (
+        //   <VSCodeMock
+        //     className="w-full"
+        //     code={bamlCode}
+        //     dark={false}
+        //     filename="agent.baml"
+        //     // height={650}
+        //     language="TypeScript"
+        //     lineNumbers
+        //     showSidebar={false}
+        //     showStatusBar={false}
+        //   />
+        // ),
+        video: '/define-agents.mp4',
       },
       {
-        content:
-          'Automatically produce language specific runtime code including types and validation logic from BAML.',
+        content: (
+          <div>
+            Do it in VSCode, or the editor of your choice.
+            <br />
+            Or in CI/CD
+            <br />
+            <pre>baml-cli test</pre>
+          </div>
+        ),
         id: 2,
-        image:
-          'https://images.unsplash.com/photo-1720371300677-ba4838fa0678?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Generate Runtime',
+        title: (
+          <div>
+            Test your{' '}
+            <span className="line-through text-destructive">prompts</span>{' '}
+            <span className="text-secondary">functions</span>
+          </div>
+        ),
+        video: '/test-agent.mp4',
       },
       {
+        component: (
+          <VSCodeMock
+            className="w-full"
+            dark={false}
+            files={[
+              // {
+              //   code: bamlCode,
+              //   filename: 'agent.baml',
+              //   language: 'BAML',
+              // },
+              {
+                code: bamlCodePython,
+                filename: 'main.py',
+                language: 'Python',
+              },
+              {
+                code: bamlCodeTypescript,
+                filename: 'main.ts',
+                language: 'TypeScript',
+              },
+              {
+                code: bamlCodeRuby,
+                filename: 'main.rb',
+                language: 'Ruby',
+              },
+              {
+                code: bamlCodeGo,
+                filename: 'main.go',
+                language: 'Go',
+              },
+              // {
+              //   code: bamlCodeJava,
+              //   filename: 'Main.java',
+              //   language: 'Java',
+              // },
+            ]}
+            lineNumbers
+            showSidebar={false}
+            showStatusBar={false}
+            showTerminal={true}
+            terminalContent={
+              <SyntaxTypingAnimation
+                code={`{
+  "endpoints": [
+    "https://api.example.com/auth/login",
+    "https://api.example.com/auth/logout"
+  ]
+}`}
+                // className="text-green-400"
+                delay={1000}
+                duration={30}
+              />
+            }
+            terminalHeight={200}
+          />
+        ),
         content:
           'Test and iterate on your prompts directly within the editor, enabling rapid experimentation and debugging.',
         id: 3,
-        image:
-          'https://images.unsplash.com/photo-1666882990322-e7f3b8df4f75?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
-        title: 'Iterate & Test',
+        title: '3. Run Agent',
       },
-      {
-        content:
-          'Leverage the observability platform to monitor, evaluate, and gain actionable insights in production.',
-        id: 4,
-        image:
-          'https://images.unsplash.com/photo-1720371300677-ba4838fa0678?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Observe & Evaluate',
-      },
+      // {
+      //   component: <IterateTestDemo />,
+      //   content:
+      //     'Test and iterate on your prompts directly within the editor, enabling rapid experimentation and debugging.',
+      //   id: 4,
+      //   title: '4. Iterate & Test',
+      // },
     ],
     title: 'Complete Development Workflow',
   },
