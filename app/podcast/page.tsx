@@ -3,88 +3,197 @@ import { FooterSection } from '@/components/footer-section';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
-import { Play, Pause, Headphones, Mic, Clock, Calendar, ExternalLink } from 'lucide-react';
+import { Headphones, Mic, Calendar, Code, Users } from 'lucide-react';
 
 const podcastEpisodes = [
   {
     id: 1,
-    episodeNumber: "EP 012",
-    title: "The Future of Type-Safe AI Development",
-    description: "We explore how type safety is revolutionizing AI development and making it more reliable for production use cases.",
-    guest: "Dr. Sarah Mitchell",
-    guestTitle: "AI Research Lead at Stanford",
-    duration: "45:23",
-    date: "2024-01-18",
+    episodeNumber: "#16",
+    title: "Evaluating Prompts Across Models",
+    description: "AI That Works #16 will be a super-practical deep dive into real-world examples and techniques for evaluating a single prompt against multiple models. While this is a commonly heralded use case for Evals, e.g. \"how do we know if the new model is better\" / \"how do we know if the new model breaks anything\", there's not a ton of practical examples out there for real-world use cases.",
+    date: "2025-07-29",
     featured: true,
-    topics: ["Type Safety", "AI Development", "Production Systems"]
+    rsvpUrl: "https://lu.ma/gnvx0iic",
+    topics: ["Evaluation", "Multi-Model", "Prompts"]
   },
   {
     id: 2,
-    episodeNumber: "EP 011",
-    title: "Building AI Agents That Actually Work",
-    description: "A deep dive into creating reliable AI agents using BAML, with real-world examples from production deployments.",
-    guest: "Alex Chen",
-    guestTitle: "CTO at TechFlow",
-    duration: "38:45",
-    date: "2024-01-11",
+    episodeNumber: "#15",
+    title: "PDFs, Multimodality, Vision Models",
+    description: "Dive deep into practical PDF processing techniques for AI applications. We'll explore how to extract, parse, and leverage PDF content effectively in your AI workflows, tackling common challenges like layout preservation, table extraction, and multi-modal content handling.",
+    date: "2025-07-22",
     featured: false,
-    topics: ["AI Agents", "Production", "Best Practices"]
+    youtubeUrl: "https://youtu.be/sCScFZB4Am8",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-07-22-multimodality",
+    topics: ["PDFs", "Multimodality", "Vision Models"]
   },
   {
     id: 3,
-    episodeNumber: "EP 010",
-    title: "From Prototype to Production: AI Scaling Strategies",
-    description: "Learn how companies are taking AI from proof of concept to production scale with proper infrastructure and tooling.",
-    guest: "Maria Rodriguez",
-    guestTitle: "VP Engineering at CloudScale",
-    duration: "42:18",
-    date: "2024-01-04",
+    episodeNumber: "#14",
+    title: "Implementing Decaying-Resolution Memory",
+    description: "Last week on #13, we did a conceptual deep dive on context engineering and memory - this week, we're going to jump right into the weeds and implement a version of Decaying-Resolution Memory that you can pick up and apply to your AI Agents today. For this episode, you'll probably want to check out episode #13 in the session listing to get caught up on DRM and why its worth building from scratch.",
+    date: "2025-07-15",
     featured: false,
-    topics: ["Scaling", "Infrastructure", "DevOps"]
+    youtubeUrl: "https://www.youtube.com/watch?v=CEGSDlCtI8U",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-07-15-decaying-resolution-memory",
+    topics: ["Memory", "AI Agents", "Implementation"]
   },
   {
     id: 4,
-    episodeNumber: "EP 009",
-    title: "The Economics of AI Development",
-    description: "Understanding the cost structures and ROI of building AI applications, and how to optimize for efficiency.",
-    guest: "David Park",
-    guestTitle: "Founder of AI Economics Institute",
-    duration: "51:07",
-    date: "2023-12-28",
+    episodeNumber: "#13",
+    title: "Building AI with Memory & Context",
+    description: "How do we build agents that can remember past conversations and learn over time? We'll explore memory and context engineering techniques to create AI systems that maintain state across interactions.",
+    date: "2025-07-08",
     featured: false,
-    topics: ["Economics", "ROI", "Cost Optimization"]
+    youtubeUrl: "https://www.youtube.com/watch?v=-doV02eh8XI",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-07-08-context-engineering",
+    topics: ["Memory", "Context Engineering", "AI Agents"]
   },
   {
     id: 5,
-    episodeNumber: "EP 008",
-    title: "Security and Privacy in AI Applications",
-    description: "Essential security considerations when building AI applications, from data privacy to prompt injection prevention.",
-    guest: "Lisa Thompson",
-    guestTitle: "Security Architect at SecureAI",
-    duration: "47:32",
-    date: "2023-12-21",
+    episodeNumber: "#12",
+    title: "Boosting AI Output Quality",
+    description: "This week's session was a bit meta! We explored \"Boosting AI Output Quality\" by building the very AI pipeline that generated this email from our Zoom recording. The real breakthrough: separating extraction from polishing for high-quality AI generation.",
+    date: "2025-07-01",
     featured: false,
-    topics: ["Security", "Privacy", "Compliance"]
+    youtubeUrl: "https://www.youtube.com/watch?v=HsElHU44xJ0",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-07-01-ai-content-pipeline-2",
+    topics: ["Content Generation", "Quality", "Pipeline"]
   },
   {
     id: 6,
-    episodeNumber: "EP 007",
-    title: "Open Source AI: Building in Public",
-    description: "The importance of open source in AI development and how the community is shaping the future of AI tools.",
-    guest: "James Wilson",
-    guestTitle: "Open Source Advocate",
-    duration: "36:54",
-    date: "2023-12-14",
+    episodeNumber: "#11",
+    title: "Building an AI Content Pipeline",
+    description: "Content creation involves a lot of manual work - uploading videos, sending emails, and other follow-up tasks that are easy to drop. We'll build an agent that integrates YouTube, email, GitHub and human-in-the-loop to fully automate the AI that Works content pipeline, handling all the repetitive work while maintaining quality.",
+    date: "2025-06-24",
     featured: false,
-    topics: ["Open Source", "Community", "Collaboration"]
+    youtubeUrl: "https://www.youtube.com/watch?v=Xece-W7Xf48",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-06-24-ai-content-pipeline",
+    topics: ["Automation", "Content Pipeline", "Integration"]
+  },
+  {
+    id: 7,
+    episodeNumber: "#10",
+    title: "Entity Resolution: Extraction, Deduping, and Enriching",
+    description: "Disambiguating many ways of naming the same thing (companies, skills, etc.) - from entity extraction to resolution to deduping. We'll explore breaking problems into extraction → resolution → enrichment stages, scaling with two-stage designs, and building async workflows with human-in-loop patterns for production entity resolution systems.",
+    date: "2025-06-17",
+    featured: false,
+    youtubeUrl: "https://youtu.be/niR896pQWOQ",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-06-17-entity-extraction",
+    topics: ["Entity Resolution", "Data Processing", "Production Systems"]
+  },
+  {
+    id: 8,
+    episodeNumber: "#9",
+    title: "Cracking the Prompting Interview",
+    description: "Ready to level up your prompting skills? Join us for a deep dive into advanced prompting techniques that separate good prompt engineers from great ones. We'll cover systematic prompt design, testing tools / inner loops, and tackle real-world prompting challenges. Perfect prep for becoming a more effective AI engineer.",
+    date: "2025-06-10",
+    featured: false,
+    youtubeUrl: "https://youtu.be/PU2h0V-pANQ",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-06-10-cracking-the-prompting-interview",
+    topics: ["Prompting", "Engineering", "Best Practices"]
+  },
+  {
+    id: 9,
+    episodeNumber: "#8",
+    title: "Humans as Tools: Async Agents and Durable Execution",
+    description: "Agents are great, but for the most accuracy-sensitive scenarios, we some times want a human in the loop. Today we'll discuss techniques for how to make this possible. We'll dive deep into concepts from our 4/22 session on 12-factor agents and extend them to handle asynchronous operations where agents need to contact humans for help, feedback, or approvals across a variety of channels.",
+    date: "2025-06-03",
+    featured: false,
+    youtubeUrl: "https://youtu.be/NMhH5_ju3-I",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-06-03-humans-as-tools-async",
+    topics: ["Human-in-the-Loop", "Async Agents", "Durable Execution"]
+  },
+  {
+    id: 10,
+    episodeNumber: "#7",
+    title: "12-factor agents: selecting from thousands of MCP tools",
+    description: "MCP is only as great as your ability to pick the right tools. We'll dive into showing how to leverage MCP servers and accurately use the right ones when only a few have actually relevant tools.",
+    date: "2025-05-27",
+    featured: false,
+    youtubeUrl: "https://www.youtube.com/watch?v=P5wRLKF4bt8",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-05-27-mcp-with-10000-tools",
+    topics: ["MCP", "Tool Selection", "12-Factor"]
+  },
+  {
+    id: 11,
+    episodeNumber: "#6",
+    title: "Policy to Prompt: Evaluating w/ the Enron Emails Dataset",
+    description: "One of the most common problems in AI engineering is looking at a set of policies / rules and evaluating evidence to determine if the rules were followed. In this session we'll explore turning policies into prompts and pipelines to evaluate which emails in the massive enron email dataset violated SEC and Sarbanes-Oxley regulations.",
+    date: "2025-05-20",
+    featured: false,
+    youtubeUrl: "https://www.youtube.com/watch?v=gkekVC67iVs",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-05-20-policies-to-prompts",
+    topics: ["Policy Evaluation", "Enron Dataset", "Compliance"]
+  },
+  {
+    id: 12,
+    episodeNumber: "#5",
+    title: "evals evals evals",
+    description: "Stay tuned for our season 2 kickoff topic on minimalist and high-performance testing/evals for LLM applications",
+    date: "2025-05-13",
+    featured: false,
+    youtubeUrl: "https://youtu.be/-N6MajRfqYw",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-05-13-designing-evals",
+    topics: ["Evaluation", "Testing", "LLM Applications"]
+  },
+  {
+    id: 13,
+    episodeNumber: "#4",
+    title: "twelve factor agents",
+    description: "Learn how to build production-ready AI agents using the twelve-factor methodology. we'll cover the core concepts and build a real agent from scratch.",
+    date: "2025-04-22",
+    featured: false,
+    youtubeUrl: "https://youtu.be/yxJDyQ8v6P0",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-04-22-twelve-factor-agents",
+    topics: ["12-Factor", "AI Agents", "Production"]
+  },
+  {
+    id: 14,
+    episodeNumber: "#3",
+    title: "code generation with small models",
+    description: "Large models can do a lot, but so can small models. we'll discuss techniques for how to leverge extremely small models for generating diffs and making changes in complete codebases.",
+    date: "2025-04-15",
+    featured: false,
+    youtubeUrl: "https://youtu.be/KJkvYdGEnAY",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-04-15-code-generation-with-small-models",
+    topics: ["Code Generation", "Small Models", "Optimization"]
+  },
+  {
+    id: 15,
+    episodeNumber: "#2",
+    title: "reasoning models vs reasoning prompts",
+    description: "Models can reason but you can also reason within a prompt. which technique wins out when and why? we'll find out by adding reasoning to a chat bot that generates complex cypher/sql queries.",
+    date: "2025-04-08",
+    featured: false,
+    youtubeUrl: "https://youtu.be/D-pcKduKdYM",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-04-07-reasoning-models-vs-prompts",
+    topics: ["Reasoning", "Models", "Prompts"]
+  },
+  {
+    id: 16,
+    episodeNumber: "#1",
+    title: "large scale classification",
+    description: "LLMs are great at classification from 5, 10, maybe even 50 categories. but how do we deal with situations when we have over 1000? perhaps its an ever changing list of categories?",
+    date: "2025-03-31",
+    featured: false,
+    youtubeUrl: "https://youtu.be/6B7MzraQMZk",
+    codeUrl: "https://github.com/hellovai/ai-that-works/tree/main/2025-03-31-large-scale-classification",
+    topics: ["Classification", "Scale", "Dynamic Categories"]
   }
 ];
 
+// Helper function to extract YouTube video ID from URL
+const getYouTubeVideoId = (url: string) => {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=|youtube\.com\/embed\/)([^&\n?#]+)/);
+  return match ? match[1] : null;
+};
+
 const podcastPlatforms = [
-  { name: "Apple Podcasts", icon: "🎵", url: "#" },
-  { name: "Spotify", icon: "🎧", url: "#" },
-  { name: "Google Podcasts", icon: "📻", url: "#" },
-  { name: "RSS Feed", icon: "📡", url: "#" }
+  { name: "Event Calendar", icon: "📅", url: "https://lu.ma/baml" },
+  { name: "Discord", icon: "💬", url: "https://boundaryml.com/discord" },
+  { name: "GitHub", icon: "🚀", url: "https://github.com/boundaryml/baml" },
+  { name: "YouTube", icon: "📺", url: "https://www.youtube.com/@boundaryml" }
 ];
 
 export default function PodcastPage() {
@@ -100,11 +209,16 @@ export default function PodcastPage() {
               Podcast
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl">
-              AI That Works Podcast
+              🦄 ai that works
             </h1>
             <p className="max-w-2xl text-lg text-muted-foreground">
-              Conversations about practical AI implementation and real-world applications. 
-              Join us as we explore how teams are building production-ready AI systems.
+              A weekly conversation about how we can all get the most juice out of todays models 
+              with <Link href="https://www.github.com/hellovai" className="underline">@hellovai</Link> & <Link href="https://www.github.com/dexhorthy" className="underline">@dexhorthy</Link>
+            </p>
+            <p className="text-base text-muted-foreground">
+              Every <span className="font-semibold text-foreground">Tuesday</span> at{' '}
+              <span className="font-semibold text-foreground">10 AM PST</span> on Zoom.{' '}
+              1 hour of live code, Q&A with some prepped content to help you take your AI app from a demo to production.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               {podcastPlatforms.map((platform) => (
@@ -124,59 +238,73 @@ export default function PodcastPage() {
           <div className="mx-auto max-w-6xl">
             {podcastEpisodes.filter(ep => ep.featured).map(episode => (
               <Card key={episode.id} className="overflow-hidden">
-                <div className="p-8 md:p-12">
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-sm font-medium bg-primary text-primary-foreground px-3 py-1 rounded-full">
-                      LATEST EPISODE
-                    </span>
-                    <span className="text-sm text-muted-foreground">{episode.episodeNumber}</span>
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">{episode.title}</h2>
-                  <p className="text-lg text-muted-foreground mb-6">{episode.description}</p>
-                  
-                  <div className="flex flex-col md:flex-row gap-6 mb-8">
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-1">Guest</p>
-                      <p className="font-semibold">{episode.guest}</p>
-                      <p className="text-sm text-muted-foreground">{episode.guestTitle}</p>
-                    </div>
-                    <div className="flex gap-6">
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Duration</p>
-                        <p className="font-semibold flex items-center gap-1">
-                          <Clock className="h-4 w-4" />
-                          {episode.duration}
-                        </p>
+                <div className="p-6 md:p-8">
+                  <div className="flex flex-col md:flex-row gap-6">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-4 mb-4">
+                        <span className="text-sm font-medium bg-primary text-primary-foreground px-3 py-1 rounded-full">
+                          LATEST EPISODE
+                        </span>
+                        <span className="text-sm text-muted-foreground">{episode.episodeNumber}</span>
                       </div>
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Released</p>
-                        <p className="font-semibold flex items-center gap-1">
-                          <Calendar className="h-4 w-4" />
+                      <h2 className="text-2xl md:text-3xl font-bold mb-3">{episode.title}</h2>
+                      <p className="text-base text-muted-foreground mb-4">{episode.description}</p>
+                      
+                      <div className="flex items-center gap-1 mb-4">
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm text-muted-foreground">
                           {new Date(episode.date).toLocaleDateString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric' 
+                            month: 'long', 
+                            day: 'numeric',
+                            year: 'numeric'
                           })}
-                        </p>
+                        </span>
                       </div>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {episode.topics.map((topic) => (
+                          <span key={topic} className="text-sm bg-muted px-3 py-1 rounded-full">
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+
+                      {episode.rsvpUrl && (
+                        <Button size="lg" className="gap-2" asChild>
+                          <Link href={episode.rsvpUrl} target="_blank">
+                            <Users className="h-4 w-4" />
+                            RSVP
+                          </Link>
+                        </Button>
+                      )}
                     </div>
-                  </div>
 
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {episode.topics.map((topic) => (
-                      <span key={topic} className="text-sm bg-muted px-3 py-1 rounded-full">
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-4">
-                    <Button size="lg" className="gap-2">
-                      <Play className="h-4 w-4" />
-                      Play Episode
-                    </Button>
-                    <Button size="lg" variant="outline">
-                      Show Notes
-                    </Button>
+                    {episode.youtubeUrl && getYouTubeVideoId(episode.youtubeUrl) && (
+                      <div className="flex flex-col gap-3">
+                        <Link href={episode.youtubeUrl} target="_blank" className="block rounded-lg overflow-hidden bg-black aspect-video w-full md:w-80 relative group">
+                          <img
+                            src={`https://img.youtube.com/vi/${getYouTubeVideoId(episode.youtubeUrl)}/0.jpg`}
+                            alt={episode.title}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                            <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
+                              <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </Link>
+                        {episode.codeUrl && (
+                          <Button size="sm" variant="outline" className="gap-2 w-full" asChild>
+                            <Link href={episode.codeUrl} target="_blank">
+                              <Code className="h-4 w-4" />
+                              View Code
+                            </Link>
+                          </Button>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -190,10 +318,10 @@ export default function PodcastPage() {
             <h2 className="text-3xl font-bold mb-8">All Episodes</h2>
             <div className="space-y-6">
               {podcastEpisodes.filter(ep => !ep.featured).map(episode => (
-                <Card key={episode.id} className="p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex flex-col md:flex-row gap-6">
+                <Card key={episode.id} className="p-4 hover:shadow-lg transition-shadow">
+                  <div className="flex flex-col md:flex-row gap-4">
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center gap-3 mb-2">
                         <span className="text-sm font-medium text-muted-foreground">
                           {episode.episodeNumber}
                         </span>
@@ -205,34 +333,52 @@ export default function PodcastPage() {
                             year: 'numeric'
                           })}
                         </span>
-                        <span className="text-sm text-muted-foreground">•</span>
-                        <span className="text-sm text-muted-foreground flex items-center gap-1">
-                          <Clock className="h-3 w-3" />
-                          {episode.duration}
-                        </span>
                       </div>
-                      <h3 className="text-xl font-semibold mb-2">{episode.title}</h3>
-                      <p className="text-muted-foreground mb-4">{episode.description}</p>
-                      <div className="flex items-center gap-4">
-                        <div>
-                          <p className="text-sm">
-                            <span className="text-muted-foreground">with</span>{' '}
-                            <span className="font-medium">{episode.guest}</span>
-                          </p>
-                          <p className="text-sm text-muted-foreground">{episode.guestTitle}</p>
-                        </div>
+                      <h3 className="text-lg font-semibold mb-2">{episode.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">{episode.description}</p>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {episode.topics.map((topic) => (
+                          <span key={topic} className="text-xs bg-muted px-2 py-1 rounded-full">
+                            {topic}
+                          </span>
+                        ))}
                       </div>
+                      {episode.rsvpUrl && (
+                        <Button variant="outline" size="sm" className="gap-2" asChild>
+                          <Link href={episode.rsvpUrl} target="_blank">
+                            <Users className="h-4 w-4" />
+                            RSVP
+                          </Link>
+                        </Button>
+                      )}
                     </div>
-                    <div className="flex md:flex-col gap-2 md:justify-center">
-                      <Button variant="outline" size="sm" className="gap-2">
-                        <Play className="h-4 w-4" />
-                        Play
-                      </Button>
-                      <Button variant="ghost" size="sm" className="gap-2">
-                        <ExternalLink className="h-4 w-4" />
-                        Notes
-                      </Button>
-                    </div>
+                    
+                    {episode.youtubeUrl && getYouTubeVideoId(episode.youtubeUrl) && (
+                      <div className="flex flex-col gap-2">
+                        <Link href={episode.youtubeUrl} target="_blank" className="block rounded-lg overflow-hidden bg-black aspect-video w-64 relative group">
+                          <img
+                            src={`https://img.youtube.com/vi/${getYouTubeVideoId(episode.youtubeUrl)}/0.jpg`}
+                            alt={episode.title}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+                            <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                              <svg className="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </Link>
+                        {episode.codeUrl && (
+                          <Button variant="outline" size="sm" className="gap-2 w-full" asChild>
+                            <Link href={episode.codeUrl} target="_blank">
+                              <Code className="h-4 w-4" />
+                              View Code
+                            </Link>
+                          </Button>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </Card>
               ))}
@@ -246,8 +392,7 @@ export default function PodcastPage() {
             <Headphones className="h-12 w-12 mx-auto mb-6 text-primary" />
             <h2 className="text-3xl font-bold mb-4">Never Miss an Episode</h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Subscribe to AI That Works on your favorite podcast platform and get notified 
-              when new episodes are released.
+              Join our weekly sessions and learn how to build AI that actually works in production.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               {podcastPlatforms.map((platform) => (
