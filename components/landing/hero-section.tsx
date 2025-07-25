@@ -11,6 +11,7 @@ import TextShimmer from '@/components/magicui/text-shimmer';
 import { ScriptCopyBtn } from '../magicui/script-copy-btn';
 import { SphereMask } from '../magicui/sphere-mask';
 import { HeroTerminalSection } from './hero-terminal-section';
+import Link from 'next/link';
 
 // Logo section component
 function LogoSection() {
@@ -145,12 +146,14 @@ export default function HeroSection() {
       className="relative mx-auto mt-24 max-w-[80rem] px-6 text-center md:px-8"
       id="hero"
     >
+      <Link href="/playground">
       <div className="backdrop-filter-[12px] inline-flex h-10 items-center justify-between rounded-full border border-border bg-accent/20 px-3 text-xs text-white dark:text-black transition-all ease-in hover:cursor-pointer hover:bg-accent/40 group gap-1 translate-y-[-1rem] animate-fade-in opacity-0">
         <TextShimmer className="inline-flex items-center justify-center">
-          <span className="text-sm">✨ Introducing LLM Observability</span>{' '}
+          <span className="text-sm">✨ Try BAML online</span>{' '}
           <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
         </TextShimmer>
       </div>
+      </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-12">
         {/* Left column - Text content */}

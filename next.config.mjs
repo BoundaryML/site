@@ -11,6 +11,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/playground',
+        destination: 'https://promptfiddle.com/',
+        permanent: false,
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       { hostname: 'images.unsplash.com' },

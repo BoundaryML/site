@@ -382,38 +382,38 @@ export const siteConfig = {
     {
       links: [
         { id: 1, title: 'About Us', url: '/who-are-we' },
-        { id: 2, title: 'Why BAML?', url: '/why-the-f-did-we-make-a-language' },
-        { id: 3, title: 'Privacy Policy', url: '/privacy-policy' },
-        { id: 4, title: 'Terms of Service', url: '/tos' },
+        { id: 2, title: 'Why BAML?', url: 'https://gloochat.notion.site/benefits-of-baml' },
+        { id: 3, title: 'Privacy Policy', url: 'https://www.boundaryml.com/privacy-policy' },
+        { id: 4, title: 'Terms of Service', url: 'https://www.boundaryml.com/tos' },
       ],
       title: 'Company',
     },
-    {
-      links: [
-        {
-          id: 12,
-          title: 'VS Code Extension',
-          url: 'https://marketplace.visualstudio.com/items?itemName=boundaryml.baml',
-        },
-        {
-          id: 13,
-          title: 'JetBrains Plugin',
-          url: 'https://plugins.jetbrains.com/plugin/24002-baml',
-        },
-        {
-          id: 14,
-          title: 'BAML CLI',
-          url: '/docs/cli',
-        },
-      ],
-      title: 'Products',
-    },
+    // {
+    //   links: [
+    //     {
+    //       id: 12,
+    //       title: 'VS Code Extension',
+    //       url: 'https://marketplace.visualstudio.com/items?itemName=boundaryml.baml',
+    //     },
+    //     {
+    //       id: 13,
+    //       title: 'JetBrains Plugin',
+    //       url: 'https://plugins.jetbrains.com/plugin/24002-baml',
+    //     },
+    //     {
+    //       id: 14,
+    //       title: 'BAML CLI',
+    //       url: '/docs/cli',
+    //     },
+    //   ],
+    //   title: 'Products',
+    // },
     {
       links: [
         {
           id: 16,
           title: 'Changelog',
-          url: 'https://github.com/boundaryml/baml/releases',
+          url: 'https://docs.boundaryml.com/changelog/changelog',
         },
         { id: 18, title: 'Docs', url: 'https://docs.boundaryml.com' },
       ],
@@ -512,7 +512,7 @@ export const siteConfig = {
   nav: {
     links: [
       { href: '/', id: 1, name: 'Home' },
-      { href: '/cloud', id: 2, name: 'Cloud' },
+      // { href: '/cloud', id: 2, name: 'Cloud' },
       { href: '/blog', id: 3, name: 'Blog' },
       { href: '/podcast', id: 4, name: 'Podcast' },
       { href: '/who-are-we', id: 5, name: 'Team' },
