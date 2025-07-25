@@ -626,198 +626,100 @@ export const siteConfig = {
     {
       description: (
         <p>
-          The AI-driven analytics from #QuantumInsights have revolutionized our
-          product development cycle.
-          <Highlight>
-            Insights are now more accurate and faster than ever.
-          </Highlight>{' '}
-          A game-changer for tech companies.
+          BAML is amazing. I&apos;ve used it in Python and Typescript.{' '}
+          <Highlight>It&apos;s a game changer.</Highlight>
         </p>
       ),
       id: '1',
-      img: 'https://randomuser.me/api/portraits/men/91.jpg',
-      name: 'Alex Rivera',
-      role: 'CTO at InnovateTech',
+      img: '/testimonials/people/user1.png',
+      name: 'Adam Gitzes',
+      role: 'Amazon',
     },
     {
       description: (
         <p>
-          Implementing #AIStream&apos;s customer prediction model has
-          drastically improved our targeting strategy.
-          <Highlight>Seeing a 50% increase in conversion rates!</Highlight>{' '}
-          Highly recommend their solutions.
+          Just set up baml for my project, 10/10 experience and{' '}
+          <Highlight>much faster than langchain</Highlight>.
         </p>
       ),
       id: '2',
-      img: 'https://randomuser.me/api/portraits/women/12.jpg',
-      name: 'Samantha Lee',
-      role: 'Marketing Director at NextGen Solutions',
+      img: '/testimonials/people/jason.png',
+      name: 'Jason Fan',
+      role: 'Finic.ai',
     },
     {
       description: (
         <p>
-          As a startup, we need to move fast and stay ahead. #CodeAI&apos;s
-          automated coding assistant helps us do just that.
-          <Highlight>Our development speed has doubled.</Highlight> Essential
-          tool for any startup.
+          It&apos;s amazing!! Was able to{' '}
+          <Highlight>cut down my tokens and time-to-first-token significantly without compromising results</Highlight>.
         </p>
       ),
       id: '3',
-      img: 'https://randomuser.me/api/portraits/men/45.jpg',
-      name: 'Raj Patel',
-      role: 'Founder & CEO at StartUp Grid',
+      img: '/testimonials/people/ray.png',
+      name: 'Ray del Vecchio',
+      role: 'Cerebral Valley',
     },
     {
       description: (
         <p>
-          #VoiceGen&apos;s AI-driven voice synthesis has made creating global
-          products a breeze.
-          <Highlight>Localization is now seamless and efficient.</Highlight> A
-          must-have for global product teams.
+          BAML is definitely a must have if you want any structured data from LLM; no more BS/long paragraphs describing
+          what the output should be like, <Highlight>it just works!!!</Highlight>
         </p>
       ),
       id: '4',
-      img: 'https://randomuser.me/api/portraits/women/83.jpg',
-      name: 'Emily Chen',
-      role: 'Product Manager at Digital Wave',
+      img: '/testimonials/people/hankel.png',
+      name: 'Hankel Bao',
+      role: 'Coldreach.ai',
     },
     {
       description: (
         <p>
-          Leveraging #DataCrunch&apos;s AI for our financial models has given us
-          an edge in predictive accuracy.
-          <Highlight>
-            Our investment strategies are now powered by real-time data
-            analytics.
-          </Highlight>{' '}
-          Transformative for the finance industry.
+          The test case and playground is quite literally the BEST feature. It has{' '}
+          <Highlight>improved the iteration speed and quality by an order of magnitude</Highlight>.
         </p>
       ),
       id: '5',
-      img: 'https://randomuser.me/api/portraits/men/1.jpg',
-      name: 'Michael Brown',
-      role: 'Data Scientist at FinTech Innovations',
+      img: '/testimonials/people/joseph.png',
+      name: 'Joseph Tutera',
+      role: 'Docucare AI',
     },
     {
       description: (
         <p>
-          #LogiTech&apos;s supply chain optimization tools have drastically
-          reduced our operational costs.
-          <Highlight>
-            Efficiency and accuracy in logistics have never been better.
-          </Highlight>{' '}
+          I really really like what Baml offers [...] I think it&apos;s a step-wise improvement over Marvin. Having
+          complete control over the prompt WITH strong type guarantees is fantastic.
+          <br />I also think <Highlight>the dedicated testing playground is awesome.</Highlight>
         </p>
       ),
       id: '6',
-      img: 'https://randomuser.me/api/portraits/women/5.jpg',
-      name: 'Linda Wu',
-      role: 'VP of Operations at LogiChain Solutions',
+      img: '/testimonials/people/gabe.png',
+      name: 'Gabe',
+      role: 'Zenfetch',
     },
     {
       description: (
         <p>
-          By integrating #GreenTech&apos;s sustainable energy solutions,
-          we&apos;ve seen a significant reduction in carbon footprint.
-          <Highlight>
-            Leading the way in eco-friendly business practices.
-          </Highlight>{' '}
-          Pioneering change in the industry.
+          Code is hella clean now. Look at [the] folder structure, and each folder for a respective pipeline. Each file
+          just a prompt. <Highlight>Clean, elegant, beautiful.</Highlight>
         </p>
       ),
       id: '7',
-      img: 'https://randomuser.me/api/portraits/men/14.jpg',
-      name: 'Carlos Gomez',
-      role: 'Head of R&D at EcoInnovate',
+      img: '/testimonials/people/paulo.png',
+      name: 'Paulo Rossi',
+      role: 'Magnaplay',
     },
     {
       description: (
         <p>
-          #TrendSetter&apos;s market analysis AI has transformed how we approach
-          fashion trends.
-          <Highlight>
-            Our campaigns are now data-driven with higher customer engagement.
-          </Highlight>{' '}
-          Revolutionizing fashion marketing.
+          Just got the categorizer to work first try.
+          <br />
+          Felt like landing a kickflip
         </p>
       ),
       id: '8',
-      img: 'https://randomuser.me/api/portraits/women/56.jpg',
-      name: 'Aisha Khan',
-      role: 'Chief Marketing Officer at Fashion Forward',
-    },
-    {
-      description: (
-        <p>
-          Implementing #MediCareAI in our patient care systems has improved
-          patient outcomes significantly.
-          <Highlight>
-            Technology and healthcare working hand in hand for better health.
-          </Highlight>{' '}
-          A milestone in medical technology.
-        </p>
-      ),
-      id: '9',
-      img: 'https://randomuser.me/api/portraits/men/18.jpg',
-      name: 'Tom Chen',
-      role: 'Director of IT at HealthTech Solutions',
-    },
-    {
-      description: (
-        <p>
-          #LearnSmart&apos;s AI-driven personalized learning plans have doubled
-          student performance metrics.
-          <Highlight>
-            Education tailored to every learner&apos;s needs.
-          </Highlight>{' '}
-          Transforming the educational landscape.
-        </p>
-      ),
-      id: '10',
-      img: 'https://randomuser.me/api/portraits/women/73.jpg',
-      name: 'Sofia Patel',
-      role: 'CEO at EduTech Innovations',
-    },
-    {
-      description: (
-        <p>
-          With #CyberShield&apos;s AI-powered security systems, our data
-          protection levels are unmatched.
-          <Highlight>Ensuring safety and trust in digital spaces.</Highlight>{' '}
-          Redefining cybersecurity standards.
-        </p>
-      ),
-      id: '11',
-      img: 'https://randomuser.me/api/portraits/men/25.jpg',
-      name: 'Jake Morrison',
-      role: 'CTO at SecureNet Tech',
-    },
-    {
-      description: (
-        <p>
-          #DesignPro&apos;s AI has streamlined our creative process, enhancing
-          productivity and innovation.
-          <Highlight>Bringing creativity and technology together.</Highlight> A
-          game-changer for creative industries.
-        </p>
-      ),
-      id: '12',
-      img: 'https://randomuser.me/api/portraits/women/78.jpg',
-      name: 'Nadia Ali',
-      role: 'Product Manager at Creative Solutions',
-    },
-    {
-      description: (
-        <p>
-          #VentureAI&apos;s insights into startup ecosystems have been
-          invaluable for our growth and funding strategies.
-          <Highlight>Empowering startups with data-driven decisions.</Highlight>{' '}
-          A catalyst for startup success.
-        </p>
-      ),
-      id: '13',
-      img: 'https://randomuser.me/api/portraits/men/54.jpg',
-      name: 'Omar Farooq',
-      role: 'Founder at Startup Hub',
+      img: '/testimonials/people/eitan.png',
+      name: 'Eitan Borgnia',
+      role: 'Squack',
     },
   ],
   url,
