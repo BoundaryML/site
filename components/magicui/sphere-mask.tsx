@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { YCBadge } from '../ycbadge';
 
 export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
   return (
@@ -36,7 +37,7 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
             ease: 'backInOut',
           }}
         >
-          <div className="size-32 rounded-full flex items-center justify-center">
+          <div className="size-32 rounded-full flex items-center justify-center flex flex-col w-full">
             <Image
               alt="BAML Lamb Logo"
               className="size-24 object-contain"
@@ -44,6 +45,9 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
               src="/lamb.png"
               width={96}
             />
+            {/* <div className="mt-20"> */}
+            {/* <YCBadge /> */}
+            {/* </div> */}
           </div>
         </motion.div>
 

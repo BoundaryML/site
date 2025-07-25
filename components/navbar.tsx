@@ -9,6 +9,7 @@ import { siteConfig } from '@/app/(marketing)/_lib/config';
 import { ThemeToggle } from '@/components/custom/theme';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { GithubStars } from './GithubStars';
 
 // import { Icons } from '../todo/(marketing)/_components/icons';
 
@@ -75,15 +76,19 @@ function DesktopActionButtons() {
         Get Started
       </Link>
       <Button asChild className="hidden md:flex rounded-full" variant="outline">
-        <Link target="_blank" href="https://docs.boundaryml.com/home?utm_source=marketing-site&utm_medium=navbar-docs">
+        <Link
+          href="https://docs.boundaryml.com/home?utm_source=marketing-site&utm_medium=navbar-docs"
+          target="_blank"
+        >
           Documentation
         </Link>
       </Button>
-      <Button asChild className="hidden md:flex rounded-full" variant="outline">
+      {/* <Button asChild className="hidden md:flex rounded-full" variant="outline">
         <Link href="https://github.com/boundaryml/baml?utm_source=marketing-site&utm_medium=navbar-github">
           GitHub
         </Link>
-      </Button>
+      </Button> */}
+      <GithubStars />
     </div>
   );
 }
@@ -236,11 +241,7 @@ function MobileMenuContent({
                     Documentation
                   </Link>
                 </Button>
-                <Button asChild className="rounded-full" variant="outline">
-                  <Link href="https://github.com/boundaryml/baml?utm_source=marketing-site&utm_medium=navbar-github">
-                    GitHub
-                  </Link>
-                </Button>
+                <GithubStars />
               </div>
             </div>
           </motion.div>
