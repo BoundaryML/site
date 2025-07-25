@@ -50,7 +50,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       >
         <Suspense>
           {/* <AnalyticsProviders identifyUser> */}
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+          >
             {props.children}
           </ThemeProvider>
           {/* </AnalyticsProviders> */}
