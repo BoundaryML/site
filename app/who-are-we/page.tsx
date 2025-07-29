@@ -244,14 +244,14 @@ export default function WhoAreWePage() {
                 </Link>
               </Button>
               <Button asChild variant="outline">
-                <Link href="https://discord.gg/boundaryml">
+                <Link href="https://boundaryml.com/discord">
                   <MessageCircle className="mr-2 h-4 w-4" />
                   Join Discord
                 </Link>
               </Button>
-              <Button asChild variant="outline">
+              {/* <Button asChild variant="outline">
                 <Link href="/play">Try BAML</Link>
-              </Button>
+              </Button> */}
             </div>
           </div>
         </section>

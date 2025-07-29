@@ -6,6 +6,7 @@ import { useInView } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { useRef } from 'react';
 import { BorderBeam } from '@/components/magicui/border-beam';
+import { Button } from '@/components/ui/button';
 import type { LumaEvent } from '@/lib/luma';
 import { ScriptCopyBtn } from '../magicui/script-copy-btn';
 import { SphereMask } from '../magicui/sphere-mask';
@@ -136,6 +137,7 @@ interface HeroSectionProps {
 export default function HeroSection({ nextEvent }: HeroSectionProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { margin: '-100px', once: true });
+
   // biome-ignore assist/source/useSortedKeys: needs to be in this order
   const commandMap = {
     python: 'uv add baml-py && uv run baml-cli init',
@@ -143,6 +145,11 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
     ruby: 'bundle add baml && bundle exec baml-cli init',
     go: 'go install github.com/boundaryml/baml/go/baml-cli@latest && baml-cli init',
   };
+
+  const handleTryOnline = () => {
+    window.open('https://promptfiddle.com', '_blank');
+  };
+
   return (
     <section
       className="relative mx-auto mt-12 sm:mt-24 max-w-[80rem] px-4 sm:px-6 md:px-8 text-center"
@@ -162,7 +169,7 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
             <span className="text-secondary font-bold">BAML</span> changes the
             way you think about AI
           </p>
-          <div className="translate-y-[-1rem] animate-fade-in opacity-0 ease-in-out [--animation-delay:600ms]">
+          <div className="translate-y-[-1rem] animate-fade-in opacity-0 ease-in-out [--animation-delay:600ms] space-y-3">
             <ScriptCopyBtn
               className="block w-full"
               codeLanguage="bash"
@@ -171,6 +178,14 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
               lightTheme="none"
               showMultiplePackageOptions={true}
             />
+            <Button
+              // className="bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={handleTryOnline}
+              size="lg"
+              variant="secondary"
+            >
+              Try BAML in your browser
+            </Button>
             {/* <span>Get Started for free </span>
             <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /> */}
           </div>

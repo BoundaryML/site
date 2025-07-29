@@ -136,9 +136,9 @@ export const siteConfig = {
       {
         content: <SecondBentoAnimation />,
         description:
-          'Built-in support for OpenAI, Anthropic, and other AI providers. Easy to extend for custom providers.',
+          'Get type-safe, validated responses from any LLM. Support for JSON, XML, YAML, and more output formats.',
         id: 2,
-        title: 'AI Provider Integrations',
+        title: 'Structured Outputs',
       },
       {
         content: <ThirdBentoAnimation />,
@@ -485,7 +485,7 @@ export const siteConfig = {
       links: [
         { id: 20, title: 'GitHub', url: 'https://github.com/boundaryml' },
         { id: 21, title: 'Twitter', url: 'https://twitter.com/boundaryml' },
-        { id: 22, title: 'Discord', url: 'https://discord.gg/boundaryml' },
+        { id: 22, title: 'Discord', url: 'https://boundaryml.com/discord' },
         {
           id: 23,
           title: 'LinkedIn',
@@ -547,7 +547,7 @@ export const siteConfig = {
     'Schema Validation',
   ],
   links: {
-    discord: 'https://discord.gg/boundaryml',
+    discord: 'https://boundaryml.com/discord',
     email: 'hello@boundaryml.com',
     github: 'https://github.com/boundaryml',
     twitter: 'https://twitter.com/boundaryml',

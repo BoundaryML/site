@@ -8,16 +8,18 @@ import { CodeBlock, type CodeSnippet } from './magicui/code-block';
 // Constants for better maintainability
 const CODE_SNIPPETS = {
   baml: `class Resume {
-  name: string
-  title: string
-}`,
-  go: `resume := getResume()
+  name string
+  title string
+}
+
+function ExtractResume(resume: string) -> Resume`,
+  go: `resume := b.ExtractResume(resume)
 fmt.Println(resume.Education)`,
-  python: `resume = get_resume()
+  python: `resume = b.ExtractResume(resume)
 print(resume.education)`,
-  ruby: `resume = get_resume
+  ruby: `resume = b.ExtractResume(resume)
 puts resume.education`,
-  typescript: `const resume = getResume();
+  typescript: `const resume = b.ExtractResume(resume);
 console.log(resume.education);`,
 } as const;
 
@@ -58,7 +60,7 @@ export function FirstBentoAnimation() {
       case 'typescript':
         return (
           <>
-            <div>const resume = getResume();</div>
+            <div>const resume = b.ExtractResume(resume);</div>
             <div>
               console.log(resume
               <span className="error-underline">.education</span>
@@ -69,7 +71,7 @@ export function FirstBentoAnimation() {
       case 'python':
         return (
           <>
-            <div>resume = get_resume()</div>
+            <div>resume = b.ExtractResume(resume)</div>
             <div>
               print(resume
               <span className="error-underline">.education</span>)
@@ -79,7 +81,7 @@ export function FirstBentoAnimation() {
       case 'ruby':
         return (
           <>
-            <div>resume = get_resume</div>
+            <div>resume = b.ExtractResume(resume)</div>
             <div>
               puts resume
               <span className="error-underline">.education</span>
@@ -89,10 +91,10 @@ export function FirstBentoAnimation() {
       case 'go':
         return (
           <>
-            <div>resume := getResume()</div>
+            <div>resume := b.ExtractResume(resume)</div>
             <div>
               fmt.Println(resume
-              <span className="error-underline">.Education</span>)
+              <span className="error-underline">.education</span>)
             </div>
           </>
         );
@@ -100,8 +102,8 @@ export function FirstBentoAnimation() {
   };
 
   // Create snippets array for the multi-file CodeBlock
-  const codeSnippets: CodeSnippet[] = (
-    Object.keys(LANGUAGE_CONFIG) as Language[]
+  const codeSnippets: any[] = (
+    ['python', 'typescript', 'ruby', 'go'] as Language[]
   ).map((lang) => ({
     code: (
       <pre className="text-[14px] font-mono text-primary leading-relaxed p-4">
@@ -114,7 +116,7 @@ export function FirstBentoAnimation() {
   }));
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-4 relative">
+    <div className="w-full flex flex-col items-center justify-center gap-6 relative">
       {/* BAML Schema Section */}
       <motion.div
         animate={{ opacity: 1, y: 0 }}
@@ -122,7 +124,7 @@ export function FirstBentoAnimation() {
         initial={{ opacity: 0, y: 30 }}
         transition={{ delay: 0.1, duration: 0.6 }}
       >
-        <CodeBlock className="mb-2 shadow-lg" filename="resume.baml">
+        <CodeBlock className="mb-2 shadow-lg mt-2" filename="resume.baml">
           <pre className="text-[14px] font-mono text-primary leading-relaxed p-4">
             <code>{CODE_SNIPPETS.baml}</code>
           </pre>
@@ -151,7 +153,7 @@ export function FirstBentoAnimation() {
           {showError && (
             <motion.div
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-2 mt-2 ml-2 text-xs text-destructive font-mono"
+              className="flex items-center gap-2 mt-2 ml-2 mb-6 text-xs text-destructive font-mono"
               exit={{ opacity: 0, y: 10 }}
               initial={{ opacity: 0, y: 10 }}
               key={activeLanguage}

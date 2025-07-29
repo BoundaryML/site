@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { marked } from 'marked';
-import { memo, type PropsWithChildren, useId, useMemo } from 'react';
-import ReactMarkdown, {
-  type Components,
-  type ExtraProps,
-} from 'react-markdown';
+import { memo, useId, useMemo } from 'react';
+import ReactMarkdown, { type Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { cn } from '@/lib/utils';
 import { CodeBlock, CodeBlockCode } from './code-block';
@@ -19,22 +16,17 @@ export type MarkdownProps = {
 
 function parseMarkdownIntoBlocks(markdown: string): string[] {
   const tokens = marked.lexer(markdown);
-  return tokens.map((token: { raw: string }) => token.raw);
+  return tokens.map((token: any) => token.raw);
 }
 
 function extractLanguage(className?: string): string {
   if (!className) return 'plaintext';
   const match = className.match(/language-(\w+)/);
-  if (match?.[1]) return match[1];
-  return 'plaintext';
+  return match ? match[1] : 'plaintext';
 }
 
 const INITIAL_COMPONENTS: Partial<Components> = {
-  code: function CodeComponent({
-    className,
-    children,
-    ...props
-  }: PropsWithChildren<ExtraProps & { className?: string }>) {
+  code: function CodeComponent({ className, children, ...props }: any) {
     const isInline =
       !props.node?.position?.start.line ||
       props.node?.position?.start.line === props.node?.position?.end.line;
@@ -61,7 +53,7 @@ const INITIAL_COMPONENTS: Partial<Components> = {
       </CodeBlock>
     );
   },
-  pre: function PreComponent({ children }: PropsWithChildren<ExtraProps>) {
+  pre: function PreComponent({ children }: any) {
     return <>{children}</>;
   },
 };
@@ -80,10 +72,7 @@ const MemoizedMarkdownBlock = memo(
       </ReactMarkdown>
     );
   },
-  function propsAreEqual(
-    prevProps: { content: string },
-    nextProps: { content: string },
-  ) {
+  function propsAreEqual(prevProps: any, nextProps: any) {
     return prevProps.content === nextProps.content;
   },
 );
@@ -102,11 +91,11 @@ function MarkdownComponent({
 
   return (
     <div className={className}>
-      {blocks.map((block) => (
+      {blocks.map((block, index) => (
         <MemoizedMarkdownBlock
           components={components}
           content={block}
-          key={`${blockId}-block`}
+          key={`${blockId}-block-${index}`}
         />
       ))}
     </div>

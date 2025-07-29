@@ -19,7 +19,7 @@ export default async function Page() {
       <Navbar />
       <main className="flex flex-col items-center justify-center min-h-screen w-full gap-12 sm:gap-20">
         <HeroSection nextEvent={nextEvent} />
-        <CompanyShowcase />
+        {/* <CompanyShowcase /> */}
 
         {/* Code Analysis Interface Section */}
         {/* <CodeAnalysisSection

@@ -255,7 +255,6 @@ function useTextStream({
     }
   }, [textStream, isComplete, processStringTypewriter]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: we only need to start the streaming once
   useEffect(() => {
     startStreaming();
 
