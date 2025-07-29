@@ -1,9 +1,11 @@
-import { notFound } from 'next/navigation';
-import { Navbar } from '@/components/navbar';
-import { FooterSection } from '@/components/footer-section';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { formatDistanceToNow } from 'date-fns';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { FooterSection } from '@/components/footer-section';
+import { Navbar } from '@/components/navbar';
+import { Button } from '@/components/ui/button';
 import { getPost, getPosts } from '../_lib/get-posts';
 import { PostBody } from '../content';
 
@@ -25,7 +27,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = await getPost(slug);
-  
+
   if (!post) {
     return {
       title: 'Post Not Found',
@@ -33,19 +35,19 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   }
 
   return {
-    title: post.title,
     description: post.description,
     openGraph: {
-      title: post.title,
-      description: post.description,
-      type: 'article',
-      publishedTime: post.date,
       authors: [post.author?.name].filter(Boolean),
+      description: post.description,
+      publishedTime: post.date,
+      title: post.title,
+      type: 'article',
     },
+    title: post.title,
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
       description: post.description,
+      title: post.title,
     },
   };
 }
@@ -58,20 +60,21 @@ const getCategoryStyles = (category: string) => {
   };
 
   const normalizedCategory = normalizeCategory(category);
-  
+
   const styles = {
-    "All": { backgroundColor: '#f1f5f9', color: '#1e293b' },
-    "Announcements": { backgroundColor: '#dbeafe', color: '#1e40af' },
-    "Tutorials": { backgroundColor: '#dcfce7', color: '#166534' }, 
-    "Research": { backgroundColor: '#f3e8ff', color: '#7c3aed' },
-    "Engineering": { backgroundColor: '#fed7aa', color: '#ea580c' },
-    "LaunchWeek": { backgroundColor: '#fce7f3', color: '#be185d' }
+    All: { backgroundColor: '#f1f5f9', color: '#1e293b' },
+    Announcements: { backgroundColor: '#dbeafe', color: '#1e40af' },
+    Engineering: { backgroundColor: '#fed7aa', color: '#ea580c' },
+    LaunchWeek: { backgroundColor: '#fce7f3', color: '#be185d' },
+    Research: { backgroundColor: '#f3e8ff', color: '#7c3aed' },
+    Tutorials: { backgroundColor: '#dcfce7', color: '#166534' },
   };
-  return styles[normalizedCategory as keyof typeof styles] || styles["All"];
+  return styles[normalizedCategory as keyof typeof styles] || styles['All'];
 };
 
 const formatCategoryForDisplay = (category: string) => {
-  if (category.toLowerCase() === "launch week" || category === "LaunchWeek") return "Launch Week";
+  if (category.toLowerCase() === 'launch week' || category === 'LaunchWeek')
+    return 'Launch Week';
   return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
 };
 
@@ -91,7 +94,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section className="w-full px-4 py-8">
           <div className="mx-auto max-w-4xl">
             <Link href="/blog">
-              <Button variant="ghost" className="group mb-8">
+              <Button className="group mb-8" variant="ghost">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 Back to Blog
               </Button>
@@ -103,7 +106,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section className="w-full px-4 py-8">
           <div className="mx-auto max-w-4xl">
             <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-              <span 
+              <span
                 className="flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium"
                 style={getCategoryStyles(post.tags[0])}
               >
@@ -112,22 +115,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </span>
               <span className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
-                {new Date(post.date).toLocaleDateString('en-US', { 
-                  month: 'long', 
-                  day: 'numeric', 
-                  year: 'numeric' 
-                })}
+                {formatDistanceToNow(new Date(post.date), { addSuffix: true })}
               </span>
               <span className="flex items-center gap-1">
                 <Clock className="h-4 w-4" />
                 {post.readingTime}
               </span>
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
               {post.title}
             </h1>
-            
+
             <p className="text-xl text-muted-foreground mb-8">
               {post.description}
             </p>
@@ -135,20 +134,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.author && (
               <div className="flex items-center gap-4 pb-8 border-b">
                 {post.author.imageUrl && (
-                  <img
-                    src={post.author.imageUrl}
+                  <Image
                     alt={post.author.name}
                     className="w-12 h-12 rounded-full object-cover"
+                    height={512}
+                    src={post.author.imageUrl}
+                    width={512}
                   />
                 )}
                 <div>
                   <p className="font-semibold">{post.author.name}</p>
                   {post.author.linkedin && (
-                    <Link 
-                      href={post.author.linkedin}
+                    <Link
                       className="text-sm text-muted-foreground hover:text-primary"
-                      target="_blank"
+                      href={post.author.linkedin}
                       rel="noopener noreferrer"
+                      target="_blank"
                     >
                       LinkedIn
                     </Link>

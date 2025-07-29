@@ -1,13 +1,15 @@
 /** biome-ignore-all assist/source/useSortedKeys: <explanation> */
 // @ts-check
-import { dirname } from 'node:path'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+
+/** biome-ignore-all assist/source/useSortedKeys: <explanation> */
+// @ts-check
+import path, { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 /**
  * Define __dirname for ES modules
  */
-const __dirname = dirname(fileURLToPath(import.meta.url))
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -18,7 +20,7 @@ const nextConfig = {
         destination: 'https://promptfiddle.com/',
         permanent: false,
       },
-    ]
+    ];
   },
   images: {
     remotePatterns: [
@@ -33,6 +35,7 @@ const nextConfig = {
       { hostname: 'picsum.photos' },
       { hostname: 'randomuser.me' },
       { hostname: 'cdn.brandfetch.io' },
+      { hostname: 'img.youtube.com' },
     ],
   },
   experimental: {
@@ -41,9 +44,7 @@ const nextConfig = {
   },
   transpilePackages: ['unist-util-visit', 'mdast'],
   serverExternalPackages: ['shiki', '@boundaryml/baml'],
-  turbopack: {
-    
-  },
+  turbopack: {},
 
   webpack: (config, { dev, isServer, webpack, nextRuntime }) => {
     config.module.rules.push({

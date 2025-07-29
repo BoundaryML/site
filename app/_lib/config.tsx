@@ -1,12 +1,13 @@
-import { CheckCircle, Globe } from 'lucide-react';
+import { Globe } from 'lucide-react';
 import { FirstBentoAnimation } from '@/components/first-bento-animation';
 import { FourthBentoAnimation } from '@/components/fourth-bento-animation';
+import { DeploymentStatus } from '@/components/magicui/deployment-status';
 import { SyntaxTypingAnimation } from '@/components/magicui/syntax-typing-animation';
+import { WordRotate } from '@/components/magicui/word-rotate';
 import { SecondBentoAnimation } from '@/components/second-bento-animation';
 import { ThirdBentoAnimation } from '@/components/third-bento-animation';
 import { VSCodeMock } from '@/components/vscode';
 import { cn } from '@/lib/utils';
-import { WordRotate } from '@/components/magicui/word-rotate';
 
 // import { FirstBentoAnimation } from '@/todo/(marketing)/_components/first-bento-animation';
 // import { FourthBentoAnimation } from '@/todo/(marketing)/_components/fourth-bento-animation';
@@ -269,7 +270,7 @@ export const siteConfig = {
         title: (
           <div>
             Define your{' '}
-            <span className="line-through text-destructive">prompts</span>{' '}
+            <span className="line-through text-destructive/80">prompts</span>{' '}
             <span className="text-secondary">functions</span>
           </div>
         ),
@@ -295,7 +296,7 @@ export const siteConfig = {
         title: (
           <div>
             Test your{' '}
-            <span className="line-through text-destructive">prompts</span>{' '}
+            <span className="line-through text-destructive/80">prompts</span>{' '}
             <span className="text-secondary">functions</span>
           </div>
         ),
@@ -360,32 +361,45 @@ export const siteConfig = {
         ),
         content: (
           <div>
-            <pre>baml-cli generate</pre> <div className='flex flex-row gap-1 items-center'>converts BAML functions to native functions in <WordRotate className='text-secondary' words={['Python', 'TypeScript', 'Ruby', 'Go']} /></div>
+            <pre>baml-cli generate</pre>{' '}
+            <div className="flex flex-row gap-1 items-center">
+              converts BAML functions to native functions in{' '}
+              <WordRotate
+                className="text-secondary"
+                words={['Python', 'TypeScript', 'Ruby', 'Go']}
+              />
+            </div>
           </div>
         ),
         id: 3,
         title: (
           <div>
             Call your{' '}
-            <span className="line-through text-destructive">prompts</span>{' '}
-            <span className="text-secondary">functions</span>{' '}from any programming language you love
+            <span className="line-through text-destructive/80">prompts</span>{' '}
+            <span className="text-secondary">functions</span> from any
+            programming language you love
           </div>
         ),
       },
       {
         component: (
-          <div className='flex flex-row gap-2 items-center p-4'>
-            <CheckCircle className='size-10 text-green-500' /> Published
+          <div className="flex justify-center p-4">
+            <DeploymentStatus autoStart={true} className="w-full max-w-sm" />
           </div>
         ),
         content: (
           <div>
-            Do nothing special for BAML. Since BAML generates native code in your language of choice, you can use it in any way you want.
+            Do nothing special for BAML. Since BAML generates native code in
+            your language of choice, you can use it in any way you want.
           </div>
         ),
         id: 4,
-        title: 'Deploy your Agent',
-      }
+        title: (
+          <div>
+            Deploy your <span className="text-secondary">Agent</span>
+          </div>
+        ),
+      },
       // {
       //   component: <IterateTestDemo />,
       //   content:
@@ -400,9 +414,21 @@ export const siteConfig = {
     {
       links: [
         { id: 1, title: 'About Us', url: '/who-are-we' },
-        { id: 2, title: 'Why BAML?', url: 'https://gloochat.notion.site/benefits-of-baml' },
-        { id: 3, title: 'Privacy Policy', url: 'https://www.boundaryml.com/privacy-policy' },
-        { id: 4, title: 'Terms of Service', url: 'https://www.boundaryml.com/tos' },
+        {
+          id: 2,
+          title: 'Why BAML?',
+          url: 'https://gloochat.notion.site/benefits-of-baml',
+        },
+        {
+          id: 3,
+          title: 'Privacy Policy',
+          url: 'https://www.boundaryml.com/privacy-policy',
+        },
+        {
+          id: 4,
+          title: 'Terms of Service',
+          url: 'https://www.boundaryml.com/tos',
+        },
       ],
       title: 'Company',
     },
@@ -651,7 +677,11 @@ export const siteConfig = {
       description: (
         <p>
           It&apos;s amazing!! Was able to{' '}
-          <Highlight>cut down my tokens and time-to-first-token significantly without compromising results</Highlight>.
+          <Highlight>
+            cut down my tokens and time-to-first-token significantly without
+            compromising results
+          </Highlight>
+          .
         </p>
       ),
       id: '3',
@@ -662,8 +692,9 @@ export const siteConfig = {
     {
       description: (
         <p>
-          BAML is definitely a must have if you want any structured data from LLM; no more BS/long paragraphs describing
-          what the output should be like, <Highlight>it just works!!!</Highlight>
+          BAML is definitely a must have if you want any structured data from
+          LLM; no more BS/long paragraphs describing what the output should be
+          like, <Highlight>it just works!!!</Highlight>
         </p>
       ),
       id: '4',
@@ -674,8 +705,12 @@ export const siteConfig = {
     {
       description: (
         <p>
-          The test case and playground is quite literally the BEST feature. It has{' '}
-          <Highlight>improved the iteration speed and quality by an order of magnitude</Highlight>.
+          The test case and playground is quite literally the BEST feature. It
+          has{' '}
+          <Highlight>
+            improved the iteration speed and quality by an order of magnitude
+          </Highlight>
+          .
         </p>
       ),
       id: '5',
@@ -686,9 +721,11 @@ export const siteConfig = {
     {
       description: (
         <p>
-          I really really like what Baml offers [...] I think it&apos;s a step-wise improvement over Marvin. Having
-          complete control over the prompt WITH strong type guarantees is fantastic.
-          <br />I also think <Highlight>the dedicated testing playground is awesome.</Highlight>
+          I really really like what Baml offers [...] I think it&apos;s a
+          step-wise improvement over Marvin. Having complete control over the
+          prompt WITH strong type guarantees is fantastic.
+          <br />I also think{' '}
+          <Highlight>the dedicated testing playground is awesome.</Highlight>
         </p>
       ),
       id: '6',
@@ -699,8 +736,9 @@ export const siteConfig = {
     {
       description: (
         <p>
-          Code is hella clean now. Look at [the] folder structure, and each folder for a respective pipeline. Each file
-          just a prompt. <Highlight>Clean, elegant, beautiful.</Highlight>
+          Code is hella clean now. Look at [the] folder structure, and each
+          folder for a respective pipeline. Each file just a prompt.{' '}
+          <Highlight>Clean, elegant, beautiful.</Highlight>
         </p>
       ),
       id: '7',

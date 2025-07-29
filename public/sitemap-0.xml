@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://www.boundaryml.com/baml</loc><lastmod>2025-02-03T21:34:45.708Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.boundaryml.com/pricing</loc><lastmod>2025-02-03T21:34:45.709Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.boundaryml.com</loc><lastmod>2025-02-03T21:34:45.709Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.boundaryml.com/launchweek</loc><lastmod>2025-02-03T21:34:45.709Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.boundaryml.com/twitter-image</loc><lastmod>2025-02-03T21:34:45.709Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.boundaryml.com/opengraph-image</loc><lastmod>2025-02-03T21:34:45.709Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.boundaryml.com/blog/2024-11-evals</loc><lastmod>2025-01-31T21:27:25.946Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/2024-11-json-schema</loc><lastmod>2025-01-31T21:57:40.260Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/2024-11-semantic-streaming</loc><lastmod>2025-01-31T21:46:25.659Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/2024-12-06-o1-pro</loc><lastmod>2025-01-31T21:46:29.248Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/2025-01-20-deepseek-r1</loc><lastmod>2025-01-31T21:31:24.488Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/2025-01-24-ai-agents-need-a-new-syntax</loc><lastmod>2025-01-31T21:57:45.757Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/announcing-baml</loc><lastmod>2025-01-31T21:46:42.413Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/announcing-openapi-support</loc><lastmod>2025-01-31T21:46:52.242Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/audio-support</loc><lastmod>2025-01-31T21:47:00.230Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/bfcl-sota</loc><lastmod>2025-01-31T22:13:20.390Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/building-a-new-programming-language-pt1</loc><lastmod>2025-01-31T21:47:32.386Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/comparison-chart</loc><lastmod>2025-01-31T21:47:38.250Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/cursor-support</loc><lastmod>2025-01-31T21:48:00.941Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/launch-week-day-0</loc><lastmod>2025-01-31T21:48:56.329Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/launch-week-day-1</loc><lastmod>2025-01-31T21:30:28.184Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/launch-week-day-2</loc><lastmod>2025-01-31T21:30:44.318Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/launch-week-day-3</loc><lastmod>2025-01-31T21:30:56.778Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/launch-week-day-4</loc><lastmod>2025-01-31T21:28:01.485Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/launch-week-day-5</loc><lastmod>2025-01-31T21:28:13.509Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/new-code-prompting-trick</loc><lastmod>2025-01-31T21:48:59.015Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/nextjs-rag-streaming-example</loc><lastmod>2025-01-31T21:49:01.449Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/releasing-gemini</loc><lastmod>2025-01-31T21:49:04.134Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/ruby-rag-streaming-example</loc><lastmod>2025-01-31T21:49:06.667Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/schema-aligned-parsing</loc><lastmod>2025-01-31T21:57:55.107Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/structured-output-with-ollama</loc><lastmod>2025-01-31T21:49:11.691Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/transparency-curl</loc><lastmod>2025-01-31T21:49:14.091Z</lastmod></url>
+<url><loc>https://www.boundaryml.com/blog/type-definition-prompting-baml</loc><lastmod>2025-01-31T21:57:55.107Z</lastmod></url>
+</urlset>

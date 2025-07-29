@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { YCBadge } from '../ycbadge';
 
 export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
   return (
@@ -15,7 +14,9 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
         '[mask-image:radial-gradient(ellipse_at_center_center,#000,transparent_50%)]',
 
         // reverse
-        reverse ? 'my-[-22rem] rotate-180 md:mt-[-30rem]' : 'my-[-21.8rem]',
+        reverse
+          ? 'my-[-22rem] rotate-180 md:mt-[-30rem]'
+          : 'my-[-10rem] md:my-[-21.8rem]',
 
         // before
         'before:absolute before:inset-0 before:h-full before:w-full before:opacity-40 before:[background-image:radial-gradient(circle_at_bottom_center,var(--color),transparent_70%)]',
@@ -45,16 +46,13 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
               src="/lamb.png"
               width={96}
             />
-            {/* <div className="mt-20"> */}
-            {/* <YCBadge /> */}
-            {/* </div> */}
           </div>
         </motion.div>
 
         {/* Text Content - positioned below the sphere line */}
         <motion.div
           animate={{ opacity: 1, y: 0 }}
-          className="relative z-60 mt-8"
+          className="relative z-60 mt-8 md:mt-12"
           initial={{ opacity: 0, y: 100 }}
           transition={{
             delay: 1.4,
@@ -62,9 +60,11 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
             ease: 'easeOut',
           }}
         >
-          <div className="text-center">
-            <h3 className="text-lg mb-2 text-primary">Baaaaaaaaaaml</h3>
-            <p className="text-lg text-primary tracking-wide">
+          <div className="text-center px-4">
+            <h3 className="text-base md:text-lg mb-1 md:mb-2 text-primary">
+              Baaaaaaaaaaml
+            </h3>
+            <p className="text-sm md:text-lg text-primary tracking-wide">
               <span className="text-secondary font-bold">B</span>asically{' '}
               <span className="text-secondary font-bold">A</span>{' '}
               <span className="text-secondary font-bold">M</span>ade-Up{' '}

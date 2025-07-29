@@ -62,19 +62,24 @@ export function ScriptCopyBtn({
   };
 
   return (
-    <div className={cn('flex max-w-lg items-center justify-center', className)}>
+    <div
+      className={cn(
+        'flex w-full max-w-lg items-center justify-center',
+        className,
+      )}
+    >
       <div className="w-full space-y-2">
         <div className="mb-2 flex items-center">
           {showMultiplePackageOptions && (
-            <div className="relative">
-              <div className="inline-flex overflow-hidden rounded-md border border-border text-xs">
+            <div className="relative w-full">
+              <div className="inline-flex w-full overflow-x-auto rounded-md border border-border text-xs scrollbar-hide">
                 {packageManagers.map((pm, index) => (
-                  <div className="flex items-center" key={pm}>
+                  <div className="flex items-center flex-shrink-0" key={pm}>
                     {index > 0 && (
                       <div aria-hidden="true" className="h-4 w-px bg-border" />
                     )}
                     <Button
-                      className={`relative rounded-none bg-background px-2 py-1 hover:bg-background ${
+                      className={`relative rounded-none bg-background px-2 py-1 hover:bg-background whitespace-nowrap ${
                         packageManager === pm
                           ? 'text-primary'
                           : 'text-muted-foreground'
@@ -104,17 +109,17 @@ export function ScriptCopyBtn({
           )}
         </div>
         <div className="relative flex items-center">
-          <div className="min-w-[300px] grow font-mono">
+          <div className="w-full grow font-mono">
             {highlightedCode ? (
               <div
-                className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-1.5 [&>pre]:px-4 [&>pre]:font-mono bg-background border border-border rounded ${
+                className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-1.5 [&>pre]:px-4 [&>pre]:font-mono [&>pre]:text-sm sm:[&>pre]:text-base bg-background border border-border rounded ${
                   theme === 'dark' ? 'dark' : 'light'
                 }`}
                 // biome-ignore lint/security/noDangerouslySetInnerHtml: ok
                 dangerouslySetInnerHTML={{ __html: highlightedCode }}
               />
             ) : (
-              <pre className="rounded-md border border-border bg-white p-2 px-4 font-mono dark:bg-black">
+              <pre className="rounded-md border border-border bg-white p-2 px-4 font-mono text-sm sm:text-base overflow-x-auto dark:bg-black">
                 {command}
               </pre>
             )}

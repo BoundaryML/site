@@ -7,6 +7,7 @@ import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Viewport } from 'next';
 import { Suspense } from 'react';
+import { AnalyticsProvider } from '@/context/analytics';
 
 export const metadata: Metadata = {
   description:
@@ -49,15 +50,15 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         )}
       >
         <Suspense>
-          {/* <AnalyticsProviders identifyUser> */}
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem={false}
-          >
-            {props.children}
-          </ThemeProvider>
-          {/* </AnalyticsProviders> */}
+          <AnalyticsProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem={false}
+            >
+              {props.children}
+            </ThemeProvider>
+          </AnalyticsProvider>
         </Suspense>
       </body>
     </html>

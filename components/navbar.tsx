@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion, useScroll } from 'motion/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { siteConfig } from '@/app/(marketing)/_lib/config';
+import { siteConfig } from '@/app/_lib/config';
 // import { GitHubStarsButtonWrapper } from '@/components/ui/custom/github-stars-button/button-wrapper';
 import { ThemeToggle } from '@/components/custom/theme';
 import { Button } from '@/components/ui/button';
@@ -77,7 +77,7 @@ function DesktopActionButtons() {
       </Link>
       <Button asChild className="hidden md:flex rounded-full" variant="outline">
         <Link
-          href="https://docs.boundaryml.com/home?utm_source=marketing-site&utm_medium=navbar-docs"
+          href="https://docs.boundaryml.com/?utm_source=marketing-site&utm_medium=navbar-docs"
           target="_blank"
         >
           Documentation

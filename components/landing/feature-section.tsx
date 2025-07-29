@@ -1,4 +1,4 @@
-import { siteConfig } from '@/app/(marketing)/_lib/config';
+import { siteConfig } from '@/app/_lib/config';
 import { Feature as FeatureComponent } from '@/components/magicui/feature-slideshow';
 import { SectionHeader } from '@/components/section-header';
 

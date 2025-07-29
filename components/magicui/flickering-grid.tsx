@@ -117,13 +117,24 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
       const rows = Math.ceil(height / (squareSize + gridGap));
 
       const squares = new Float32Array(cols * rows);
+      // Initialize with 0 to prevent hydration mismatch
       for (let i = 0; i < squares.length; i++) {
-        squares[i] = Math.random() * maxOpacity;
+        squares[i] = 0;
       }
 
       return { cols, dpr, rows, squares };
     },
     [squareSize, gridGap, maxOpacity],
+  );
+
+  // Initialize squares with random values after mount to prevent hydration mismatch
+  const initializeSquares = useCallback(
+    (squares: Float32Array) => {
+      for (let i = 0; i < squares.length; i++) {
+        squares[i] = Math.random() * maxOpacity;
+      }
+    },
+    [maxOpacity],
   );
 
   const updateSquares = useCallback(
@@ -146,20 +157,30 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     if (!ctx) return;
 
     let animationFrameId: number;
-    let gridParams: ReturnType<typeof setupCanvas>;
+    let gridParams: {
+      cols: number;
+      dpr: number;
+      rows: number;
+      squares: Float32Array;
+    } | null = null;
 
     const updateCanvasSize = () => {
       const newWidth = width || container.clientWidth;
       const newHeight = height || container.clientHeight;
       setCanvasSize({ height: newHeight, width: newWidth });
       gridParams = setupCanvas(canvas, newWidth, newHeight);
+
+      // Initialize squares with random values after setup
+      if (gridParams) {
+        initializeSquares(gridParams.squares);
+      }
     };
 
     updateCanvasSize();
 
     let lastTime = 0;
     const animate = (time: number) => {
-      if (!isInView) return;
+      if (!isInView || !gridParams) return;
 
       const deltaTime = (time - lastTime) / 1000;
       lastTime = time;
@@ -201,7 +222,15 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
     };
-  }, [setupCanvas, updateSquares, drawGrid, width, height, isInView]);
+  }, [
+    setupCanvas,
+    updateSquares,
+    drawGrid,
+    initializeSquares,
+    width,
+    height,
+    isInView,
+  ]);
 
   return (
     <div

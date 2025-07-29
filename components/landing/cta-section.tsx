@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { siteConfig } from '@/app/(marketing)/_lib/config';
+import { siteConfig } from '@/app/_lib/config';
 
 export function CTASection() {
   const { ctaSection } = siteConfig;

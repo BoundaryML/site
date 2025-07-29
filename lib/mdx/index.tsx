@@ -1,19 +1,40 @@
-import NewsletterForm from '@/components/NewsletterForm'
-import { type MDXComponents } from 'mdx/types'
-import dynamic from 'next/dynamic'
-import NextImage from 'next/image'
-import BamlBlock from './baml-block/BamlBlock2'
-import { CodeBlocks } from './code-blocks'
-import { DevSpotlight } from './dev-spotlight'
-import { MDXMedia } from './media'
-import { MDXNote } from './note'
-import { ProblemStatement, TechniqueTitle, WhatIsSAP } from './sap/intro'
-import { MDXTip } from './tip'
-import Video from './video'
-const BFCLDataComponent = dynamic(() => import('./bfcl/page'))
+import type { MDXComponents } from 'mdx/types';
+import dynamic from 'next/dynamic';
+import NextImage from 'next/image';
+import NewsletterForm from '@/components/NewsletterForm';
+import BamlBlock from './baml-block/BamlBlock2';
+import { CodeBlocks } from './code-blocks';
+import { DevSpotlight } from './dev-spotlight';
+import { MDXMedia } from './media';
+import { MDXNote } from './note';
+import { ProblemStatement, TechniqueTitle, WhatIsSAP } from './sap/intro';
+import { MDXTip } from './tip';
+import Video from './video';
+
+const BFCLDataComponent = dynamic(() => import('./bfcl/page'));
 
 export const mdxComponents: MDXComponents = {
-  NewsletterForm: NewsletterForm,
+  BamlBlock: BamlBlock,
+  BFCLDataComponent: BFCLDataComponent,
+  CodeBlocks: CodeBlocks,
+  Details: ({
+    children,
+    summary,
+    ...props
+  }: React.DetailedHTMLProps<
+    React.DetailsHTMLAttributes<HTMLDetailsElement>,
+    HTMLDetailsElement
+  > & {
+    summary: string;
+  }) => (
+    // Necessary due to a hydration error I can't quite figure out
+    <details {...props}>
+      {summary && <summary>{summary}</summary>}
+      {children}
+    </details>
+  ),
+  DevSpotlight: DevSpotlight,
+  Image: NextImage,
   // TODO: re-enable once anchor tags are fixed in the app router
   // a: ({ children, ...props }) => {
   //   // check if external
@@ -50,30 +71,13 @@ export const mdxComponents: MDXComponents = {
   //   );
   // },
   img: MDXMedia,
-  Image: NextImage,
-  Details: ({
-    children,
-    summary,
-    ...props
-  }: React.DetailedHTMLProps<React.DetailsHTMLAttributes<HTMLDetailsElement>, HTMLDetailsElement> & {
-    summary: string
-  }) => (
-    // Necessary due to a hydration error I can't quite figure out
-    <details {...props}>
-      {summary && <summary>{summary}</summary>}
-      {children}
-    </details>
-  ),
+  NewsletterForm: NewsletterForm,
   Note: MDXNote,
-  Video: Video,
-  Tip: MDXTip,
   SapProblemStatement: ProblemStatement,
   SapTechniqueTitle: TechniqueTitle,
   SapWhatIsSAP: WhatIsSAP,
-  BFCLDataComponent: BFCLDataComponent,
-  BamlBlock: BamlBlock,
-  DevSpotlight: DevSpotlight,
-  CodeBlocks: CodeBlocks,
+  Tip: MDXTip,
+  Video: Video,
   // pre: ({ children, ...props }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLPreElement>) => {
   //   // If we're inside a CodeBlocks component, just pass through
   //   if (Array.isArray(children) && children.length === 1 && typeof children[0] === 'object') {
@@ -110,4 +114,4 @@ export const mdxComponents: MDXComponents = {
   // FileTree,
   // File,
   // Folder,
-}
+};

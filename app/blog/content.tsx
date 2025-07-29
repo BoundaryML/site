@@ -1,52 +1,56 @@
 // @ts-expect-error no types
 import remarkA11yEmoji from '@fec/remark-a11y-emoji';
-import rehypeShikiFromHighlighter, {
-  type RehypeShikiCoreOptions,
-} from '@shikijs/rehype/core';
 import { type CompileMDXResult, compileMDX } from 'next-mdx-remote/rsc';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
-import {
-  createHighlighterCore,
-  createOnigurumaEngine,
-  type HighlighterCore,
-} from 'shiki';
-import go from 'shiki/langs/go.mjs';
-import php from 'shiki/langs/php.mjs';
-import python from 'shiki/langs/python.mjs';
-import ruby from 'shiki/langs/ruby.mjs';
-import rust from 'shiki/langs/rust.mjs';
-import typescript from 'shiki/langs/typescript.mjs';
-import githubDarkDefault from 'shiki/themes/github-dark-default.mjs';
 import { mdxComponents } from '../../lib/mdx';
 import rehypePreserveCodeProps from '../../lib/mdx/rehype-preserve-code-props';
 import remarkCodeMetadata from '../../lib/mdx/remark-code-metadata';
-import {
-  bamlTextmate,
-  bamlJinjaTextmate as jinjajson,
-} from '../../lib/mdx/shiki-grammars';
 
-// Create a singleton highlighter instance
-let highlighterPromise: Promise<HighlighterCore> | null = null;
+// Rehype plugin to fix invalid HTML nesting (e.g., <ol> inside <p>)
+function rehypeFixInvalidNesting() {
+  return (tree: unknown) => {
+    const visit = (node: unknown) => {
+      const typedNode = node as {
+        type?: string;
+        tagName?: string;
+        children?: unknown[];
+      };
+      if (typedNode.type === 'element' && typedNode.tagName === 'p') {
+        // Check if paragraph contains block-level elements
+        const hasBlockElements = typedNode.children?.some((child: unknown) => {
+          const typedChild = child as { type?: string; tagName?: string };
+          return (
+            typedChild.type === 'element' &&
+            ['ol', 'ul', 'div', 'table', 'pre', 'blockquote'].includes(
+              typedChild.tagName || '',
+            )
+          );
+        });
 
-async function getHighlighter() {
-  if (!highlighterPromise) {
-    highlighterPromise = createHighlighterCore({
-      engine: createOnigurumaEngine(await import('shiki/wasm')),
-      langs: [jinjajson, bamlTextmate, python, typescript, ruby, rust, go, php],
-      themes: [githubDarkDefault],
-    });
-  }
-  return highlighterPromise;
+        if (hasBlockElements) {
+          // Replace the paragraph with a div to allow block elements
+          typedNode.tagName = 'div';
+        }
+      }
+
+      // Recursively visit children
+      if (typedNode.children) {
+        typedNode.children.forEach(visit);
+      }
+    };
+
+    visit(tree);
+    return tree;
+  };
 }
 
 export async function PostBody({ children }: { children: string }) {
-  const highlighter = await getHighlighter();
-
   const { content }: CompileMDXResult = await compileMDX({
     components: mdxComponents,
     options: {
@@ -56,15 +60,27 @@ export async function PostBody({ children }: { children: string }) {
           rehypeSlug,
           rehypeAutolinkHeadings,
           [rehypePreserveCodeProps, { tagName: 'pre' }],
+          rehypeFixInvalidNesting,
           [
-            rehypeShikiFromHighlighter as unknown as () => void,
-            highlighter,
+            rehypePrettyCode,
             {
-              themes: {
-                dark: 'github-dark-default',
-                light: 'github-dark-default',
-              },
-            } satisfies RehypeShikiCoreOptions,
+              // keepBackground: false,
+              // onVisitHighlightedLine(node: {
+              //   properties: { className: string[] };
+              // }) {
+              //   node.properties.className.push('highlighted');
+              // },
+              // onVisitLine(node: { children: unknown[] }) {
+              //   // Add line numbers
+              //   if (node.children.length === 0) {
+              //     node.children = [{ type: 'text', value: ' ' }];
+              //   }
+              // },
+              // theme: {
+              // dark: 'github-dark',
+              // light: 'github-light',
+              // },
+            },
           ],
           [rehypeStringify as () => void, { allowDangerousHtml: true }],
         ],

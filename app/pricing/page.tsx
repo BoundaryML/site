@@ -3,7 +3,7 @@
 import { Check, HelpCircle, Minus } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
-import { siteConfig } from '@/app/(marketing)/_lib/config';
+import { siteConfig } from '@/app/_lib/config';
 import { FooterSection } from '@/components/footer-section';
 import { Navbar } from '@/components/navbar';
 import { Button } from '@/components/ui/button';

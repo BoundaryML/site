@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { siteConfig } from '@/app/(marketing)/_lib/config';
+import { siteConfig } from '@/app/_lib/config';
 
 export function QuoteSection() {
   const { quoteSection } = siteConfig;

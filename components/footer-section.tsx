@@ -2,7 +2,7 @@
 
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { siteConfig } from '@/app/(marketing)/_lib/config';
+import { siteConfig } from '@/app/_lib/config';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { FlickeringGrid } from './magicui/flickering-grid';
 

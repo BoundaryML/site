@@ -122,7 +122,7 @@ export function FirstBentoAnimation() {
         initial={{ opacity: 0, y: 30 }}
         transition={{ delay: 0.1, duration: 0.6 }}
       >
-        <CodeBlock className="mb-2" filename="resume.baml">
+        <CodeBlock className="mb-2 shadow-lg" filename="resume.baml">
           <pre className="text-[14px] font-mono text-primary leading-relaxed p-4">
             <code>{CODE_SNIPPETS.baml}</code>
           </pre>
@@ -137,7 +137,7 @@ export function FirstBentoAnimation() {
         transition={{ delay: 0.3, duration: 0.6 }}
       >
         <CodeBlock
-          className="mb-2 relative"
+          className="mb-2 relative shadow-lg"
           onTabChange={(index) =>
             setActiveLanguage(
               (Object.keys(LANGUAGE_CONFIG) as Language[])[index],

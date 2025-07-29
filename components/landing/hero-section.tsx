@@ -2,16 +2,14 @@
 /** biome-ignore-all lint/performance/noImgElement: we need to use img for the images */
 'use client';
 
-import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { useInView } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { useRef } from 'react';
 import { BorderBeam } from '@/components/magicui/border-beam';
-import TextShimmer from '@/components/magicui/text-shimmer';
+import type { LumaEvent } from '@/lib/luma';
 import { ScriptCopyBtn } from '../magicui/script-copy-btn';
 import { SphereMask } from '../magicui/sphere-mask';
-import { HeroTerminalSection } from './hero-terminal-section';
-import Link from 'next/link';
+import { NextEpisodeLink } from './next-episode-link';
 
 // Logo section component
 function LogoSection() {
@@ -75,17 +73,17 @@ function LogoSection() {
   ];
 
   return (
-    <div className="mt-24 mb-8 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <div className="mt-16 sm:mt-24 mb-8 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-0">
         {/* Effect works everywhere */}
         <div className="text-center">
-          <h3 className="font-medium text-gray-400 mb-6 tracking-wide">
+          <h3 className="font-medium text-gray-400 mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
             Works with every LLM provider
           </h3>
-          <div className="flex justify-center items-center gap-6">
+          <div className="flex justify-center items-center gap-3 sm:gap-6 flex-wrap">
             {logos.map((logo, index) => (
               <div
-                className="w-12 h-12 rounded-lg bg-white/5 border border-border flex items-center justify-center transition-all duration-300 hover:bg-border/50 hover:scale-110"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-border flex items-center justify-center transition-all duration-300 hover:bg-border/50 hover:scale-110"
                 key={logo.name}
                 style={{
                   animationDelay: `${900 + index * 100}ms`,
@@ -93,7 +91,7 @@ function LogoSection() {
               >
                 <img
                   alt={logo.alt}
-                  className="w-6 h-6 object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                  className="w-5 h-5 sm:w-6 sm:h-6 object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                   src={logo.url}
                 />
               </div>
@@ -104,13 +102,13 @@ function LogoSection() {
 
         {/* And with everything */}
         <div className="text-center">
-          <h3 className="font-medium text-gray-400 mb-6 tracking-wide">
+          <h3 className="font-medium text-gray-400 mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
             And every language
           </h3>
-          <div className="flex justify-center items-center gap-6">
+          <div className="flex justify-center items-center gap-3 sm:gap-6 flex-wrap">
             {frameworks.map((framework, index) => (
               <div
-                className="w-12 h-12 rounded-lg bg-white/5 border border-border flex items-center justify-center transition-all duration-300 hover:bg-border/50 hover:scale-110"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-border flex items-center justify-center transition-all duration-300 hover:bg-border/50 hover:scale-110"
                 key={framework.name}
                 style={{
                   animationDelay: `${900 + index * 100}ms`,
@@ -118,7 +116,7 @@ function LogoSection() {
               >
                 <img
                   alt={framework.alt}
-                  className="w-6 h-6 object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                  className="w-5 h-5 sm:w-6 sm:h-6 object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                   src={framework.url}
                 />
               </div>
@@ -131,7 +129,11 @@ function LogoSection() {
   );
 }
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  nextEvent: LumaEvent | null;
+}
+
+export default function HeroSection({ nextEvent }: HeroSectionProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { margin: '-100px', once: true });
   // biome-ignore assist/source/useSortedKeys: needs to be in this order
@@ -143,25 +145,18 @@ export default function HeroSection() {
   };
   return (
     <section
-      className="relative mx-auto mt-24 max-w-[80rem] px-6 text-center md:px-8"
+      className="relative mx-auto mt-12 sm:mt-24 max-w-[80rem] px-4 sm:px-6 md:px-8 text-center"
       id="hero"
     >
-      <Link href="/playground">
-      <div className="backdrop-filter-[12px] inline-flex h-10 items-center justify-between rounded-full border border-border bg-accent/20 px-3 text-xs text-white dark:text-black transition-all ease-in hover:cursor-pointer hover:bg-accent/40 group gap-1 translate-y-[-1rem] animate-fade-in opacity-0">
-        <TextShimmer className="inline-flex items-center justify-center">
-          <span className="text-sm">✨ Try BAML online</span>{' '}
-          <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-        </TextShimmer>
-      </div>
-      </Link>
+      <NextEpisodeLink nextEvent={nextEvent} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mt-8 sm:mt-12">
         {/* Left column - Text content */}
         <div className="text-left">
-          <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-6xl md:text-7xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+          <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-4 sm:py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
             The First Language for Building Agents
           </h1>
-          <p className="mb-8 text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
+          <p className="mb-6 sm:mb-8 text-base sm:text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
             React changed the way we think about UIs
             <br />
             <span className="text-secondary font-bold">BAML</span> changes the
@@ -169,7 +164,7 @@ export default function HeroSection() {
           </p>
           <div className="translate-y-[-1rem] animate-fade-in opacity-0 ease-in-out [--animation-delay:600ms]">
             <ScriptCopyBtn
-              className="block"
+              className="block w-full"
               codeLanguage="bash"
               commandMap={commandMap}
               darkTheme="none"
@@ -199,11 +194,11 @@ export default function HeroSection() {
               size={200}
             />
             <div className="w-full text-left relative z-10">
-              <div className="w-full max-w-full min-h-[360px] rounded-lg overflow-hidden">
+              <div className="w-full max-w-full min-h-[280px] sm:min-h-[360px] rounded-lg overflow-hidden shadow-lg">
                 <iframe
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                  className="w-full h-full min-h-[360px] relative z-10"
+                  className="w-full h-full min-h-[280px] sm:min-h-[360px] relative z-10"
                   frameBorder="0"
                   src="https://www.youtube.com/embed/gxckvkNg6KM"
                   title="BoundaryML Demo"

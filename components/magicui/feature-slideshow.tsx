@@ -118,7 +118,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                     >
                       {item.title}
                     </motion.h2>
-                    <motion.p
+                    <motion.div
                       className="text-base lg:text-lg text-muted-foreground leading-relaxed"
                       initial={{ opacity: 0, y: 20 }}
                       transition={{ delay: 0.4, duration: 0.5 }}
@@ -126,7 +126,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                       whileInView={{ opacity: 1, y: 0 }}
                     >
                       {item.content}
-                    </motion.p>
+                    </motion.div>
                   </div>
                 </motion.div>
 
@@ -137,7 +137,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                 >
                   {item.component && (
                     <motion.div
-                      className="w-full rounded-xl border border-border overflow-hidden bg-background"
+                      className="w-full rounded-xl border border-border overflow-hidden bg-background shadow-lg"
                       whileHover={{
                         scale: 1.02,
                         transition: { duration: 0.2 },
@@ -148,7 +148,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                   )}
                   {item.image && (
                     <motion.div
-                      className="w-full aspect-video rounded-xl border border-border overflow-hidden"
+                      className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg"
                       whileHover={{
                         scale: 1.02,
                         transition: { duration: 0.2 },
@@ -164,7 +164,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                   )}
                   {item.video && (
                     <motion.div
-                      className="w-full aspect-video rounded-xl border border-border overflow-hidden"
+                      className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg"
                       whileHover={{
                         scale: 1.02,
                         transition: { duration: 0.2 },

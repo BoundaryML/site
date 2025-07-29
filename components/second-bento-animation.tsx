@@ -14,7 +14,7 @@ export function SecondBentoAnimation() {
       <div className="pointer-events-none absolute bottom-0 left-0 h-20 w-full bg-gradient-to-t from-background to-transparent z-20" />
       <div className="pointer-events-none absolute top-0 left-0 h-20 w-full bg-gradient-to-b from-background to-transparent z-20" />
 
-      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 size-16 bg-primary-foreground border border-primary/50 p-2 rounded-full z-30 md:bottom-0 md:top-auto">
+      <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 flex items-center justify-center gap-2 size-16 bg-primary-foreground border border-primary/50 p-2 rounded-full z-30 md:bottom-0 md:top-auto shadow-lg">
         <Icons.logo className="fill-white size-10" />
       </div>
       <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
@@ -28,17 +28,17 @@ export function SecondBentoAnimation() {
           >
             <img
               alt="OpenAI logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('openai.com')}
             />
             <img
               alt="Anthropic logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('anthropic.com')}
             />
             <img
               alt="Google logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('google.com')}
             />
           </OrbitingCircles>
@@ -46,17 +46,17 @@ export function SecondBentoAnimation() {
           <OrbitingCircles iconSize={60} index={1} speed={0.5}>
             <img
               alt="Microsoft logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('microsoft.com')}
             />
             <img
               alt="Meta logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('meta.com')}
             />
             <img
               alt="Typescript logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('typescriptlang.org')}
             />
           </OrbitingCircles>
@@ -70,17 +70,17 @@ export function SecondBentoAnimation() {
           >
             <img
               alt="Python logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('python.org')}
             />
             <img
               alt="Go logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('go.dev')}
             />
             <img
               alt="Ruby logo"
-              className="size-12 rounded-full"
+              className="size-12 rounded-full shadow-lg"
               src={getBrandLogoUrl('ruby-lang.org')}
             />
           </OrbitingCircles>

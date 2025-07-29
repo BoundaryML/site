@@ -40,7 +40,7 @@ export const GithubStars = () => {
     >
       <FaGithub className="text-white" size={18} />
 
-      <span className="whitespace-nowrap">Star on GitHub</span>
+      <span className="hidden sm:inline whitespace-nowrap">Star on GitHub</span>
       <div className="flex flex-row items-center justify-center gap-x-1">
         <Star className="mb-0.5" fill={'#ffffff'} size={16} />
         <span className="ml-0">

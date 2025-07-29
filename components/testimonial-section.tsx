@@ -1,4 +1,4 @@
-import { siteConfig } from '@/app/(marketing)/_lib/config';
+import { siteConfig } from '@/app/_lib/config';
 import { SectionHeader } from './section-header';
 import { SocialProofTestimonials } from './testimonial-scroll';
 

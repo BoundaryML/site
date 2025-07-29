@@ -239,7 +239,7 @@ export function FourthBentoAnimation({
                               .width || 0,
                     }
               }
-              className={`flex items-center h-8 justify-center gap-2 rounded-lg w-[250px] p-2 shadow-[0px_9px_5px_0px_#00000005,0px_4px_4px_0px_#00000009,0px_1px_2px_0px_#00000010] ${boxConfigs[index]?.className}`}
+              className={`flex items-center h-8 justify-center gap-2 rounded-lg w-[250px] p-2 shadow-lg ${boxConfigs[index]?.className}`}
               exit={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
               initial={{
                 opacity: 0,
