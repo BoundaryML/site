@@ -44,7 +44,6 @@ const nextConfig = {
   },
   transpilePackages: ['unist-util-visit', 'mdast'],
   serverExternalPackages: ['shiki', '@boundaryml/baml'],
-  turbopack: {},
 
   webpack: (config, { dev, isServer, webpack, nextRuntime }) => {
     config.module.rules.push({
@@ -68,6 +67,13 @@ const nextConfig = {
         },
       ],
     });
+
+    // Disable CSS minification to avoid cssnano issues
+    if (!dev) {
+      config.optimization.minimizer = config.optimization.minimizer.filter(
+        (minimizer) => !minimizer.constructor.name.includes('CssMinimizer'),
+      );
+    }
 
     config.experiments = {
       ...config.experiments,
