@@ -56,17 +56,25 @@ const teamMembers = [
   },
   {
     description:
+      'Full-stack engineer specializing in React/Next.js integration and developer tooling. Makes BAML work seamlessly in modern web apps.',
+    image: '/profile-anish.png',
+    linkedin: 'https://www.linkedin.com/in/seawatts',
+    name: 'Anish',
+    role: 'Intern S24',
+  },
+  {
+    description:
       'Engineer focused on developer experience and VS Code integration. Ensures BAML works perfectly in your favorite editor.',
     image: '/rahult.jpg',
     name: 'Rahul',
-    role: 'Engineer',
+    role: 'Intern S25',
   },
   {
     description:
       'Core systems engineer building the BAML language and tooling ecosystem. Makes the magic happen behind the scenes.',
     image: '/egor.jpg',
     name: 'Egor',
-    role: 'Engineer',
+    role: 'Intern S25',
   },
 ];
 
@@ -204,9 +212,9 @@ export default function WhoAreWePage() {
                   </div>
                   <h3 className="font-semibold mb-1">{member.name}</h3>
                   <p className="text-sm text-primary mb-3">{member.role}</p>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  {/* <p className="text-sm text-muted-foreground mb-4">
                     {member.description}
-                  </p>
+                  </p> */}
                   {member.linkedin && (
                     <Button asChild size="sm" variant="outline">
                       <Link href={member.linkedin} target="_blank">

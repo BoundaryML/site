@@ -17,7 +17,7 @@ async function getStars(repoOwner: string, repoName: string) {
   } catch (error) {
     console.error(error);
   }
-  return 539;
+  return 4999;
 }
 
 export const GithubStars = () => {
