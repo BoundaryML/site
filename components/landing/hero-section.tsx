@@ -164,10 +164,9 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
             The First Language for Building Agents
           </h1>
           <p className="mb-6 sm:mb-8 text-base sm:text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-            React changed the way we think about UIs
+            Typescript made JavaScript 10x more reliable.
             <br />
-            <span className="text-secondary font-bold">BAML</span> changes the
-            way you think about AI
+            <span className="text-secondary font-bold">BAML</span> makes your ai pipelines 10x more reliable.
           </p>
           <div className="translate-y-[-1rem] animate-fade-in opacity-0 ease-in-out [--animation-delay:600ms] space-y-3">
             <ScriptCopyBtn
