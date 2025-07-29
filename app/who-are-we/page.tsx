@@ -71,7 +71,7 @@ const teamMembers = [
 ];
 
 const companyStats = [
-  { icon: Star, label: 'GitHub Stars', value: '2,000+' },
+  { icon: Star, label: 'GitHub Stars', value: '5,000+' },
   { icon: Users, label: 'Active Developers', value: '1,000+' },
   { icon: MessageCircle, label: 'Discord Members', value: '700+' },
   { icon: Zap, label: 'Core Engineers', value: '7' },
@@ -104,9 +104,9 @@ export default function WhoAreWePage() {
   return (
     <div className="max-w-7xl mx-auto border-x relative">
       <Navbar />
-      <main className="flex flex-col items-center justify-center divide-y divide-border min-h-screen w-full">
+      <main className="flex flex-col items-center justify-center min-h-screen w-full">
         {/* Hero Section */}
-        <section className="relative flex w-full items-center justify-center px-4 py-20 md:py-32">
+        <section className="relative flex w-full items-center justify-center px-4 pt-20 md:pt-32">
           <div className="flex flex-col items-center justify-center space-y-8 text-center max-w-4xl">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
               Who are we?
@@ -130,7 +130,7 @@ export default function WhoAreWePage() {
         </section>
 
         {/* Company Stats */}
-        <section className="w-full px-4 py-20">
+        {/* <section className="w-full px-4 py-20">
           <div className="mx-auto max-w-6xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Growing Fast</h2>
@@ -151,10 +151,10 @@ export default function WhoAreWePage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Company Values */}
-        <section className="w-full px-4 py-20">
+        {/* <section className="w-full px-4 py-20">
           <div className="mx-auto max-w-6xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Our Values</h2>
@@ -171,17 +171,17 @@ export default function WhoAreWePage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Team Image Section */}
-        <section className="w-full px-4 py-20">
+        <section className="w-full px-4">
           <div className="mx-auto max-w-4xl">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
+              {/* <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 The crazy people behind BAML who believe AI development should
                 be simple, type-safe, and actually work in production.
-              </p>
+              </p> */}
             </div>
             <div className="w-full mb-12">
               <img
