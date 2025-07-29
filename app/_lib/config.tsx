@@ -422,12 +422,12 @@ export const siteConfig = {
         {
           id: 3,
           title: 'Privacy Policy',
-          url: 'https://www.boundaryml.com/privacy-policy',
+          url: '/privacy-policy',
         },
         {
           id: 4,
           title: 'Terms of Service',
-          url: 'https://www.boundaryml.com/tos',
+          url: '/tos',
         },
       ],
       title: 'Company',

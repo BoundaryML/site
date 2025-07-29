@@ -58,7 +58,7 @@ const teamMembers = [
     description:
       'Full-stack engineer specializing in React/Next.js integration and developer tooling. Makes BAML work seamlessly in modern web apps.',
     image: '/profile-anish.png',
-    linkedin: 'https://www.linkedin.com/in/seawatts',
+    linkedin: 'https://www.linkedin.com/in/anish-palakurthi/',
     name: 'Anish',
     role: 'Intern S24',
   },
@@ -66,6 +66,7 @@ const teamMembers = [
     description:
       'Engineer focused on developer experience and VS Code integration. Ensures BAML works perfectly in your favorite editor.',
     image: '/rahult.jpg',
+    linkedin: 'https://www.linkedin.com/in/ba11b0y/',
     name: 'Rahul',
     role: 'Intern S25',
   },
@@ -73,6 +74,7 @@ const teamMembers = [
     description:
       'Core systems engineer building the BAML language and tooling ecosystem. Makes the magic happen behind the scenes.',
     image: '/egor.jpg',
+    linkedin: 'https://www.linkedin.com/in/egor-l/',
     name: 'Egor',
     role: 'Intern S25',
   },

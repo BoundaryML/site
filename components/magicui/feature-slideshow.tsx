@@ -136,24 +136,12 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                   variants={mediaVariants}
                 >
                   {item.component && (
-                    <motion.div
-                      className="w-full rounded-xl border border-border overflow-hidden bg-background shadow-lg"
-                      whileHover={{
-                        scale: 1.02,
-                        transition: { duration: 0.2 },
-                      }}
-                    >
+                    <motion.div className="w-full rounded-xl border border-border overflow-hidden bg-background shadow-lg">
                       {item.component}
                     </motion.div>
                   )}
                   {item.image && (
-                    <motion.div
-                      className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg"
-                      whileHover={{
-                        scale: 1.02,
-                        transition: { duration: 0.2 },
-                      }}
-                    >
+                    <motion.div className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg">
                       {/** biome-ignore lint/performance/noImgElement: we need to use img for the image */}
                       <img
                         alt={typeof item.title === 'string' ? item.title : ''}
@@ -163,13 +151,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                     </motion.div>
                   )}
                   {item.video && (
-                    <motion.div
-                      className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg"
-                      whileHover={{
-                        scale: 1.02,
-                        transition: { duration: 0.2 },
-                      }}
-                    >
+                    <motion.div className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg">
                       <video
                         autoPlay
                         className="w-full h-full object-cover"

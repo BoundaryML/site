@@ -1,4 +1,3 @@
-import { CompanyShowcase } from '@/components/company-showcase';
 import { FooterSection } from '@/components/footer-section';
 import { BentoSection } from '@/components/landing/bento-section';
 import { CTASection } from '@/components/landing/cta-section';
