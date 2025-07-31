@@ -62,7 +62,7 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
           }}
         >
           <div className="text-center px-4">
-            <div className="text-base md:text-lg mb-1 md:mb-2 text-primary">
+            <div className="md:text-lg mb-1 md:mb-2 text-primary">
               Baaaaaaaaaaml
             </div>
             <p className="text-sm md:text-lg text-primary tracking-wide">

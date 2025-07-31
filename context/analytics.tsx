@@ -1,6 +1,6 @@
 'use client';
 
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { PropsWithChildren } from 'react';
 import { env } from '@/lib/env';
@@ -11,7 +11,7 @@ import {
 } from '../lib/posthog';
 import { WebVitals } from '../lib/web-vitals';
 
-const isProduction = env.NODE_ENV === 'production';
+const isProduction = env.NEXT_PUBLIC_APP_ENV === 'production';
 
 export function AnalyticsProvider(props: PropsWithChildren) {
   return (
