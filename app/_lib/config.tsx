@@ -639,15 +639,6 @@ export const siteConfig = {
     ],
     title: 'Simple, transparent pricing',
   },
-  quoteSection: {
-    author: {
-      image: 'https://randomuser.me/api/portraits/women/12.jpg',
-      name: 'Sarah Chen',
-      role: 'Lead Developer, TechFlow',
-    },
-    quote:
-      'BAML has transformed our AI development process. What used to be a complex type management effort is now seamless type-safe development.',
-  },
   testimonials: [
     {
       description: (
