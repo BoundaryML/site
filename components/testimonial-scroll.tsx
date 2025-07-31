@@ -75,9 +75,9 @@ export function SocialProofTestimonials({
               .map((_, i) => (
                 <Marquee
                   className={cn({
-                    '[--duration:30s]': i === 2,
-                    '[--duration:60s]': i === 1,
-                    '[--duration:70s]': i === 3,
+                    '[--duration:8s]': i === 1,
+                    '[--duration:10s]': i === 0,
+                    '[--duration:12s]': i === 2,
                   })}
                   // biome-ignore lint/suspicious/noArrayIndexKey: Array index is stable here since we're mapping over a fixed slice of children
                   key={i}

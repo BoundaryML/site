@@ -185,8 +185,8 @@ export const siteConfig = {
   ctaSection: {
     backgroundImage: '/agent-cta-background.png',
     button: {
-      href: '/docs/getting-started?utm_source=marketing-site&utm_medium=cta-button',
-      text: 'Start Building AI Apps Today',
+      href: 'https://calendly.com/boundaryml/meeting-with-founders?back=1&month=2023-12&utm_source=marketing-site&utm_medium=cta-button',
+      text: 'Book a meeting with us',
     },
     id: 'cta',
     subtext: 'Start building type-safe AI applications in minutes',

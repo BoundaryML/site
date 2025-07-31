@@ -1,3 +1,4 @@
+import { CompanyShowcase } from '@/components/company-showcase';
 import { FooterSection } from '@/components/footer-section';
 import { BentoSection } from '@/components/landing/bento-section';
 import { CTASection } from '@/components/landing/cta-section';
@@ -18,7 +19,7 @@ export default async function Page() {
       <Navbar />
       <main className="flex flex-col items-center justify-center min-h-screen w-full gap-12 sm:gap-20">
         <HeroSection nextEvent={nextEvent} />
-        {/* <CompanyShowcase /> */}
+        <CompanyShowcase />
 
         {/* Code Analysis Interface Section */}
         {/* <CodeAnalysisSection

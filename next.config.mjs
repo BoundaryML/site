@@ -20,6 +20,16 @@ const nextConfig = {
         destination: 'https://promptfiddle.com/',
         permanent: false,
       },
+      {
+        source: '/chat',
+        destination: 'https://dashboard.boundaryml.com/chat',
+        permanent: true,
+      },
+      {
+        source: '/discord',
+        destination: 'https://discord.gg/yzaTpQ3tdT',
+        permanent: true,
+      },
     ];
   },
   images: {
@@ -36,6 +46,18 @@ const nextConfig = {
       { hostname: 'randomuser.me' },
       { hostname: 'cdn.brandfetch.io' },
       { hostname: 'img.youtube.com' },
+      {
+        protocol: 'https',
+        hostname: 'mintlify.s3-us-west-1.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'my.spline.design',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.shields.io',
+      },
     ],
   },
   experimental: {

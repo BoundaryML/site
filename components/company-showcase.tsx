@@ -1,34 +1,61 @@
-import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
-import { siteConfig } from '@/app/_lib/config';
+import Image from 'next/image';
+
+const customerLogos = [
+  {
+    alt: 'Aer Compliance',
+    src: '/testimonials/aer_compliance_logo.png',
+  },
+  {
+    alt: 'PMMI',
+    src: '/testimonials/logos/pmmi.png',
+  },
+  {
+    alt: 'Product Hunt',
+    src: '/testimonials/logos/product-hunt.png',
+  },
+  {
+    alt: 'SAP',
+    src: '/testimonials/logos/sapLogo.png',
+  },
+  {
+    alt: 'AI Tinkerers',
+    src: '/testimonials/logos/ai-tinkerers.png',
+  },
+  {
+    alt: 'Cerebral Valley',
+    src: '/testimonials/logos/cerebral.png',
+  },
+  {
+    alt: 'Vetrec',
+    src: '/testimonials/logos/vetrec.png',
+  },
+];
 
 export function CompanyShowcase() {
-  const { companyShowcase } = siteConfig;
   return (
     <section
       className="flex flex-col items-center justify-center gap-10 pt-20 w-full relative"
       id="company"
     >
-      {/* <p className="text-muted-foreground font-medium">
-        Trusted by fast-growing startups
-      </p> */}
-      <div className="grid w-full max-w-7xl grid-cols-2 md:grid-cols-4 overflow-hidden border-y border-border items-center justify-center z-20">
-        {companyShowcase.companyLogos.map((logo) => (
-          <Link
-            className="group w-full h-28 flex items-center justify-center relative p-4 before:absolute before:-left-1 before:top-0 before:z-10 before:h-screen before:w-px before:bg-border before:content-[''] after:absolute after:-top-1 after:left-0 after:z-10 after:h-px after:w-screen after:bg-border after:content-['']"
-            href="#"
-            key={logo.id}
-          >
-            <div className="transition-all duration-200 [cubic-bezier(0.165, 0.84, 0.44, 1)] translate-y-0 group-hover:-translate-y-4 duration-300 flex items-center justify-center w-full h-full">
-              {logo.logo}
+      <div className="flex w-full flex-col items-center justify-center gap-x-4 gap-y-8 px-12 pt-0">
+        <div className="text-xl font-light text-primary/50">
+          Trusted by developers at
+        </div>
+        <div className="flex flex-wrap lg:flex-nowrap justify-center gap-x-3 gap-y-0 opacity-50 grayscale">
+          {customerLogos.map((logo) => (
+            <div
+              className="relative h-[60px] w-[140px] md:h-[80px] md:w-[160px]"
+              key={logo.alt}
+            >
+              <Image
+                alt={logo.alt}
+                className="object-contain"
+                fill
+                src={logo.src}
+              />
             </div>
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-8 group-hover:translate-y-4 transition-all duration-300 ease-[cubic-bezier(0.165, 0.84, 0.44, 1)]">
-              <span className="flex items-center gap-2 text-sm font-medium">
-                Learn More <ArrowRight className="w-4 h-4" />
-              </span>
-            </div>
-          </Link>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

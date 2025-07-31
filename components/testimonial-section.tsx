@@ -1,6 +1,8 @@
+import { Github } from 'lucide-react';
 import { siteConfig } from '@/app/_lib/config';
 import { SectionHeader } from './section-header';
 import { SocialProofTestimonials } from './testimonial-scroll';
+import { Button } from './ui/button';
 
 export function TestimonialSection() {
   const { testimonials } = siteConfig;
@@ -19,6 +21,18 @@ export function TestimonialSection() {
         </p>
       </SectionHeader>
       <SocialProofTestimonials testimonials={testimonials} />
+      <div className="mt-8 flex justify-center">
+        <Button asChild className="gap-2" size="lg" variant="outline">
+          <a
+            href="https://github.com/boundaryml/site/blob/main/app/_lib/config.tsx#L650"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Github className="h-4 w-4" />
+            Share your story
+          </a>
+        </Button>
+      </div>
     </section>
   );
 }
