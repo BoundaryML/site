@@ -215,14 +215,6 @@ const podcastEpisodes = [
   },
 ];
 
-// Helper function to extract YouTube video ID from URL
-const getYouTubeVideoId = (url: string) => {
-  const match = url.match(
-    /(?:youtu\.be\/|youtube\.com\/watch\?v=|youtube\.com\/embed\/)([^&\n?#]+)/,
-  );
-  return match ? match[1] : null;
-};
-
 const podcastPlatforms = [
   { icon: '📅', name: 'Event Calendar', url: 'https://lu.ma/baml' },
   { icon: '💬', name: 'Discord', url: 'https://boundaryml.com/discord' },

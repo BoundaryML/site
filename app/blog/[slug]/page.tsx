@@ -7,7 +7,7 @@ import { FooterSection } from '@/components/footer-section';
 import { Navbar } from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { getPost, getPosts } from '../_lib/get-posts';
-import { PostBody } from '../content';
+import { PostBody } from './content';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -34,19 +34,40 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
     };
   }
 
+  const baseUrl = process.env.SITE_URL || 'https://boundaryml.com';
+  const postUrl = `${baseUrl}/blog/${post.slug}`;
+
   return {
+    alternates: {
+      canonical: postUrl,
+    },
+    authors: post.author ? [post.author.name] : undefined,
     description: post.description,
+    keywords: post.tags.join(', '),
     openGraph: {
-      authors: [post.author?.name].filter(Boolean),
+      authors: post.author ? [post.author.name] : undefined,
       description: post.description,
+      images: post.og?.image
+        ? [
+            {
+              alt: post.title,
+              height: 630,
+              url: post.og.image,
+              width: 1200,
+            },
+          ]
+        : undefined,
       publishedTime: post.date,
+      siteName: 'BAML Blog',
       title: post.title,
       type: 'article',
+      url: postUrl,
     },
     title: post.title,
     twitter: {
       card: 'summary_large_image',
       description: post.description,
+      images: post.og?.image ? [post.og.image] : undefined,
       title: post.title,
     },
   };

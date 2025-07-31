@@ -1,4 +1,4 @@
-import { Calendar, Mic } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -17,12 +17,8 @@ export function HeroSection() {
           {/* Left side - Title and description */}
           <div className="space-y-6">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium w-fit">
-                <Mic className="h-4 w-4" />
-                Podcast
-              </div>
-              <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl">
-                🦄 ai that works
+              <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-4 sm:py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+                <span className="text-primary">🦄</span> ai that works
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground max-w-lg">
                 A weekly conversation about how we can all get the most juice

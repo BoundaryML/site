@@ -17,8 +17,8 @@ export function HeroSection({
           {/* Left side - Title and description */}
           <div className="space-y-6">
             <div className="space-y-4">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
-                BAML Blog
+              <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-4 sm:py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+                BAML Thoughts
               </h1>
               <p className="text-xl text-muted-foreground max-w-lg">
                 Insights, tutorials, and updates from the BAML team. Stay ahead

@@ -118,7 +118,7 @@ export default function WhoAreWePage() {
         {/* Hero Section */}
         <section className="relative flex w-full items-center justify-center px-4 pt-20 md:pt-32">
           <div className="flex flex-col items-center justify-center space-y-8 text-center max-w-4xl">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-4 sm:py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
               Who are we?
             </h1>
             <div className="space-y-6">
