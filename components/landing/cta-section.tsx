@@ -17,6 +17,7 @@ export function CTASection() {
             className="absolute inset-0 w-full h-full object-cover object-right md:object-center"
             fill
             priority
+            sizes="100vw"
             src={ctaSection.backgroundImage}
           />
           <div className="absolute inset-0 -top-32 md:-top-40 flex flex-col items-center justify-center">

@@ -39,6 +39,7 @@ export const TestimonialCard = ({
           alt={name}
           className="size-8 rounded-full"
           height={32}
+          sizes="32px"
           src={img}
           width={32}
         />
@@ -46,7 +47,7 @@ export const TestimonialCard = ({
 
       <div>
         <p className="font-medium text-primary/90">{name}</p>
-        <p className="text-xs font-normal text-primary/50">{role}</p>
+        <p className="text-xs font-normal text-muted-foreground">{role}</p>
       </div>
     </div>
   </div>

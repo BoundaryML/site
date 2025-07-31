@@ -107,6 +107,7 @@ function MobileMenuToggle({
 }) {
   return (
     <button
+      aria-label="Toggle navigation"
       className="md:hidden border border-border size-8 rounded-md cursor-pointer flex items-center justify-center"
       onClick={onToggle}
       type="button"
@@ -198,6 +199,7 @@ function MobileMenuContent({
                   <p className="text-lg font-semibold text-primary">BAML</p>
                 </Link>
                 <button
+                  aria-label="Close navigation menu"
                   className="border border-border rounded-md p-1 cursor-pointer"
                   onClick={onClose}
                   type="button"

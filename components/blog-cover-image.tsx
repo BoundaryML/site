@@ -44,6 +44,7 @@ export function BlogCoverImage({ post, className }: BlogCoverImageProps) {
             className="object-cover"
             fill
             priority
+            sizes="100vw"
             src={post.og.image}
           />
           {/* Dark overlay to ensure text readability */}
@@ -60,6 +61,7 @@ export function BlogCoverImage({ post, className }: BlogCoverImageProps) {
           className="object-cover"
           fill
           priority
+          sizes="100vw"
           src="/baml-og-background.png"
         />
         {/* Add a semi-transparent overlay to ensure text readability */}

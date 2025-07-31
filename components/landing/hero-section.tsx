@@ -78,9 +78,9 @@ function LogoSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-0">
         {/* Effect works everywhere */}
         <div className="text-center">
-          <h3 className="font-medium text-gray-400 mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
+          <p className="font-medium text-muted-foreground mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
             Works with every LLM provider
-          </h3>
+          </p>
           <div className="flex justify-center items-center gap-3 sm:gap-6 flex-wrap">
             {logos.map((logo, index) => (
               <div
@@ -103,9 +103,9 @@ function LogoSection() {
 
         {/* And with everything */}
         <div className="text-center">
-          <h3 className="font-medium text-gray-400 mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
+          <p className="font-medium text-muted-foreground mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
             And every language
-          </h3>
+          </p>
           <div className="flex justify-center items-center gap-3 sm:gap-6 flex-wrap">
             {frameworks.map((framework, index) => (
               <div
@@ -163,10 +163,11 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
           <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-4 sm:py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
             The First Language for Building Agents
           </h1>
-          <p className="mb-6 sm:mb-8 text-base sm:text-lg tracking-tight text-gray-400 md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
+          <p className="mb-6 sm:mb-8 text-base sm:text-lg tracking-tight text-muted-foreground md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
             Typescript made JavaScript 10x more reliable.
             <br />
-            <span className="text-secondary font-bold">BAML</span> makes your ai pipelines 10x more reliable.
+            <span className="text-secondary font-bold">BAML</span> makes your ai
+            pipelines 10x more reliable.
           </p>
           <div className="translate-y-[-1rem] animate-fade-in opacity-0 ease-in-out [--animation-delay:600ms] space-y-3">
             <ScriptCopyBtn

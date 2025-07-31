@@ -22,6 +22,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
               className="object-cover w-full h-full blur-sm group-hover:blur-none transition-all duration-300"
               fill
               priority
+              sizes="100vw"
               src={
                 post.og.image.startsWith('/blog/')
                   ? post.og.image
@@ -34,6 +35,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
               className="object-cover w-full h-full"
               fill
               priority
+              sizes="100vw"
               src="/baml-og-background.png"
             />
           )}
@@ -75,6 +77,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
                     alt={post.author.name}
                     className="object-cover"
                     fill
+                    sizes="48px"
                     src={post.author.imageUrl}
                   />
                 </div>

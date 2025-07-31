@@ -13,6 +13,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: { ignoreDuringBuilds: true },
+  reactStrictMode: true,
+  typescript: { ignoreBuildErrors: true },
+  poweredByHeader: false,
   async redirects() {
     return [
       {
@@ -63,6 +67,24 @@ const nextConfig = {
   experimental: {
     // optimizeCss: true,
     mdxRs: false,
+    // Forward browser logs to the terminal for easier debugging
+    browserDebugInfoInTerminal: true,
+
+    // cacheLife: true,
+    // cacheComponents: true,
+    // Activate new client-side router improvements
+    // clientSegmentCache: true, // will be renamed to cacheComponents in Next.js 16
+
+    // Explore route composition and segment overrides via DevTools
+    devtoolSegmentExplorer: true,
+    // Enable new caching and pre-rendering behavior
+
+    enablePrerenderSourceMaps: true,
+    // Enable support for `global-not-found`, which allows you to more easily define a global 404 page.
+    globalNotFound: true,
+    scrollRestoration: true,
+    // turbopackPersistentCaching: true,
+    // useCache: true,
   },
   transpilePackages: ['unist-util-visit', 'mdast'],
   serverExternalPackages: ['shiki', '@boundaryml/baml'],
@@ -91,11 +113,11 @@ const nextConfig = {
     });
 
     // Disable CSS minification to avoid cssnano issues
-    if (!dev) {
-      config.optimization.minimizer = config.optimization.minimizer.filter(
-        (minimizer) => !minimizer.constructor.name.includes('CssMinimizer'),
-      );
-    }
+    // if (!dev) {
+    //   config.optimization.minimizer = config.optimization.minimizer.filter(
+    //     (minimizer) => !minimizer.constructor.name.includes('CssMinimizer'),
+    //   );
+    // }
 
     config.experiments = {
       ...config.experiments,

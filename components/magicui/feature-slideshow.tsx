@@ -1,6 +1,7 @@
 'use client';
 
 import { easeOut, motion } from 'framer-motion';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 type FeatureItem = {
@@ -142,11 +143,12 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                   )}
                   {item.image && (
                     <motion.div className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg">
-                      {/** biome-ignore lint/performance/noImgElement: we need to use img for the image */}
-                      <img
+                      <Image
                         alt={typeof item.title === 'string' ? item.title : ''}
                         className="w-full h-full object-cover"
+                        height={1000}
                         src={item.image}
+                        width={1000}
                       />
                     </motion.div>
                   )}

@@ -25,6 +25,7 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
                     className="object-cover w-full h-full blur-sm group-hover:blur-none transition-all duration-300"
                     fill
                     priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     src={
                       post.og.image.startsWith('/blog/')
                         ? post.og.image
@@ -39,6 +40,7 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
                   className="object-cover w-full h-full"
                   fill
                   priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   src="/baml-og-background.png"
                 />
               )}
@@ -86,6 +88,7 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
                         alt={post.author.name}
                         className="object-cover"
                         fill
+                        sizes="32px"
                         src={post.author.imageUrl}
                       />
                     </div>

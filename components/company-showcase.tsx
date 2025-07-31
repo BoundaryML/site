@@ -38,7 +38,7 @@ export function CompanyShowcase() {
       id="company"
     >
       <div className="flex w-full flex-col items-center justify-center gap-x-4 gap-y-8 px-12 pt-0">
-        <div className="text-xl font-light text-primary/50">
+        <div className="text-xl font-light text-muted-foreground">
           Trusted by developers at
         </div>
         <div className="flex flex-wrap lg:flex-nowrap justify-center gap-x-3 gap-y-0 opacity-50 grayscale">
@@ -51,6 +51,8 @@ export function CompanyShowcase() {
                 alt={logo.alt}
                 className="object-contain"
                 fill
+                priority
+                sizes="(max-width: 768px) 140px, 160px"
                 src={logo.src}
               />
             </div>

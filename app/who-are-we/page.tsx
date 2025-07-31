@@ -1,4 +1,5 @@
 import { Github, MessageCircle, Star, Users, Zap } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { FooterSection } from '@/components/footer-section';
 import { MagicCard } from '@/components/magicui/magic-card';
@@ -194,10 +195,12 @@ export default function WhoAreWePage() {
               </p> */}
             </div>
             <div className="w-full mb-12">
-              <img
+              <Image
                 alt="Our team"
                 className="w-full rounded-lg shadow-lg"
+                height={1000}
                 src="/team.jpg"
+                width={1000}
               />
             </div>
 
@@ -206,10 +209,12 @@ export default function WhoAreWePage() {
               {teamMembers.map((member) => (
                 <MagicCard className="p-6 text-center" key={member.name}>
                   <div className="mb-4">
-                    <img
+                    <Image
                       alt={member.name}
                       className="w-20 h-20 rounded-full mx-auto object-cover"
+                      height={80}
                       src={member.image}
+                      width={80}
                     />
                   </div>
                   <h3 className="font-semibold mb-1">{member.name}</h3>

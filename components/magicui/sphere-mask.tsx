@@ -43,6 +43,7 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
               alt="BAML Lamb Logo"
               className="size-24 object-contain"
               height={96}
+              priority
               src="/lamb.png"
               width={96}
             />
@@ -61,9 +62,9 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
           }}
         >
           <div className="text-center px-4">
-            <h3 className="text-base md:text-lg mb-1 md:mb-2 text-primary">
+            <div className="text-base md:text-lg mb-1 md:mb-2 text-primary">
               Baaaaaaaaaaml
-            </h3>
+            </div>
             <p className="text-sm md:text-lg text-primary tracking-wide">
               <span className="text-secondary font-bold">B</span>asically{' '}
               <span className="text-secondary font-bold">A</span>{' '}

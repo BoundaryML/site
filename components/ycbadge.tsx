@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export const YCBadge = () => {
   return (
-    <div className="flex flex-row items-center gap-x-4 rounded-full text-sm font-light text-primary/50">
+    <div className="flex flex-row items-center gap-x-4 rounded-full text-sm font-light text-muted-foreground">
       <div>Backed by</div>
       <a href="https://www.ycombinator.com/">
         <Image
