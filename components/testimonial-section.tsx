@@ -24,7 +24,7 @@ export function TestimonialSection() {
       <div className="mt-8 flex justify-center">
         <Button asChild className="gap-2" size="lg" variant="outline">
           <a
-            href="https://github.com/boundaryml/site/blob/main/app/_lib/config.tsx#L650"
+            href="https://github.com/BoundaryML/site/issues/new?template=testimonial.yml"
             rel="noopener noreferrer"
             target="_blank"
           >
