@@ -1,0 +1,48 @@
+name: New Testimonial
+description: Love BAML? Let us know!
+title: "Why <???> loves BAML"
+labels: ["testimonial"]
+assignees: []
+
+body:
+  - type: input
+    id: person_name
+    attributes:
+      label: "Person's Name"
+      description: "You know the drill"
+      placeholder: "Baaary the Lamb"
+    validations:
+      required: true
+
+  - type: input
+    id: role
+    attributes:
+      label: "Role"
+      description: "What are you?"
+      placeholder: "AI Engineer"
+    validations:
+      required: true
+
+  - type: input
+    id: company
+    attributes:
+      label: "Company Name"
+      description: "Where do you work?"
+      placeholder: "Best AI company"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ### Image of Person
+        Drag & drop the image file here after creating the issue.
+
+  - type: textarea
+    id: testimonial
+    attributes:
+      label: "Testimonial"
+      description: "What do you love about BAML?"
+      placeholder: "Why I've become a Fan"
+    validations:
+      required: true
