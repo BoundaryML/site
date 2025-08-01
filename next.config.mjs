@@ -1,10 +1,8 @@
 /** biome-ignore-all assist/source/useSortedKeys: <explanation> */
-// @ts-check
 
-/** biome-ignore-all assist/source/useSortedKeys: <explanation> */
-// @ts-check
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { withBaml } from '@boundaryml/baml-nextjs-plugin';
 
 /**
  * Define __dirname for ES modules
@@ -131,4 +129,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBaml()(nextConfig);

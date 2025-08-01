@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { Suspense } from 'react'
-import LessonContent from "./_components/LessonContent"
-import URLSyncWrapper from "./_components/URLSyncWrapper"
+import { Suspense } from 'react';
+import LessonContent from './_components/LessonContent';
+import URLSyncWrapper from './_components/URLSyncWrapper';
 
 const GuidePage = () => {
   return (
@@ -11,7 +11,7 @@ const GuidePage = () => {
         <LessonContent />
       </URLSyncWrapper>
     </Suspense>
-  )
-}
+  );
+};
 
-export default GuidePage
+export default GuidePage;

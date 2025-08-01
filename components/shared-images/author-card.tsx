@@ -1,8 +1,8 @@
 interface AuthorCardProps {
-  name: string
-  imageUrl?: string
-  date?: string
-  label?: string
+  name: string;
+  imageUrl?: string;
+  date?: string;
+  label?: string;
 }
 
 export function AuthorCard({ name, imageUrl, date, label }: AuthorCardProps) {
@@ -79,5 +79,5 @@ export function AuthorCard({ name, imageUrl, date, label }: AuthorCardProps) {
         )}
       </div>
     </div>
-  )
+  );
 }

@@ -1,76 +1,76 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
-import { cn } from "@/lib/utils";
-import { CheckIcon } from "@radix-ui/react-icons";
-import { motion } from "framer-motion";
-import { Loader } from "lucide-react";
-import { useState } from "react";
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { cn } from '@/lib/utils';
+import { CheckIcon } from '@radix-ui/react-icons';
+import { motion } from 'framer-motion';
+import { Loader } from 'lucide-react';
+import { useState } from 'react';
 
-type Interval = "month" | "year";
+type Interval = 'month' | 'year';
 
 export const toHumanPrice = (price: number, decimals: number = 2) => {
   return Number(price / 100).toFixed(decimals);
 };
 const demoPrices = [
   {
-    id: "price_1",
-    name: "Basic",
-    description: "A basic plan for startups and individual users",
+    id: 'price_1',
+    name: 'Basic',
+    description: 'A basic plan for startups and individual users',
     features: [
-      "AI-powered analytics",
-      "Basic support",
-      "5 projects limit",
-      "Access to basic AI tools",
+      'AI-powered analytics',
+      'Basic support',
+      '5 projects limit',
+      'Access to basic AI tools',
     ],
     monthlyPrice: 1000,
     yearlyPrice: 10000,
     isMostPopular: false,
   },
   {
-    id: "price_2",
-    name: "Premium",
-    description: "A premium plan for growing businesses",
+    id: 'price_2',
+    name: 'Premium',
+    description: 'A premium plan for growing businesses',
     features: [
-      "Advanced AI insights",
-      "Priority support",
-      "Unlimited projects",
-      "Access to all AI tools",
-      "Custom integrations",
+      'Advanced AI insights',
+      'Priority support',
+      'Unlimited projects',
+      'Access to all AI tools',
+      'Custom integrations',
     ],
     monthlyPrice: 2000,
     yearlyPrice: 20000,
     isMostPopular: true,
   },
   {
-    id: "price_5",
-    name: "Enterprise",
+    id: 'price_5',
+    name: 'Enterprise',
     description:
-      "An enterprise plan with advanced features for large organizations",
+      'An enterprise plan with advanced features for large organizations',
     features: [
-      "Custom AI solutions",
-      "24/7 dedicated support",
-      "Unlimited projects",
-      "Access to all AI tools",
-      "Custom integrations",
-      "Data security and compliance",
+      'Custom AI solutions',
+      '24/7 dedicated support',
+      'Unlimited projects',
+      'Access to all AI tools',
+      'Custom integrations',
+      'Data security and compliance',
     ],
     monthlyPrice: 5000,
     yearlyPrice: 50000,
     isMostPopular: false,
   },
   {
-    id: "price_6",
-    name: "Ultimate",
-    description: "The ultimate plan with all features for industry leaders",
+    id: 'price_6',
+    name: 'Ultimate',
+    description: 'The ultimate plan with all features for industry leaders',
     features: [
-      "Bespoke AI development",
-      "White-glove support",
-      "Unlimited projects",
-      "Priority access to new AI tools",
-      "Custom integrations",
-      "Highest data security and compliance",
+      'Bespoke AI development',
+      'White-glove support',
+      'Unlimited projects',
+      'Priority access to new AI tools',
+      'Custom integrations',
+      'Highest data security and compliance',
     ],
     monthlyPrice: 8000,
     yearlyPrice: 80000,
@@ -79,7 +79,7 @@ const demoPrices = [
 ];
 
 export default function PricingSection() {
-  const [interval, setInterval] = useState<Interval>("month");
+  const [interval, setInterval] = useState<Interval>('month');
   const [isLoading, setIsLoading] = useState(false);
   const [id, setId] = useState<string | null>(null);
 
@@ -113,7 +113,7 @@ export default function PricingSection() {
           <Switch
             id="interval"
             onCheckedChange={(checked) => {
-              setInterval(checked ? "year" : "month");
+              setInterval(checked ? 'year' : 'month');
             }}
           />
           <span>Annual</span>
@@ -127,11 +127,11 @@ export default function PricingSection() {
             <div
               key={price.id}
               className={cn(
-                "relative flex max-w-[400px] flex-col gap-8 rounded-2xl border p-4 text-black dark:text-white overflow-hidden",
+                'relative flex max-w-[400px] flex-col gap-8 rounded-2xl border p-4 text-black dark:text-white overflow-hidden',
                 {
-                  "border-2 border-[var(--color-one)] dark:border-[var(--color-one)]":
+                  'border-2 border-[var(--color-one)] dark:border-[var(--color-one)]':
                     price.isMostPopular,
-                }
+                },
               )}
             >
               <div className="flex items-center">
@@ -168,7 +168,7 @@ export default function PricingSection() {
               >
                 <span className="text-4xl font-bold text-black dark:text-white">
                   $
-                  {interval === "year"
+                  {interval === 'year'
                     ? toHumanPrice(price.yearlyPrice, 0)
                     : toHumanPrice(price.monthlyPrice, 0)}
                   <span className="text-xs"> / {interval}</span>
@@ -177,8 +177,8 @@ export default function PricingSection() {
 
               <Button
                 className={cn(
-                  "group relative w-full gap-2 overflow-hidden text-lg font-semibold tracking-tighter",
-                  "transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2"
+                  'group relative w-full gap-2 overflow-hidden text-lg font-semibold tracking-tighter',
+                  'transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-2',
                 )}
                 disabled={isLoading}
                 onClick={() => void onSubscribeClick(price.id)}

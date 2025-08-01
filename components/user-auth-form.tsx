@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from '@/components/ui/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import { Loader2 } from "lucide-react";
-import * as React from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import * as z from "zod";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { Loader2 } from 'lucide-react';
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 export const userAuthSchema = z.object({
   email: z.string().email(),
@@ -30,7 +30,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const form = useForm<FormData>({
     resolver: zodResolver(userAuthSchema),
     defaultValues: {
-      email: "",
+      email: '',
     },
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -46,13 +46,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(false);
 
     if (!signInResult?.ok) {
-      return toast.error("Something went wrong.", {
-        description: "Your sign in request failed. Please try again.",
+      return toast.error('Something went wrong.', {
+        description: 'Your sign in request failed. Please try again.',
       });
     }
 
-    return toast.success("Check your email", {
-      description: "We sent you a login link. Be sure to check your spam too.",
+    return toast.success('Check your email', {
+      description: 'We sent you a login link. Be sure to check your spam too.',
     });
   }
 
@@ -64,7 +64,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn('grid gap-6', className)} {...props}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="grid gap-4">
@@ -118,7 +118,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       </div>
       <button
         type="button"
-        className={cn(buttonVariants({ variant: "outline" }))}
+        className={cn(buttonVariants({ variant: 'outline' }))}
         onClick={() => {
           onSignInGithub();
         }}
@@ -128,7 +128,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
         ) : (
           <GitHubLogoIcon className="mr-2 h-4 w-4" />
-        )}{" "}
+        )}{' '}
         Github
       </button>
     </div>

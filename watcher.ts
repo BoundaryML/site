@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
-import { exec } from 'child_process';
-import fs from 'fs';
-import { promisify } from 'util';
+import { exec } from 'node:child_process';
+import fs from 'node:fs';
+import { promisify } from 'node:util';
 import { WebSocketServer } from 'ws';
 
 const execAsync = promisify(exec);

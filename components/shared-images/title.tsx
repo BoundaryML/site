@@ -1,7 +1,7 @@
 interface TitleProps {
-  title: string
-  subtitle?: string
-  align?: 'start' | 'center'
+  title: string;
+  subtitle?: string;
+  align?: 'start' | 'center';
 }
 
 export function Title({ title, subtitle, align = 'start' }: TitleProps) {
@@ -42,5 +42,5 @@ export function Title({ title, subtitle, align = 'start' }: TitleProps) {
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 
 
 function ConvertToMarkdown(input: string) -> string {
-  client GPT4o
+  client CustomGPT4oMini
   prompt ##"
     Take the following input and convert it to a mdx markdown.
 

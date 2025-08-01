@@ -1,24 +1,24 @@
-import { type Diagnostic } from '@codemirror/lint'
-import { atom, useAtomValue } from 'jotai'
-import { atomFamily, atomWithStorage } from 'jotai/utils'
+import { type Diagnostic } from '@codemirror/lint';
+import { atom, useAtomValue } from 'jotai';
+import { atomFamily, atomWithStorage } from 'jotai/utils';
 
-import { unwrap } from 'jotai/utils'
-import { type ICodeBlock } from './types'
+import { unwrap } from 'jotai/utils';
+import { type ICodeBlock } from './types';
 
 const wasmAtomAsync = atom(async () => {
-  const wasm = await import('@gloo-ai/baml-schema-wasm-web/baml_schema_build')
-  return wasm
-})
+  const wasm = await import('@gloo-ai/baml-schema-wasm-web/baml_schema_build');
+  return wasm;
+});
 
-export const wasmAtom = unwrap(wasmAtomAsync)
+export const wasmAtom = unwrap(wasmAtomAsync);
 
 export const useWaitForWasm = () => {
-  const wasm = useAtomValue(wasmAtom)
-  return wasm !== undefined
-}
+  const wasm = useAtomValue(wasmAtom);
+  return wasm !== undefined;
+};
 
-export const filesAtom = atom<string>('')
-export const sandboxFilesAtom = atom<string>('')
+export const filesAtom = atom<string>('');
+export const sandboxFilesAtom = atom<string>('');
 
 const pythonGenerator = `
 generator python {
@@ -48,93 +48,96 @@ generator typescript {
     version "0.66.0"
 }
 
-`
+`;
 export const projectAtom = atom((get) => {
-  const wasm = get(wasmAtom)
-  let files = get(filesAtom)
+  const wasm = get(wasmAtom);
+  let files = get(filesAtom);
   if (wasm === undefined) {
-    return undefined
+    return undefined;
   }
-  files = files + pythonGenerator
-  return wasm.WasmProject.new('./', { './baml_src/main.baml': files })
-})
+  files = files + pythonGenerator;
+  return wasm.WasmProject.new('./', { './baml_src/main.baml': files });
+});
 
 export const ctxAtom = atom((get) => {
-  const wasm = get(wasmAtom)
+  const wasm = get(wasmAtom);
   if (wasm === undefined) {
-    return undefined
+    return undefined;
   }
-  return new wasm.WasmCallContext()
-})
+  return new wasm.WasmCallContext();
+});
 
 export const runtimeAtom = atom((get) => {
-  const wasm = get(wasmAtom)
-  const project = get(projectAtom)
-  const envVars = get(envVarsAtom)
+  const wasm = get(wasmAtom);
+  const project = get(projectAtom);
+  const envVars = get(envVarsAtom);
   if (wasm === undefined || project === undefined) {
-    return { rt: undefined, diags: undefined }
+    return { rt: undefined, diags: undefined };
   }
   try {
-    const selectedEnvVars = Object.fromEntries(Object.entries(envVars).filter(([key, value]) => value !== undefined))
-    const rt = project.runtime(selectedEnvVars)
-    const diags = project.diagnostics(rt)
-    return { rt, diags }
+    const selectedEnvVars = Object.fromEntries(
+      Object.entries(envVars).filter(([key, value]) => value !== undefined),
+    );
+    const rt = project.runtime(selectedEnvVars);
+    const diags = project.diagnostics(rt);
+    return { rt, diags };
   } catch (e) {
-    const WasmDiagnosticError = wasm.WasmDiagnosticError
+    const WasmDiagnosticError = wasm.WasmDiagnosticError;
     if (e instanceof Error) {
-      console.error(e.message)
+      console.error(e.message);
     } else if (e instanceof WasmDiagnosticError) {
-      return { rt: undefined, diags: e }
+      return { rt: undefined, diags: e };
     } else {
-      console.error(e)
+      console.error(e);
     }
   }
-  return { rt: undefined, diags: undefined }
-})
+  return { rt: undefined, diags: undefined };
+});
 
 export const diagnosticsAtom = atom((get) => {
-  const runtime = get(runtimeAtom)
-  return runtime.diags?.errors() ?? []
-})
+  const runtime = get(runtimeAtom);
+  return runtime.diags?.errors() ?? [];
+});
 
 // todo debounce this.
 export const generatedFilesAtom = atom((get) => {
-  const project = get(projectAtom)
+  const project = get(projectAtom);
   if (project === undefined) {
-    return undefined
+    return undefined;
   }
-  const runtime = get(runtimeAtom)
+  const runtime = get(runtimeAtom);
   if (runtime.rt === undefined) {
-    return undefined
+    return undefined;
   }
 
-  const generators = project.run_generators()
+  const generators = project.run_generators();
   const files = generators.flatMap((gen) =>
     gen.files.map((f) => ({
       path: f.path_in_output_dir,
       content: f.contents,
       outputDir: gen.output_dir,
     })),
-  )
-  return files
-})
+  );
+  return files;
+});
 
-export const generatedFilesByLangAtom = atomFamily((lang: ICodeBlock['language']) =>
-  atom((get) => {
-    const allFiles = get(generatedFilesAtom)
-    if (!allFiles) return undefined
+export const generatedFilesByLangAtom = atomFamily(
+  (lang: ICodeBlock['language']) =>
+    atom((get) => {
+      const allFiles = get(generatedFilesAtom);
+      if (!allFiles) return undefined;
 
-    return allFiles
-      .filter((f) => f.outputDir.includes(lang))
-      .map(({ path, content }) => ({
-        path,
-        content,
-      }))
-  }),
-)
+      return allFiles
+        .filter((f) => f.outputDir.includes(lang))
+        .map(({ path, content }) => ({
+          path,
+          content,
+        }));
+    }),
+);
 
 export const CodeMirrorDiagnosticsAtom = atom((get) => {
-  const diags = get(diagnosticsAtom)
+  const diags = get(diagnosticsAtom);
   return diags.map((d): Diagnostic => {
     return {
       from: d.start_ch,
@@ -146,29 +149,31 @@ export const CodeMirrorDiagnosticsAtom = atom((get) => {
         d.type === 'error'
           ? 'decoration-wavy decoration-red-500 text-red-450 stroke-blue-500'
           : 'decoration-wavy decoration-yellow-500 text-yellow-450 stroke-blue-500',
-    }
-  })
-})
+    };
+  });
+});
 
-export const isPanelVisibleAtom = atom(false)
+export const isPanelVisibleAtom = atom(false);
 
-export const envVarsAtom = atomWithStorage<{ [key: string]: string | undefined }>('baml-env-vars', {
+export const envVarsAtom = atomWithStorage<{
+  [key: string]: string | undefined;
+}>('baml-env-vars', {
   BOUNDARY_PROXY_URL: 'https://fiddle-proxy.fly.dev',
-})
+});
 
 export const requiredEnvVarsAtom = atom((get) => {
-  const { rt } = get(runtimeAtom)
+  const { rt } = get(runtimeAtom);
   if (rt === undefined) {
-    return []
+    return [];
   }
-  const requiredEnvVars = rt.required_env_vars()
+  const requiredEnvVars = rt.required_env_vars();
 
-  const defaultEnvVars = ['OPENAI_API_KEY', 'ANTHROPIC_API_KEY']
+  const defaultEnvVars = ['OPENAI_API_KEY', 'ANTHROPIC_API_KEY'];
   defaultEnvVars.forEach((e) => {
     if (!requiredEnvVars.find((envVar) => e === envVar)) {
-      requiredEnvVars.push(e)
+      requiredEnvVars.push(e);
     }
-  })
+  });
 
-  return requiredEnvVars
-})
+  return requiredEnvVars;
+});

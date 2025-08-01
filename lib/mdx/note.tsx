@@ -1,6 +1,9 @@
 // import Info from '@components/icons/info'
 // import styles from "./mdx-note.module.css";
-export function MDXNote({ children, ...props }: React.HTMLAttributes<HTMLElement>) {
+export function MDXNote({
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLElement>) {
   return (
     <aside {...props}>
       <div>
@@ -8,5 +11,5 @@ export function MDXNote({ children, ...props }: React.HTMLAttributes<HTMLElement
         {children}
       </div>
     </aside>
-  )
+  );
 }

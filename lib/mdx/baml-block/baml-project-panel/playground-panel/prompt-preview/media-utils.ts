@@ -1,13 +1,13 @@
 export const findMediaFile = async (path: string): Promise<Uint8Array> => {
   // Helper to hash the path to ensure the same path generates the same data
   const hashPath = (str: string): number => {
-    let hash = 0
+    let hash = 0;
     for (let i = 0; i < str.length; i++) {
-      hash = (hash << 5) - hash + str.charCodeAt(i)
-      hash |= 0
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0;
     }
-    return Math.abs(hash)
-  }
+    return Math.abs(hash);
+  };
 
   // Helper to generate a dummy image in JPEG/PNG format with text
   const generateRandomImage = async (
@@ -16,40 +16,50 @@ export const findMediaFile = async (path: string): Promise<Uint8Array> => {
     height: number,
     text: string,
   ): Promise<Uint8Array> => {
-    const canvas = new OffscreenCanvas(width, height)
-    const ctx = canvas.getContext('2d')
+    const canvas = new OffscreenCanvas(width, height);
+    const ctx = canvas.getContext('2d');
     if (ctx) {
-      const colorSeed = hashPath(text)
-      ctx.fillStyle = `#${((colorSeed & 0xffffff) | 0x1000000).toString(16).slice(1)}`
-      ctx.fillRect(0, 0, width, height)
+      const colorSeed = hashPath(text);
+      ctx.fillStyle = `#${((colorSeed & 0xffffff) | 0x1000000).toString(16).slice(1)}`;
+      ctx.fillRect(0, 0, width, height);
 
-      ctx.fillStyle = '#FFFFFF'
-      ctx.font = '16px Arial'
-      ctx.fillText(`Placeholder: ${type}`, 10, 50)
-      ctx.fillText(path, 10, 70)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '16px Arial';
+      ctx.fillText(`Placeholder: ${type}`, 10, 50);
+      ctx.fillText(path, 10, 70);
     }
-    const blob = await canvas.convertToBlob({ type })
-    return new Uint8Array(await blob.arrayBuffer())
-  }
+    const blob = await canvas.convertToBlob({ type });
+    return new Uint8Array(await blob.arrayBuffer());
+  };
 
   const generateRandomAudio = (path: string): Uint8Array => {
-    const audioLength = 1 * 1024 * 1024
-    const randomAudioData = new Uint8Array(audioLength)
-    const seed = hashPath(path)
+    const audioLength = 1 * 1024 * 1024;
+    const randomAudioData = new Uint8Array(audioLength);
+    const seed = hashPath(path);
     for (let i = 0; i < audioLength; i++) {
-      randomAudioData[i] = (seed + i) % 256
+      randomAudioData[i] = (seed + i) % 256;
     }
-    return randomAudioData
-  }
+    return randomAudioData;
+  };
 
-  const extension = path.split('.').pop()?.toLowerCase()
+  const extension = path.split('.').pop()?.toLowerCase();
   if (extension === 'jpeg' || extension === 'jpg') {
-    return await generateRandomImage('image/jpeg', 200, 100, `Dummy JPEG:\n${path}`)
+    return await generateRandomImage(
+      'image/jpeg',
+      200,
+      100,
+      `Dummy JPEG:\n${path}`,
+    );
   } else if (extension === 'png') {
-    return await generateRandomImage('image/png', 200, 100, `Dummy PNG:\n${path}`)
+    return await generateRandomImage(
+      'image/png',
+      200,
+      100,
+      `Dummy PNG:\n${path}`,
+    );
   } else if (extension === 'mp3') {
-    return generateRandomAudio(path)
+    return generateRandomAudio(path);
   }
 
-  throw new Error(`Unknown file extension: ${extension}`)
-}
+  throw new Error(`Unknown file extension: ${extension}`);
+};
