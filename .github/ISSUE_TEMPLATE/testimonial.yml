@@ -32,11 +32,13 @@ body:
     validations:
       required: true
 
-  - type: markdown
+  - type: textarea
+    id: image
     attributes:
-      value: |
-        ### Image of Person
-        Drag & drop the image file here after creating the issue.
+      label: "Image"
+      description: "URL or upload an image (feel free to use your github gravatar)"
+    validations:
+      required: true
 
   - type: textarea
     id: testimonial
