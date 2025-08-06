@@ -3,10 +3,9 @@
 import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion, useScroll } from 'motion/react';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { siteConfig } from '@/app/_lib/config';
 // import { GitHubStarsButtonWrapper } from '@/components/ui/custom/github-stars-button/button-wrapper';
-import { ThemeToggle } from '@/components/custom/theme';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { GithubStars } from './GithubStars';
@@ -75,11 +74,7 @@ function DesktopActionButtons() {
       >
         Get Started
       </Link> */}
-      <Button
-        asChild
-        className="hidden md:flex rounded-full"
-        variant="secondary"
-      >
+      <Button asChild className="rounded-full" variant="secondary">
         <Link
           href="https://docs.boundaryml.com/?utm_source=marketing-site&utm_medium=navbar-docs"
           target="_blank"
@@ -238,14 +233,14 @@ function MobileMenuContent({
               <div className="flex flex-col gap-2">
                 <Link
                   className="bg-secondary h-8 flex items-center justify-center text-sm font-normal tracking-wide rounded-full text-primary-foreground dark:text-secondary-foreground w-full px-4 shadow-[inset_0_1px_2px_rgba(255,255,255,0.25),0_3px_3px_-1.5px_rgba(16,24,40,0.06),0_1px_1px_rgba(16,24,40,0.08)] border border-white/[0.12] hover:bg-secondary/80 transition-all ease-out active:scale-95"
-                  href="/docs/getting-started?utm_source=marketing-site&utm_medium=navbar-get-started"
+                  href="https://docs.boundaryml.com/home"
                 >
                   Get Started
                 </Link>
                 <Button asChild className="rounded-full" variant="outline">
-                  <Link href="/docs?utm_source=marketing-site&utm_medium=navbar-docs">
+                  <a href="https://docs.boundaryml.com/home?utm_source=marketing-site&utm_medium=navbar-docs">
                     Documentation
-                  </Link>
+                  </a>
                 </Button>
                 <GithubStars />
               </div>

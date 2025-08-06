@@ -144,6 +144,16 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
     typescript: 'npm install @boundaryml/baml && npx baml-cli init',
     ruby: 'bundle add baml && bundle exec baml-cli init',
     go: 'go install github.com/boundaryml/baml/go/baml-cli@latest && baml-cli init',
+    other: (
+      <Button asChild variant="outline">
+        <a
+          href="https://docs.boundaryml.com/guide/installation-language/rest-api-other-languages"
+          // target="_blank"
+        >
+          Install BAML
+        </a>
+      </Button>
+    ),
   };
 
   const handleTryOnline = () => {
@@ -178,14 +188,19 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
               lightTheme="none"
               showMultiplePackageOptions={true}
             />
-            <Button
-              // className="bg-primary text-primary-foreground hover:bg-primary/90"
-              onClick={handleTryOnline}
-              size="lg"
-              variant="secondary"
-            >
-              Try BAML in your browser
-            </Button>
+            <div className="flex gap-4">
+              <Button
+                // className="bg-primary text-primary-foreground hover:bg-primary/90"
+                onClick={handleTryOnline}
+                size="lg"
+                variant="secondary"
+              >
+                Try BAML in your browser
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <a href="https://docs.boundaryml.com/home">Get Started</a>
+              </Button>
+            </div>
             {/* <span>Get Started for free </span>
             <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /> */}
           </div>

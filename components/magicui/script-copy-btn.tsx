@@ -3,7 +3,12 @@
 import { Check, Copy } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTheme } from 'next-themes';
-import { type HTMLAttributes, useEffect, useState } from 'react';
+import {
+  type HTMLAttributes,
+  type ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -12,7 +17,7 @@ interface ScriptCopyBtnProps extends HTMLAttributes<HTMLDivElement> {
   codeLanguage: string;
   lightTheme: string;
   darkTheme: string;
-  commandMap: Record<string, string>;
+  commandMap: Record<string, ReactElement | string>;
   className?: string;
 }
 
@@ -29,7 +34,9 @@ export function ScriptCopyBtn({
     packageManagers[0] ?? '',
   );
   const [copied, setCopied] = useState(false);
-  const [highlightedCode, setHighlightedCode] = useState('');
+  const [highlightedCode, setHighlightedCode] = useState<
+    ReactElement | string
+  >();
   const { theme } = useTheme();
   const command = commandMap[packageManager] ?? '';
 
@@ -37,15 +44,19 @@ export function ScriptCopyBtn({
     async function loadHighlightedCode() {
       try {
         const { codeToHtml } = await import('shiki');
-        const highlighted = await codeToHtml(command, {
-          defaultColor: theme === 'dark' ? 'dark' : 'light',
-          lang: codeLanguage,
-          themes: {
-            dark: darkTheme,
-            light: lightTheme,
-          },
-        });
-        setHighlightedCode(highlighted);
+        if (typeof command === 'string') {
+          const highlighted = await codeToHtml(command, {
+            defaultColor: theme === 'dark' ? 'dark' : 'light',
+            lang: codeLanguage,
+            themes: {
+              dark: darkTheme,
+              light: lightTheme,
+            },
+          });
+          setHighlightedCode(highlighted);
+        } else {
+          setHighlightedCode(command);
+        }
       } catch (error) {
         console.error('Error highlighting code:', error);
         setHighlightedCode(`<pre>${command}</pre>`);
@@ -56,7 +67,9 @@ export function ScriptCopyBtn({
   }, [command, theme, codeLanguage, lightTheme, darkTheme]);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(command);
+    if (typeof command === 'string') {
+      navigator.clipboard.writeText(command);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -110,7 +123,7 @@ export function ScriptCopyBtn({
         </div>
         <div className="relative flex items-center">
           <div className="w-full grow font-mono">
-            {highlightedCode ? (
+            {highlightedCode && typeof highlightedCode === 'string' ? (
               <div
                 className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-1.5 [&>pre]:px-4 [&>pre]:font-mono [&>pre]:text-sm sm:[&>pre]:text-base bg-background border border-border rounded ${
                   theme === 'dark' ? 'dark' : 'light'
@@ -119,30 +132,30 @@ export function ScriptCopyBtn({
                 dangerouslySetInnerHTML={{ __html: highlightedCode }}
               />
             ) : (
-              <pre className="rounded-md border border-border bg-white p-2 px-4 font-mono text-sm sm:text-base overflow-x-auto dark:bg-black">
-                {command}
-              </pre>
+              command
             )}
           </div>
-          <Button
-            aria-label={copied ? 'Copied' : 'Copy to clipboard'}
-            className="relative ml-2 rounded-md hidden md:block"
-            onClick={copyToClipboard}
-            size="icon"
-            variant="outline"
-          >
-            <span className="sr-only">{copied ? 'Copied' : 'Copy'}</span>
-            <Copy
-              className={`h-4 w-4 m-auto inset-0 transition-all duration-300 ${
-                copied ? 'scale-0' : 'scale-100'
-              }`}
-            />
-            <Check
-              className={`absolute inset-0 m-auto h-4 w-4 transition-all duration-300 ${
-                copied ? 'scale-100' : 'scale-0'
-              }`}
-            />
-          </Button>
+          {typeof highlightedCode === 'string' && (
+            <Button
+              aria-label={copied ? 'Copied' : 'Copy to clipboard'}
+              className="relative ml-2 rounded-md hidden md:block"
+              onClick={copyToClipboard}
+              size="icon"
+              variant="outline"
+            >
+              <span className="sr-only">{copied ? 'Copied' : 'Copy'}</span>
+              <Copy
+                className={`h-4 w-4 m-auto inset-0 transition-all duration-300 ${
+                  copied ? 'scale-0' : 'scale-100'
+                }`}
+              />
+              <Check
+                className={`absolute inset-0 m-auto h-4 w-4 transition-all duration-300 ${
+                  copied ? 'scale-100' : 'scale-0'
+                }`}
+              />
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -115,7 +115,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section className="w-full px-4 py-8">
           <div className="mx-auto max-w-4xl">
             <Link href="/blog">
-              <Button className="group mb-8" variant="ghost">
+              <Button className="group lg:mb-8" variant="ghost">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
                 Back to Blog
               </Button>
@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
 
         {/* Article Header */}
-        <section className="w-full px-4 py-8">
+        <section className="w-full px-4 lg:py-8">
           <div className="mx-auto max-w-4xl">
             <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
               <span
