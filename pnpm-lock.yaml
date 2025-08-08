@@ -233,6 +233,9 @@ importers:
       posthog-js:
         specifier: 1.258.2
         version: 1.258.2
+      posthog-node:
+        specifier: ^5.6.0
+        version: 5.6.0
       react:
         specifier: 19.1.1
         version: 19.1.1
@@ -3693,6 +3696,10 @@ packages:
         optional: true
       rrweb-snapshot:
         optional: true
+
+  posthog-node@5.6.0:
+    resolution: {integrity: sha512-MVXxKmqAYp2cPBrN1YMhnhYsJYIu6yc6wumbHz1dbo67wZBf2WtMm67Uh+4VCrp07049qierWlxQqz1W5zGDeg==}
+    engines: {node: '>=20'}
 
   preact@10.27.0:
     resolution: {integrity: sha512-/DTYoB6mwwgPytiqQTh/7SFRL98ZdiD8Sk8zIUVOxtwq4oWcwrcd1uno9fE/zZmUaUrFNYzbH14CPebOz9tZQw==}
@@ -8375,6 +8382,8 @@ snapshots:
       fflate: 0.4.8
       preact: 10.27.0
       web-vitals: 4.2.4
+
+  posthog-node@5.6.0: {}
 
   preact@10.27.0: {}
 
