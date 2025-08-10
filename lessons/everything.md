@@ -203,6 +203,11 @@ function Completed(
         ..t
     }
 }
+
+function TodoContents(t: Todo) -> String {
+  // Access fields of a class like this:
+  t.todo
+}
 ```
 
 # Functions
@@ -350,3 +355,4 @@ while (x < 100) {
   x = x + 1;
 }
 ```
+
