@@ -31,6 +31,27 @@ function AddBert() {
 }
 ```
 
+It works inside functions & blocks, too:
+
+```baml
+function GetSignups() -> string[] {
+    let mut signups: string[] = [];
+
+    signups.push("Bert");
+
+    signups
+}
+```
+
+Use `mut` to declare an argument as mutable:
+
+```baml
+function AddBert(mut signups: string[]) -> string[] {
+    signups.push("Bert")
+    signups
+}
+```
+
 ---
 
 ## Comments
