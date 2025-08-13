@@ -294,23 +294,52 @@ While loops continue executing as long as a condition is true:
 
 ```baml
 let mut count = 0;
-while (count < 5) {
+while count < 5 {
   print(count);
   count = count + 1;
 }
+```
 
-let mut running = true;
-while (running) {
+`continue` and `break` statements are supported:
+
+```baml
+while true {
   let input = getUserInput();
-  if (input == "quit") {
-    running = false;
+  if input == "quit" {
+    break;
+  }
+
+  if input == "hello" {
+    sayHello();
+    continue;
   }
 }
 ```
 
+
 While loops check the condition before each iteration.
 
----
+### Break & Continue
+
+While loops support `break` and `continue` statements: 
+
+```baml
+let mut x = 0;
+
+while x < 10 {
+    x += 1;
+    if x == 9 {
+        continue;
+    }
+    x += 1;
+
+    let randomNumber = GetRandom(x);
+
+    if randomNumber % 10 == 0 {
+        break;
+    }
+}
+```
 
 ## If statements
 
@@ -355,4 +384,7 @@ while (x < 100) {
   x = x + 1;
 }
 ```
+
+
+You can use `continue` and `break` inside your loops:
 
