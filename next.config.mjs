@@ -3,6 +3,7 @@
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withBaml } from '@boundaryml/baml-nextjs-plugin';
+import { withPostHogConfig } from '@posthog/nextjs-config';
 
 /**
  * Define __dirname for ES modules
