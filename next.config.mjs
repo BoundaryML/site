@@ -153,7 +153,6 @@ const configWithPlugins = withBaml()(nextConfig);
 
 const configWithPosthog = withPostHogConfig(configWithPlugins, {
   envId: process.env.POSTHOG_ENV_ID, // Environment ID
-  host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
   personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY, // Personal API Key
 });
 
