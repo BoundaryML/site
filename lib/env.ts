@@ -26,9 +26,11 @@ export const env = createEnv({
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NODE_ENV: process.env.NODE_ENV,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
   server: {
     LUMA_API_KEY: z.string(),
+    OPENAI_API_KEY: z.string(),
   },
   shared: {
     NODE_ENV: z
