@@ -148,10 +148,18 @@ const nextConfig = {
   },
 };
 
+// console.log(configWithPosthog);
 const configWithPlugins = withBaml()(nextConfig);
 
-export default withPostHogConfig(configWithPlugins, {
+const configWithPosthog = withPostHogConfig(configWithPlugins, {
   envId: process.env.POSTHOG_ENV_ID, // Environment ID
   host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
   personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY, // Personal API Key
 });
+
+export default configWithPosthog;
+// export default withPostHogConfig(configWithPlugins, {
+//   envId: process.env.POSTHOG_ENV_ID, // Environment ID
+//   host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
+//   personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY, // Personal API Key
+// });
