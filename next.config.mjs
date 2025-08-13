@@ -37,15 +37,15 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/ingest/static/:path*',
+        source: '/relay-JkOu/static/:path*',
         destination: 'https://us-assets.i.posthog.com/static/:path*',
       },
       {
-        source: '/ingest/:path*',
+        source: '/relay-JkOu/:path*',
         destination: 'https://us.i.posthog.com/:path*',
       },
       {
-        source: '/ingest/flags',
+        source: '/relay-JkOu/flags',
         destination: 'https://us.i.posthog.com/flags',
       },
     ];
@@ -147,4 +147,10 @@ const nextConfig = {
   },
 };
 
-export default withBaml()(nextConfig);
+const configWithPlugins = withBaml()(nextConfig);
+
+export default withPostHogConfig(configWithPlugins, {
+  envId: process.env.POSTHOG_ENV_ID, // Environment ID
+  host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
+  personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY, // Personal API Key
+});

@@ -6,7 +6,7 @@ export function postHogClient() {
   const posthogClient = new PostHog(env.NEXT_PUBLIC_POSTHOG_KEY, {
     flushAt: 1,
     flushInterval: 0,
-    host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    host: 'https://us.posthog.com',
   });
   return posthogClient;
 }

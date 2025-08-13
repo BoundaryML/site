@@ -2,11 +2,9 @@
 
 import { useReportWebVitals } from 'next/web-vitals';
 import { event } from 'nextjs-google-analytics';
-import { usePostHog } from 'posthog-js/react';
+import posthog from 'posthog-js';
 
 export function WebVitals() {
-  const posthog = usePostHog();
-
   useReportWebVitals((metric) => {
     // Guard against missing init
     try {
