@@ -148,17 +148,15 @@ const nextConfig = {
   },
 };
 
-// console.log(configWithPosthog);
 const configWithPlugins = withBaml()(nextConfig);
 
-const configWithPosthog = withPostHogConfig(configWithPlugins, {
-  envId: process.env.POSTHOG_ENV_ID, // Environment ID
-  personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY, // Personal API Key
-});
-
-export default configWithPosthog;
-// export default withPostHogConfig(configWithPlugins, {
+// NOTE: This does not work, i'm not sure why:
+// Error 2025-08-13T17:56:39.953052Z ERROR posthog_cli: msg="Oops! While creating release\n\nCaused by:\n    Failed to create release: "
+// Error running PostHog sourcemap plugin: Command failed with code 1
+// https://vercel.com/baml/site/KoXbpd8GYmmEoyfRKPzCoPP4zTfP
+// const configWithPosthog = withPostHogConfig(configWithPlugins, {
 //   envId: process.env.POSTHOG_ENV_ID, // Environment ID
-//   host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
 //   personalApiKey: process.env.POSTHOG_PERSONAL_API_KEY, // Personal API Key
 // });
+
+export default configWithPlugins;
