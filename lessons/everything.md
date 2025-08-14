@@ -266,25 +266,35 @@ The `std::fetch_value` function makes HTTP requests to external APIs.
 
 ## For loops
 
-For loops iterate over a range of values using C-style syntax:
+For loops iterate over a collection of values. Currently only arrays are supported:
 
 ```baml
-let mut counter = 0;
+let names = ["Pete", "Bob", "Sam"];
 
-for (int i = 0; i < 10; i++) {
-  counter = counter + 1; 
-}
-
-for (int x = 1; x <= 5; x++) {
-  let result = x * 2;
-  print(result)
+for name in names {
+    print(name)
 }
 ```
 
-The for loop header has three parts:
-- Initialization: `int i = 0`
-- Condition: `i < 10`
-- Update: `i++`
+Like `while` loops, `for` loops also support `continue` and `break` control flow modifiers:
+
+```baml
+let numbers = [5, 10, 2, 0, 3];
+
+let mut sum = 0;
+
+for num in numbers {
+    if num > 10 {
+        continue;
+    }
+    if num < 2 {
+        break;
+    }
+    sum += num;
+}
+
+print(sum)
+```
 
 ---
 
