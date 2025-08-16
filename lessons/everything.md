@@ -287,25 +287,50 @@ The `std::fetch_value` function makes HTTP requests to external APIs.
 
 ## For loops
 
-For loops iterate over a range of values using C-style syntax:
+### Iterator for loops
+
+For loops iterate over a collection of values. Currently only arrays are supported:
 
 ```baml
-let mut counter = 0;
+let names = ["Pete", "Bob", "Sam"];
 
-for (int i = 0; i < 10; i++) {
-  counter = counter + 1; 
-}
-
-for (int x = 1; x <= 5; x++) {
-  let result = x * 2;
-  print(result)
+for name in names {
+    print(name)
 }
 ```
 
-The for loop header has three parts:
-- Initialization: `int i = 0`
-- Condition: `i < 10`
-- Update: `i++`
+Like `while` loops, `for` loops also support `continue` and `break` control flow modifiers:
+
+```baml
+let numbers = [5, 10, 2, 0, 3];
+
+let mut sum = 0;
+
+for num in numbers {
+    if num > 10 {
+        continue;
+    }
+    if num < 2 {
+        break;
+    }
+    sum += num;
+}
+
+print(sum)
+```
+
+### C-like for loops
+
+You can also use the traditional c-like `for` loop, specially handy
+when part of the loop must be run on `continue`:
+
+```baml
+let names = ["Pete", "Bob", "Sam"];
+
+for (let mut i = 0; i < names.len(); i += 1) {
+    print(name[i])
+}
+```
 
 ---
 
@@ -315,23 +340,52 @@ While loops continue executing as long as a condition is true:
 
 ```baml
 let mut count = 0;
-while (count < 5) {
+while count < 5 {
   print(count);
   count = count + 1;
 }
+```
 
-let mut running = true;
-while (running) {
+`continue` and `break` statements are supported:
+
+```baml
+while true {
   let input = getUserInput();
-  if (input == "quit") {
-    running = false;
+  if input == "quit" {
+    break;
+  }
+
+  if input == "hello" {
+    sayHello();
+    continue;
   }
 }
 ```
 
+
 While loops check the condition before each iteration.
 
----
+### Break & Continue
+
+While loops support `break` and `continue` statements: 
+
+```baml
+let mut x = 0;
+
+while x < 10 {
+    x += 1;
+    if x == 9 {
+        continue;
+    }
+    x += 1;
+
+    let randomNumber = GetRandom(x);
+
+    if randomNumber % 10 == 0 {
+        break;
+    }
+}
+```
 
 ## If statements
 
@@ -376,4 +430,7 @@ while (x < 100) {
   x = x + 1;
 }
 ```
+
+
+You can use `continue` and `break` inside your loops:
 
