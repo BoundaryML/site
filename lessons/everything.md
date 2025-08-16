@@ -266,6 +266,8 @@ The `std::fetch_value` function makes HTTP requests to external APIs.
 
 ## For loops
 
+### Iterator for loops
+
 For loops iterate over a collection of values. Currently only arrays are supported:
 
 ```baml
@@ -294,6 +296,19 @@ for num in numbers {
 }
 
 print(sum)
+```
+
+### C-like for loops
+
+You can also use the traditional c-like `for` loop, specially handy
+when part of the loop must be run on `continue`:
+
+```baml
+let names = ["Pete", "Bob", "Sam"];
+
+for (let mut i = 0; i < names.len(); i += 1) {
+    print(name[i])
+}
 ```
 
 ---
