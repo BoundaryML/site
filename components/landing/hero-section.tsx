@@ -143,7 +143,7 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
     python: 'uv add baml-py && uv run baml-cli init',
     typescript: 'npm install @boundaryml/baml && npx baml-cli init',
     ruby: 'bundle add baml && bundle exec baml-cli init',
-    go: 'go install github.com/boundaryml/baml/go/baml-cli@latest && baml-cli init',
+    go: 'go install github.com/boundaryml/baml/baml-cli@latest && baml-cli init',
     other: (
       <Button asChild variant="outline">
         <a
