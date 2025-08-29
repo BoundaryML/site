@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { HeroSection } from './_components/hero-section';
 import { PodcastEpisodesGrid } from './_components/podcast-episodes-grid';
 
-const podcastEpisodes = [
+const fallbackEpisodes = [
   {
     date: '2025-07-29',
     description:
@@ -215,6 +215,93 @@ const podcastEpisodes = [
   },
 ];
 
+type ExternalEpisode = {
+  folder: string;
+  guid: string;
+  title: string;
+  description: string;
+  event_link?: string;
+  eventDate: string;
+  event_type: string;
+  media?: { url: string | null; type?: string };
+  links?: { youtube?: string; code?: string; rsvp?: string; discord?: string; connect?: string };
+  season?: number;
+  episode?: number;
+  isPast?: boolean;
+  isWorkshop?: boolean;
+};
+
+type PodcastEpisodeForGrid = {
+  date: string;
+  description: string;
+  episodeNumber: string;
+  featured: boolean;
+  id: number;
+  rsvpUrl?: string;
+  title: string;
+  topics: string[];
+  codeUrl?: string;
+  youtubeUrl?: string;
+  slug: string;
+};
+
+async function fetchPodcastEpisodes(): Promise<PodcastEpisodeForGrid[]> {
+  const res = await fetch(
+    'https://raw.githubusercontent.com/ai-that-works/ai-that-works/refs/heads/main/data.json',
+    { next: { revalidate: 600 } },
+  );
+
+  if (!res.ok) {
+    return [];
+  }
+
+  const data = (await res.json()) as { episodes: ExternalEpisode[] };
+
+  const onlyEpisodes = data.episodes.filter((e) => e.event_type === 'episode');
+
+  // Assign global episode numbers in chronological order (oldest → newest)
+  const ascendingByDate = [...onlyEpisodes].sort(
+    (a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime(),
+  );
+  const guidToAbsoluteNumber = new Map<string, number>(
+    ascendingByDate.map((e, index) => [e.guid, index + 1]),
+  );
+
+  const mapped = [...onlyEpisodes]
+    .sort((a, b) => new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime())
+    .map((e, idx) => {
+      const youtubeFromLinks = e.links?.youtube;
+      const youtubeFromMedia = e.media?.type?.includes('youtube')
+        ? e.media?.url ?? undefined
+        : undefined;
+
+      const youtubeUrl = youtubeFromLinks ?? youtubeFromMedia;
+      const cleanedTitle = e.title
+        // Remove leading season/episode prefixes like "S02E16 – ", "S2E16 - ", etc.
+        .replace(/^S\d+E\d+\s*(?:-|–|—|:)\s*/i, '')
+        .trim();
+
+      const absoluteEpisode = guidToAbsoluteNumber.get(e.guid) ?? idx + 1;
+      const slug = e.folder || `episode-${absoluteEpisode}`;
+
+      return {
+        id: absoluteEpisode,
+        date: e.eventDate,
+        description: e.description,
+        episodeNumber: '#' + absoluteEpisode,
+        featured: false,
+        rsvpUrl: e.links?.rsvp ?? e.event_link,
+        title: cleanedTitle,
+        topics: [],
+        codeUrl: e.links?.code,
+        youtubeUrl,
+        slug,
+      } as PodcastEpisodeForGrid;
+    });
+
+  return mapped;
+}
+
 const podcastPlatforms = [
   { icon: '📅', name: 'Event Calendar', url: 'https://lu.ma/baml' },
   { icon: '💬', name: 'Discord', url: 'https://boundaryml.com/discord' },
@@ -222,7 +309,9 @@ const podcastPlatforms = [
   { icon: '📺', name: 'YouTube', url: 'https://www.youtube.com/@boundaryml' },
 ];
 
-export default function PodcastPage() {
+export default async function PodcastPage() {
+  const fetched = await fetchPodcastEpisodes();
+  const podcastEpisodes = fetched.length > 0 ? fetched : fallbackEpisodes;
   return (
     <div className="max-w-7xl mx-auto border-x relative">
       <Navbar />

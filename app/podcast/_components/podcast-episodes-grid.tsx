@@ -1,4 +1,5 @@
 'use client';
+
 import { formatDistanceToNow } from 'date-fns';
 import { ArrowRight, Calendar, Code, Play } from 'lucide-react';
 import Image from 'next/image';
@@ -16,6 +17,7 @@ interface PodcastEpisode {
   topics: string[];
   codeUrl?: string;
   youtubeUrl?: string;
+  slug: string;
 }
 
 interface PodcastEpisodesGridProps {
@@ -33,16 +35,11 @@ const getYouTubeVideoId = (url: string) => {
 export function PodcastEpisodesGrid({ episodes }: PodcastEpisodesGridProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-fr">
-      {episodes.map((episode) => (
-        <Card
-          className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer py-0 flex flex-col h-full gap-0"
-          key={episode.id}
-          onClick={() => {
-            if (episode.youtubeUrl) {
-              window.open(episode.youtubeUrl, '_blank');
-            }
-          }}
-        >
+      {episodes.map((episode) => {
+        const isUpcoming = new Date(episode.date) > new Date();
+        return (
+        <Link href={`/podcast/${episode.slug}`} key={episode.id}>
+          <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer py-0 flex flex-col h-full gap-0">
           {/* Cover Image - YouTube Thumbnail */}
           {episode.youtubeUrl && getYouTubeVideoId(episode.youtubeUrl) && (
             <div className="relative h-40 sm:h-48">
@@ -61,6 +58,14 @@ export function PodcastEpisodesGrid({ episodes }: PodcastEpisodesGridProps) {
                     fill="currentColor"
                   />
                 </div>
+              </div>
+            </div>
+          )}
+          {!episode.youtubeUrl && isUpcoming && (
+            <div className="relative h-40 sm:h-48 bg-gradient-to-br from-primary/15 to-transparent flex items-center justify-center">
+              <div className="text-primary text-xs sm:text-sm font-medium flex items-center gap-2 bg-background/80 backdrop-blur px-3 py-1 rounded-full border border-primary/20">
+                <span className="h-2 w-2 bg-primary rounded-full animate-pulse" />
+                Upcoming • {formatDistanceToNow(new Date(episode.date), { addSuffix: true })}
               </div>
             </div>
           )}
@@ -112,7 +117,7 @@ export function PodcastEpisodesGrid({ episodes }: PodcastEpisodesGridProps) {
             <div className="flex items-center justify-between mt-auto">
               <div className="flex items-center gap-2">
                 {/* Code link if available */}
-                {episode.codeUrl && (
+                {episode.codeUrl && !isUpcoming && (
                   <Link
                     className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     href={episode.codeUrl}
@@ -126,7 +131,7 @@ export function PodcastEpisodesGrid({ episodes }: PodcastEpisodesGridProps) {
                 )}
 
                 {/* RSVP link if available */}
-                {episode.rsvpUrl && (
+                {episode.rsvpUrl && !episode.youtubeUrl && (
                   <Link
                     className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
                     href={episode.rsvpUrl}
@@ -140,13 +145,15 @@ export function PodcastEpisodesGrid({ episodes }: PodcastEpisodesGridProps) {
               </div>
 
               <div className="flex items-center gap-1 text-muted-foreground">
-                <span className="text-sm">Watch</span>
+                <span className="text-sm">{episode.youtubeUrl ? 'Watch' : (isUpcoming ? 'RSVP' : 'View')}</span>
                 <ArrowRight className="h-3 w-3" />
               </div>
             </div>
           </div>
         </Card>
-      ))}
+        </Link>
+        );
+      })}
     </div>
   );
 }
