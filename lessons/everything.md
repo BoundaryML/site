@@ -14,17 +14,25 @@ let default_poem = ClaudePoem(poem_subject);
 
 Variables can store any value type and can reference function calls or other variables.
 
-They can not be changed after they are defined.
+---
+
+## Annotating Variable Types
+
+You can specify a variable's type. This improves your code readability and improves the
+quality of error messages.
+
+```baml
+let name: string = "Bammy";
+let r: int | string = some_complicated_function();
+```
 
 ---
 
-## Mutable Variables
-
-Use `let mut` to declare mutable variables:
+## Mutating Variables
 
 ```baml
 // A global variable
-let mut signups: string[] = [];
+let signups: string[] = [];
 
 function AddBert() {
     signups.push("Bert")
@@ -35,7 +43,7 @@ It works inside functions & blocks, too:
 
 ```baml
 function GetSignups() -> string[] {
-    let mut signups: string[] = [];
+    let signups: string[] = [];
 
     signups.push("Bert");
 
@@ -43,10 +51,8 @@ function GetSignups() -> string[] {
 }
 ```
 
-Use `mut` to declare an argument as mutable:
-
 ```baml
-function AddBert(mut signups: string[]) -> string[] {
+function AddBert(signups: string[]) -> string[] {
     signups.push("Bert")
     signups
 }
@@ -304,7 +310,7 @@ Like `while` loops, `for` loops also support `continue` and `break` control flow
 ```baml
 let numbers = [5, 10, 2, 0, 3];
 
-let mut sum = 0;
+let sum = 0;
 
 for num in numbers {
     if num > 10 {
@@ -327,7 +333,7 @@ when part of the loop must be run on `continue`:
 ```baml
 let names = ["Pete", "Bob", "Sam"];
 
-for (let mut i = 0; i < names.len(); i += 1) {
+for (let i = 0; i < names.len(); i += 1) {
     print(name[i])
 }
 ```
@@ -339,7 +345,7 @@ for (let mut i = 0; i < names.len(); i += 1) {
 While loops continue executing as long as a condition is true:
 
 ```baml
-let mut count = 0;
+let count = 0;
 while count < 5 {
   print(count);
   count = count + 1;
@@ -367,10 +373,10 @@ While loops check the condition before each iteration.
 
 ### Break & Continue
 
-While loops support `break` and `continue` statements: 
+While loops support `break` and `continue` statements:
 
 ```baml
-let mut x = 0;
+let x = 0;
 
 while x < 10 {
     x += 1;
@@ -422,7 +428,7 @@ for (int i = 1; i <= 10; i++) {
   }
 }
 
-let mut x = 0;
+let x = 0;
 while (x < 100) {
   if (x % 10 == 0) {
     print("Milestone: " + x);
@@ -433,4 +439,3 @@ while (x < 100) {
 
 
 You can use `continue` and `break` inside your loops:
-
