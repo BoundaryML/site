@@ -68,7 +68,7 @@ Let's look at a real example where we aggregate items by their class IDs. We'll 
 
 Here's a BAML function that takes items with UUID identifiers and aggregates them by class:
 
-```baml
+```rust
 class ItemUuid {
   class_id string @description("UUID")
   name string
@@ -97,7 +97,7 @@ function AggregateItemsUuid(items: ItemUuid[]) -> AggregationUuid[] {
 
 And here's the same function but using integer IDs:
 
-```baml
+```rust
 class ItemInt {
   class_id string
   name string
@@ -142,7 +142,7 @@ By contrast, both the direct integer approach and the UUID remapping approach co
 
 Here's how to implement the remapping in Python:
 
-```python
+```rust
 from baml_client import b
 from baml_client.types import ItemInt, ItemUuid, AggregationInt, AggregationUuid
 
@@ -199,7 +199,7 @@ For tasks where the LLM only needs to read IDs (not produce them), or where you 
 
 While the manual remapping approach works well, we're exploring ways to automate this pattern directly in BAML. Imagine a built-in `RemappingId` type that you could use anywhere in your schemas:
 
-```baml
+```rust
 class ItemUuid {
   class_id RemappingId @description("UUID")
   name string
