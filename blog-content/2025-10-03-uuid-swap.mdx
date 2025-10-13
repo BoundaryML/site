@@ -1,5 +1,5 @@
 ---
-title: "Handling UUIDs in LLM Calls"
+title: "Using UUIDs in prompts is bad"
 description: Guidance on dealing with entity IDs in LLM functions
 slug: uuid-swap
 date: October 3, 2025
@@ -190,7 +190,7 @@ You should benchmark your specific use case with and without UUID remapping. The
 For cases where accuracy is critical, benchmarking is even more
 important. For instance, our experiment shows that Claude Haiku
 does not reach perfect aggregation accuracy, even using int
-identifiers. When we change the model to Opus4, we get 100%
+identifiers. When we change the model to Opus 4, we get 100%
 accuracy with ints but 80% accuracy with UUIDs.
 
 For tasks where the LLM only needs to read IDs (not produce them), or where you have more than 1000 unique IDs, you may need different optimization strategies, such as breaking your data down into smaller batches.
@@ -229,7 +229,7 @@ The BAML runtime would automatically:
 4. Parse the LLM response using integer IDs
 5. Map the integers back to their original UUID values in the output
 
-From the developer's perspective, you'd write your BAML functions as if you were working with UUIDs directly, but get the token efficiency and accuracy of integer IDs automatically.
+You would get to work with UUIDs directly, but get the token efficiency and accuracy of integer IDs.
 
 If this kind of automatic optimization would be useful for your use case, we'd love to hear from you! Reach out to us on [Discord](https://discord.gg/BTNBeXGuaS) or open a discussion on [GitHub](https://github.com/BoundaryML/baml).
 
