@@ -6,10 +6,10 @@ Variables store values that can be reused throughout your BAML code. Use `let` t
 
 ```baml
 // A global variable
-let poem_subject = "Math";
+let poemSubject = "Math";
 
 // Another global variable
-let default_poem = ClaudePoem(poem_subject);
+let defaultPoem = ClaudePoem(poemSubject);
 ```
 
 Variables can store any value type and can reference function calls or other variables.
@@ -23,7 +23,7 @@ quality of error messages.
 
 ```baml
 let name: string = "Bammy";
-let r: int | string = some_complicated_function();
+let r: int | string = someComplicatedFunction();
 ```
 
 ---
@@ -31,10 +31,8 @@ let r: int | string = some_complicated_function();
 ## Mutating Variables
 
 ```baml
-// A global variable
-let signups: string[] = [];
-
-function AddBert() {
+function Go() {
+    let signups: string[] = [];
     signups.push("Bert")
 }
 ```
@@ -42,19 +40,14 @@ function AddBert() {
 It works inside functions & blocks, too:
 
 ```baml
-function GetSignups() -> string[] {
+function Main() {
     let signups: string[] = [];
-
-    signups.push("Bert");
-
+    AddBert(signups);
     signups
 }
-```
 
-```baml
-function AddBert(signups: string[]) -> string[] {
-    signups.push("Bert")
-    signups
+function AddBert(s: string[]) {
+    signups.push("Bert");
 }
 ```
 
@@ -66,6 +59,37 @@ Comments explain your code and are ignored during execution:
 
 ```baml
 // Single line comment
+```
+
+Use header comments to organize complex code paths into blocks:
+
+```baml
+function MakeLanguage() -> string {
+  //# Initialize
+  let expectations = 65536;
+  let features = [];
+
+  //# The implementation cycle
+  while (features.length() < 10 && expecations > 0) {
+    //# Implement a feature.
+    features.push(newFeature());
+
+    //# Check the feature set.
+    if (HasBugs(features)) {
+      expectations -= 1000;
+    }
+
+  }
+
+  //# Ship it
+  let announcement = if (expectations > 5) {
+    "We have a great new language"
+  } else {
+    "We have a new language!"
+  };
+  announcement
+
+}
 ```
 
 # Data Types
@@ -126,35 +150,16 @@ Maps use curly braces with quoted string keys.
 Optional types represent values that may or may not be present:
 
 ```baml
-let maybe_name: string? = "Alice";
-let maybe_age: int? = null;
+let maybeName: string? = "Alice";
+let maybeAge: int? = null;
 
 // Check if optional has a value
-if (maybe_name != null) {
-  print("Name is: " + maybe_name);
+if (maybeName != null) {
+  print("Name is: " + maybeName);
 }
 ```
 
 Optional types are denoted with `?` after the type name and can hold either a value or `null`.
-
----
-
-## Tuples
-
-Tuples store fixed-size collections of values with different types:
-
-```baml
-let point: (int, int) = (10, 20);
-let person: (string, int, bool) = ("Alice", 30, true);
-
-// Access tuple elements
-let x = point.0;              // 10
-let y = point.1;              // 20
-let name = person.0;          // "Alice"
-let age = person.1;           // 30
-```
-
-Tuples use parentheses and access elements with dot notation and index numbers.
 
 ---
 
@@ -175,14 +180,6 @@ let user_scores: map<string, int[]> = {
   "charlie": [92, 94, 89]
 };
 
-// Mixed compound types
-let complex: (string, int[], map<string, bool>) = (
-  "project",
-  [1, 2, 3],
-  {"active": true, "published": false}
-);
-```
-
 # Classes
 
 ## Class definitions
@@ -198,15 +195,25 @@ class Todo {
 }
 
 class Comparison {
-  poem_1_score int @description("1-10 rating of the first poem's quality")
-  poem_2_score int @description("1-10 rating of the second poem's quality")
+  poem1Score int @description("1-10 rating of the first poem's quality")
+  poem2Score int @description("1-10 rating of the second poem's quality")
   reasoning string @description("Reasons for the above scores, explicitly contrasting the poems.")
+
+  function topScore(self) -> int {
+    if (self.poem1Score > self.poem2Score) {
+      self.poem1Score
+    } else {
+      self.poem2Score
+    }
+  }
 }
 ```
 
 Classes can include:
 - Field names and types
-- `@description` annotations for documentation
+- Methods (like `topScore` above)
+- `@description` annotations on fields for documentation
+- `@@description` annotation for the whole class
 
 ---
 
@@ -269,7 +276,7 @@ function RunPoemFaceoff(
 }
 ```
 
-Functions can call other functions and use variables within their scope.
+Functions can call other functions and use variables from their scope.
 
 ---
 
@@ -279,7 +286,7 @@ BAML provides built-in functions for common operations:
 
 ```baml
 function GetTodo() -> Todo {
-  std::fetch_value<Todo>(std::Request {
+  baml.fetch_as<Todo>(baml.Request {
     base_url: "https://dummyjson.com/todos/1",
     headers: {},
     query_params: {},
@@ -287,7 +294,7 @@ function GetTodo() -> Todo {
 }
 ```
 
-The `std::fetch_value` function makes HTTP requests to external APIs.
+The `baml.fetch_as` function makes HTTP requests to external APIs.
 
 # Flow Control
 
@@ -300,7 +307,7 @@ For loops iterate over a collection of values. Currently only arrays are support
 ```baml
 let names = ["Pete", "Bob", "Sam"];
 
-for name in names {
+for (let name in names) {
     print(name)
 }
 ```
@@ -312,11 +319,11 @@ let numbers = [5, 10, 2, 0, 3];
 
 let sum = 0;
 
-for num in numbers {
-    if num > 10 {
+for (let num in numbers) {
+    if (num > 10) {
         continue;
     }
-    if num < 2 {
+    if (num < 2) {
         break;
     }
     sum += num;
@@ -346,7 +353,7 @@ While loops continue executing as long as a condition is true:
 
 ```baml
 let count = 0;
-while count < 5 {
+while (count < 5) {
   print(count);
   count = count + 1;
 }
@@ -355,7 +362,7 @@ while count < 5 {
 `continue` and `break` statements are supported:
 
 ```baml
-while true {
+while (true) {
   let input = getUserInput();
   if input == "quit" {
     break;
@@ -378,7 +385,7 @@ While loops support `break` and `continue` statements:
 ```baml
 let x = 0;
 
-while x < 10 {
+while (x < 10) {
     x += 1;
     if x == 9 {
         continue;
@@ -420,7 +427,7 @@ if (score >= 90) {
 You can combine different control flow statements:
 
 ```baml
-for (int i = 1; i <= 10; i++) {
+for (let i: int = 1; i <= 10; i++) {
   if (i % 2 == 0) {
     print("Even: " + i);
   } else {
@@ -439,3 +446,85 @@ while (x < 100) {
 
 
 You can use `continue` and `break` inside your loops:
+
+---
+
+# Runtime observability
+
+Mark a variable for watching with the `watch` keyword:
+
+```baml
+class IntBox {
+  inner int
+}
+
+function Foo() -> IntBox {
+  watch let x = IntBox { inner: 1 };
+  x.inner += 1; // This will be noticed by the runtime.
+  Double(x);    // So will this.
+  x
+}
+
+function Double(i: IntBox) -> null {
+  i.inner *= 2;
+}
+```
+
+In client code, subscribe to these events like this:
+
+### TypeScript
+```typescript
+import {b, watchers} from "../baml_client";
+
+function RunFoo() {
+  const watcher = watchers.Foo();
+  watther.on_var("x", (ev) => {
+    console.log(ev);
+  });
+  const response = await b.Foo({watchers: watcher});
+}
+```
+
+### Python
+```python
+from ../baml_client import b
+from ../baml_client import watchers
+
+async def RunFoo():
+  watcher = watchers.Foo()
+  watcher.on_var("x", lambda ev: print(ev))
+  response = await b.Foo({"watchers": watcher})
+```
+
+You can change the channel on which updates are published, and the
+conditions for publishing, with `baml.WatchOptions`.
+
+```baml
+class IntBox {
+  inner int
+}
+
+function Foo() -> int {
+  watch let x = IntBox { inner: 1 };
+  x.$watch.options(baml.WatchOptions{channel: "y", when: IsBig});
+  x.inner = 2;
+  x.inner = 1000; Only this notification will occur.
+}
+
+function IsBig(i: IntBox) -> bool {
+  i.inner > 100
+}
+```
+
+---
+
+# Standard Library
+
+
+## Array
+
+ - `Array.push()`
+
+## Fetch
+
+ - `std.fetch_as<T>()`
