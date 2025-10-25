@@ -340,7 +340,7 @@ when part of the loop must be run on `continue`:
 ```baml
 let names = ["Pete", "Bob", "Sam"];
 
-for (let i = 0; i < names.len(); i += 1) {
+for (let i = 0; i < names.length(); i += 1) {
     print(name[i])
 }
 ```
