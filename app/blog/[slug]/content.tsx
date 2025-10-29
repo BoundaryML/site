@@ -1,8 +1,9 @@
 // @ts-expect-error no types
 import remarkA11yEmoji from '@fec/remark-a11y-emoji';
+import rehypeShiki from '@shikijs/rehype';
+import { bundledLanguages } from 'shiki';
 import { type CompileMDXResult, compileMDX } from 'next-mdx-remote/rsc';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeStringify from 'rehype-stringify';
 import remarkFrontmatter from 'remark-frontmatter';
@@ -11,6 +12,10 @@ import remarkToc from 'remark-toc';
 import { mdxComponents } from '../../../lib/mdx';
 import rehypePreserveCodeProps from '../../../lib/mdx/rehype-preserve-code-props';
 import remarkCodeMetadata from '../../../lib/mdx/remark-code-metadata';
+import {
+  bamlJinjaTextmate,
+  bamlTextmate,
+} from '../../../lib/mdx/shiki-grammars';
 
 // Rehype plugin to fix invalid HTML nesting (e.g., <ol> inside <p>)
 function rehypeFixInvalidNesting() {
@@ -62,24 +67,14 @@ export async function PostBody({ children }: { children: string }) {
           [rehypePreserveCodeProps, { tagName: 'pre' }],
           rehypeFixInvalidNesting,
           [
-            rehypePrettyCode,
+            rehypeShiki,
             {
-              // keepBackground: false,
-              // onVisitHighlightedLine(node: {
-              //   properties: { className: string[] };
-              // }) {
-              //   node.properties.className.push('highlighted');
-              // },
-              // onVisitLine(node: { children: unknown[] }) {
-              //   // Add line numbers
-              //   if (node.children.length === 0) {
-              //     node.children = [{ type: 'text', value: ' ' }];
-              //   }
-              // },
-              // theme: {
-              // dark: 'github-dark',
-              // light: 'github-light',
-              // },
+              themes: {
+                dark: 'github-dark',
+                light: 'github-light',
+              },
+              defaultColor: 'dark',
+              langs: [...Object.values(bundledLanguages), bamlTextmate, bamlJinjaTextmate],
             },
           ],
           [rehypeStringify as () => void, { allowDangerousHtml: true }],
