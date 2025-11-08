@@ -82,7 +82,7 @@ const nextConfig = {
     ],
   },
   experimental: {
-    // optimizeCss: true,
+    optimizeCss: false,
     mdxRs: false,
     // Forward browser logs to the terminal for easier debugging
     browserDebugInfoInTerminal: true,
@@ -130,11 +130,16 @@ const nextConfig = {
     });
 
     // Disable CSS minification to avoid cssnano issues
-    // if (!dev) {
-    //   config.optimization.minimizer = config.optimization.minimizer.filter(
-    //     (minimizer) => !minimizer.constructor.name.includes('CssMinimizer'),
-    //   );
-    // }
+    if (!dev) {
+      config.optimization.minimizer = config.optimization.minimizer.filter((minimizer) => {
+        const ctorName = minimizer.constructor?.name ?? '';
+        const snippet = String(minimizer);
+        return (
+          !ctorName.includes('CssMinimizer') &&
+          !snippet.includes('css-minimizer-plugin')
+        );
+      });
+    }
 
     config.experiments = {
       ...config.experiments,
