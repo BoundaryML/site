@@ -11,8 +11,8 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_ENV: z
       .enum(['development', 'production', 'test'])
       .default('development'),
-    NEXT_PUBLIC_POSTHOG_HOST: z.string(),
-    NEXT_PUBLIC_POSTHOG_KEY: z.string(),
+    NEXT_PUBLIC_POSTHOG_HOST: z.string().default('https://us.i.posthog.com'),
+    NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
   },
 
   extends: [vercel()],
@@ -29,8 +29,8 @@ export const env = createEnv({
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
   server: {
-    LUMA_API_KEY: z.string(),
-    OPENAI_API_KEY: z.string(),
+    LUMA_API_KEY: z.string().optional(),
+    OPENAI_API_KEY: z.string().optional(),
   },
   shared: {
     NODE_ENV: z

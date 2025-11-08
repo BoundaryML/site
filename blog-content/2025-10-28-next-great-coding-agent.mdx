@@ -70,6 +70,19 @@ that's the place to start building your agent. And in my biased opinion,
 the prompts that generate them. We have comprehensive docs on [Tool calling
 in BAML](https://docs.boundaryml.com/examples/prompt-engineering/tools-function-calling).
 
+<Note>
+Why use BAML, instead of the Anthropic SDK? I don't want to take too much
+space pitching BAML here, but briefly:
+ 1. LLM Provider Independence: we can trivially switch from Anthropic models
+    to OpenAI, Gemini or a local model.
+ 2. Types First: BAML's focus on modeling tools with types and annotating
+    those types with specific LLM instructions.
+ 3. Transparent prompts: You have complete control over your prompts, rather
+    than encoding tools into some vendor-specifc format or using JSONSchema.
+ 4. Reliability: Our parser has the resilience to deal with the many ways
+    in which models produce malformed JSON.
+</Note>
+
 The exact tools you provide to the coding agent will depend on the special
 features of your agent, but you will almost always need tools for reading
 and writing files:
@@ -89,7 +102,7 @@ class WriteFileTool {
 }
 
 class SendUserMeassage {
-  type "send_user_message
+  type "send_user_message"
   content string
 }
 
@@ -105,7 +118,7 @@ calls that satisfy the user's request:
 
 ```baml
 // Execute tasks with tool calls using Sonnet
-function ExecuteTaskWithTools(
+function ChooseToolsForTask(
   user_prompt: string,
   conversation_history: string
 ) -> Tool[] {
@@ -121,7 +134,7 @@ function ExecuteTaskWithTools(
 
     Current task: {{ user_prompt }}
 
-    Break complex tasks into steps:
+    Break complex tasks into steps, e.g.:
     1. Understand the codebase
     2. Plan changes
     3. Implement
@@ -143,30 +156,33 @@ implemntation.
 </Note>
 
 ```baml
-enum TaskType {
-  HighLevelPlanning
-  SimpleImplementation
+enum TaskComplexity {
+  COMPLEX
+  SIMPLE
 }
+
+class TaskClassification {
+  complexity TaskComplexity
+  reasoning string
+}
+
 
 function ClassifyTask(
   user_prompt: string,
-  conversation_history: string
-) -> TaskType {
-  client ClaudeSonnet
+) -> TaskClassification {
+  client ClaudeHaiku
   prompt #"
-    Classify this query as either a high level planning task, or a simple
+    Classify this query as either a complex planning task, or a simple
     implementation task:
     {{ user_prompt }}
 
     Respond in this format:
     {{ ctx.output_format }}
-
-    In case it's necessay for contextualizing the query, here is the
-    Conversation history:
-    {{ conversation_history }}
   "#
 }
 ```
+
+With these BAML types and functions, we've modeled all our LLM interactions.
 
 ## Choose your platform
 
@@ -179,10 +195,6 @@ at the [codex GitHub repo](https://github.com/openai/codex) as a reference. Even
 if your app is written in TypeScript and uses ink, modern LLMs will have no trouble
 translating the concepts from codex, which uses Rust and ratatui.
 
-Despite BAML being implemented in Rust, TypeScript and Python are indeed the
-easiest ways to build a coding agent in BAML today, because those languages have
-the simplest SDK to connect to your BAML functions.
-
 ## Connect the tool calls with the file system
 
 Vibe coding will likely do this for you, but it's worth briefly mentioning here.
@@ -190,13 +202,150 @@ Your coding assistant is an agent that not only chooses tool calls, but also
 executes them.
 
 When you call your `ExecuteTaskWithTools` BAML function, you will get back a list of
-tool calls. Depending on the tool (and on your platform - TUI vs. IDE), you will have
+tool calls - the tool calls that the LLM chose to implement the user's query.
+Depending on the tool (and on your platform - TUI vs. IDE), you will have
 to do some kind of file modification. Either directly editing the tool's specified
 file on disk, or (in the Zed case) signaling via the ACP SDK to change some file.
 
+Here is a simplified version of the context orchestrator and tool executor from
+[baml-acp](https://github.com/imalsogreg/baml-acp).
+
+```typescript
+async function runAgenticLoop(
+  userPrompt: string,
+  selectedModel: "sonnet" | "haiku",
+  priorHistory: string[] // Context from previous user queries
+) -> Promise<{ message: string, history: string[] }> {
+    // History accumulates all context across iterations
+    const conversationHistory = [
+      ...priorHistory,
+      `User: ${userPrompt}`
+    ];
+
+    // Loop up to 10 times
+    for (let iteration = 0; iteration < 10; iteration++) {
+
+      // 1. Call LLM with prompt + accumulated history
+      const agentResponse = selectedModel === "haiku"
+        ? await b.ExecuteTaskWithToolsHaiku(
+            userPrompt,
+            conversationHistory  // Full history as context
+          )
+        : await b.ExecuteTaskWithTools(
+            userPrompt,
+            conversationHistory
+          );
+
+      // 2. Add agent's thinking to history
+      if (agentResponse.thinking) {
+        conversationHistory.push(`Agent: ${agentResponse.thinking}`);
+      }
+
+      // 3. Execute each tool the agent requested
+      for (const toolCall of agentResponse.tool_calls) {
+        let result: string;
+
+        // Execute the tool (inlined for clarity)
+        if (toolCall.type === "read_file") {
+          const fileContent = await readFile(toolCall.path);
+          result = `✓ Read file: ${fileContent.substring(0, 100)}...`;
+        }
+        else if (toolCall.type === "write_file") {
+          await writeFile(toolCall.path, toolCall.content);
+          result = `✓ Wrote file: ${toolCall.path}`;
+        }
+        else if (toolCall.type === "run_command") {
+          const output = await execCommand(toolCall.command);
+          result = `✓ Command output: ${output}`;
+        }
+        else if (toolCall.type === "complete") {
+          result = "✓ Task marked complete";
+        }
+
+        // 4. Add tool result to history for next iteration
+        conversationHistory.push(
+          `Tool: ${toolCall.type}\n` +
+          `Reasoning: ${toolCall.reasoning}\n` +
+          `Result: ${result}`
+        );
+      }
+
+      // 5. Check if agent says it's done
+      if (agentResponse.is_complete) {
+        return { 
+          agentResponse.final_message,
+          history: conversationHistory
+        };
+      }
+
+      // Loop continues: next iteration calls LLM with updated history
+    }
+
+    return {
+      message: "Max iterations reached",
+      history: conversationHistory
+    }
+
+  }
+```
+
+This function takes a `selectedModel` as input, which is supplied by the
+main ACP loop, which chooses a difficulty level based on the user's query.
+
+```python
+    async handleTask(
+      complexModel: string,
+      simplemodel: string
+    ) -> Promise<AgenticLoopResult> { 
+      // Classify the task complexity (with full context)
+      const classification: TaskClassification =
+        await b.ClassifyTask(fullPrompt);
+
+      // Determine which model to use
+      const selectedModel =
+        classification.complexity === "COMPLEX" ? complexModel : simpleModel;
+      const modelName = selectedModel === "sonnet" ? "Sonnet 4.5" : "Haiku 3.5";
+      const taskType =
+        classification.complexity === "COMPLEX" ? "complex" : "simple";
+
+      // Send status message to user
+      await this.connection.sessionUpdate({
+        sessionId: this.sessionId,
+        update: {
+          sessionUpdate: "agent_thought_chunk",
+          content: {
+            type: "text",
+            text: `📊 Task classified as ${taskType.toUpperCase()}\n💭 ${classification.reasoning}\n🤖 Using ${modelName} for this ${taskType} task`,
+          },
+        },
+      });
+
+      // Run the agentic loop with selected model
+      const finalMessage = await this.runAgenticLoop(userPrompt, selectedModel);
+      ...
+    }
+```
+
+With this logic in place, we've connected our Agent to Zed through the ACP
+and implemented Theo's nice idea for a split-model coding assistant.
+
+<Image
+  src="/blog/2025-10-28-next-great-coding-agent/acp_screenshot.png"
+  alt="Screenshot of baml-acp in action"
+  width={600}
+  height={800}
+  style={{ alignSelf: 'center' }}
+  />
+
+Notice the selectors for models at the bottom-right, and the dynamic selection
+by task complexity in under "Thinking".
 
 
 ## Play!
+
+The [baml-acp](https://github.com/imalsogreg/baml-acp) isn't meant to be a serious,
+production grade thing. It is more meant to demonstrate the point that you can,
+and should, whip up quick experiments to try out new ideas.
 
 See how easy it is to define new tools and execute them? Do you see how you could do
 some context engineering to inject different structured data into the prompt?
