@@ -33,6 +33,11 @@ const nextConfig = {
         destination: 'https://discord.gg/yzaTpQ3tdT',
         permanent: true,
       },
+      {
+        source: '/jobs',
+        destination: 'https://github.com/BoundaryML/baml/tree/canary/jobs',
+        permanent: false,
+      },
     ];
   },
   async rewrites() {
