@@ -30,45 +30,64 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
 
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: 'Post Not Found | BAML Blog',
+      description: 'The requested blog post could not be found.',
     };
   }
 
   const baseUrl = process.env.SITE_URL || 'https://boundaryml.com';
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
+  // Enhanced title with site branding
+  const fullTitle = `${post.title} | BAML Blog`;
+
+  // Use provided OG image or fallback to default
+  const ogImage = post.og?.image || `${baseUrl}/baml-og-background.png`;
+
+  // Build comprehensive keywords
+  const keywords = [
+    ...post.tags,
+    'BAML',
+    'AI development',
+    'LLM',
+    'machine learning',
+    'type safety',
+    'AI engineering'
+  ].join(', ');
+
   return {
+    title: fullTitle,
+    description: post.description,
     alternates: {
       canonical: postUrl,
     },
-    authors: post.author ? [post.author.name] : undefined,
-    description: post.description,
-    keywords: post.tags.join(', '),
+    authors: post.author ? [{ name: post.author.name }] : undefined,
+    keywords: keywords,
     openGraph: {
-      authors: post.author ? [post.author.name] : undefined,
-      description: post.description,
-      images: post.og?.image
-        ? [
-            {
-              alt: post.title,
-              height: 630,
-              url: post.og.image,
-              width: 1200,
-            },
-          ]
-        : undefined,
-      publishedTime: post.date,
-      siteName: 'BAML Blog',
       title: post.title,
-      type: 'article',
+      description: post.description,
       url: postUrl,
+      siteName: 'BAML',
+      type: 'article',
+      publishedTime: post.date,
+      authors: post.author ? [post.author.name] : undefined,
+      tags: post.tags,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${post.title} - BAML Blog`,
+        },
+      ],
     },
-    title: post.title,
     twitter: {
       card: 'summary_large_image',
-      description: post.description,
-      images: post.og?.image ? [post.og.image] : undefined,
       title: post.title,
+      description: post.description,
+      images: [ogImage],
+      creator: '@boundaryml',
+      site: '@boundaryml',
     },
   };
 }

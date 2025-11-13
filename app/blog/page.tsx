@@ -5,21 +5,38 @@ import { BlogContent } from './_components/blog-content';
 import { getPosts } from './_lib/get-posts';
 
 export async function generateMetadata(): Promise<Metadata> {
+  const baseUrl = process.env.SITE_URL || 'https://boundaryml.com';
+  const blogUrl = `${baseUrl}/blog`;
+
   return {
-    description:
-      'Insights, tutorials, and updates from the BAML team. Stay ahead with the latest in AI development.',
-    openGraph: {
-      description:
-        'Insights, tutorials, and updates from the BAML team. Stay ahead with the latest in AI development.',
-      title: 'BAML Blog',
-      type: 'website',
+    title: 'BAML Blog - Insights, Tutorials, and AI Development Updates',
+    description: 'Explore the latest insights, tutorials, and updates from the BAML team. Learn best practices for building type-safe, production-ready AI applications.',
+    alternates: {
+      canonical: blogUrl,
     },
-    title: 'BAML Blog - Insights, Tutorials, and Updates',
+    keywords: 'BAML blog, AI development, LLM tutorials, machine learning insights, type safety, AI engineering, production AI',
+    openGraph: {
+      title: 'BAML Blog - Insights, Tutorials, and AI Development Updates',
+      description: 'Explore the latest insights, tutorials, and updates from the BAML team. Learn best practices for building type-safe, production-ready AI applications.',
+      url: blogUrl,
+      siteName: 'BAML',
+      type: 'website',
+      images: [
+        {
+          url: `${baseUrl}/baml-og-background.png`,
+          width: 1200,
+          height: 630,
+          alt: 'BAML Blog - AI Development Insights',
+        },
+      ],
+    },
     twitter: {
       card: 'summary_large_image',
-      description:
-        'Insights, tutorials, and updates from the BAML team. Stay ahead with the latest in AI development.',
-      title: 'BAML Blog',
+      title: 'BAML Blog - Insights, Tutorials, and AI Development Updates',
+      description: 'Explore the latest insights, tutorials, and updates from the BAML team.',
+      images: [`${baseUrl}/baml-og-background.png`],
+      creator: '@boundaryml',
+      site: '@boundaryml',
     },
   };
 }
