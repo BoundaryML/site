@@ -8,6 +8,7 @@ import { Navbar } from '@/components/navbar';
 import { FooterSection } from '@/components/footer-section';
 import { EpisodesCarousel } from '../_components/episodes-carousel';
 import { fetchPodcastEpisodes } from '../podcast-data';
+import type { Metadata } from 'next';
 
 // Helper function to extract YouTube video ID from URL
 const getYouTubeVideoId = (url: string) => {
@@ -80,6 +81,72 @@ async function fetchReadmeFromGitHub(codeUrl: string, episodeTitle: string): Pro
     console.error('Failed to fetch README:', error);
     return '';
   }
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const episodes = await fetchPodcastEpisodes();
+  const episode = episodes.find(ep => ep.slug === params.slug);
+
+  if (!episode) {
+    return {
+      title: 'Episode Not Found',
+    };
+  }
+
+  const baseUrl = process.env.SITE_URL || 'https://boundaryml.com';
+  const episodeUrl = `${baseUrl}/podcast/${episode.slug}`;
+
+  // Extract YouTube thumbnail if available
+  const videoId = episode.youtubeUrl ? getYouTubeVideoId(episode.youtubeUrl) : null;
+  const thumbnailUrl = videoId
+    ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    : `${baseUrl}/baml-og-background.png`; // Fallback to default image
+
+  const fullTitle = `🦄 ai that works: ${episode.title} | BAML Podcast`;
+  const fullDescription = `${episode.episodeNumber}: ${episode.description}`;
+
+  return {
+    title: fullTitle,
+    description: fullDescription,
+    alternates: {
+      canonical: episodeUrl,
+    },
+    keywords: [...episode.topics, 'AI', 'LLM', 'BAML', 'Boundary ML', 'Podcast'].join(', '),
+    openGraph: {
+      title: fullTitle,
+      description: fullDescription,
+      url: episodeUrl,
+      siteName: 'BAML',
+      type: 'article',
+      publishedTime: episode.date,
+      images: [
+        {
+          url: thumbnailUrl,
+          width: 1280,
+          height: 720,
+          alt: `${episode.title} - Episode ${episode.episodeNumber}`,
+        },
+      ],
+      videos: videoId ? [
+        {
+          url: `https://www.youtube.com/watch?v=${videoId}`,
+          secureUrl: `https://www.youtube.com/watch?v=${videoId}`,
+          type: 'text/html',
+          width: 1280,
+          height: 720,
+        },
+      ] : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: fullTitle,
+      description: fullDescription,
+      images: [thumbnailUrl],
+      creator: '@boundaryml',
+      site: '@boundaryml',
+    },
+  };
 }
 
 export default async function EpisodePage({ params }: { params: { slug: string } }) {

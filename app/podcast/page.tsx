@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { HeroSection } from './_components/hero-section';
 import { PodcastEpisodesGrid } from './_components/podcast-episodes-grid';
 import { fetchPodcastEpisodes, fallbackEpisodes } from './podcast-data';
+import type { Metadata } from 'next';
 
 const podcastPlatforms = [
   { icon: '📅', name: 'Event Calendar', url: 'https://lu.ma/baml' },
@@ -13,6 +14,38 @@ const podcastPlatforms = [
   { icon: '🚀', name: 'GitHub', url: 'https://github.com/boundaryml/baml' },
   { icon: '📺', name: 'YouTube', url: 'https://www.youtube.com/@boundaryml' },
 ];
+
+export const metadata: Metadata = {
+  title: '🦄 ai that works: Weekly AI Development Sessions | BAML Podcast',
+  description: 'Join our weekly interactive sessions where we build real AI applications together. Learn practical techniques for building production-ready AI systems with BAML.',
+  alternates: {
+    canonical: 'https://boundaryml.com/podcast',
+  },
+  keywords: 'AI podcast, LLM development, BAML, AI engineering, machine learning, developer podcast, AI applications',
+  openGraph: {
+    title: '🦄 ai that works: Weekly AI Development Sessions',
+    description: 'Join our weekly interactive sessions where we build real AI applications together. Learn practical techniques for building production-ready AI systems.',
+    url: 'https://boundaryml.com/podcast',
+    siteName: 'BAML',
+    type: 'website',
+    images: [
+      {
+        url: 'https://boundaryml.com/baml-og-background.png',
+        width: 1200,
+        height: 630,
+        alt: 'AI That Works - Weekly AI Development Sessions',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '🦄 ai that works: Weekly AI Development Sessions',
+    description: 'Join our weekly interactive sessions where we build real AI applications together.',
+    images: ['https://boundaryml.com/baml-og-background.png'],
+    creator: '@boundaryml',
+    site: '@boundaryml',
+  },
+};
 
 export default async function PodcastPage() {
   const fetched = await fetchPodcastEpisodes();
