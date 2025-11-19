@@ -9,6 +9,8 @@ author:
   imageUrl: /profile-sam.png
 ---
 
+![](/toon.png)
+
 We’ve had a lot of users ask us for [TOON](https://github.com/toon-format/toon?tab=readme-ov-file) support, so starting in BAML 0.214.0, you’ll be able to use `{arg|format(type="toon")}` in your BAML functions!
 
 We do see a number of issues with TOON that we want our users to be aware of, though, and also explain why we're not adding native support for TOON outputs:
@@ -52,11 +54,12 @@ If you really want to use TOON as an output format, you can use few-shot prompti
 
 ```baml
 function ToonOutputPlease(input: Input[]) -> string {
+  client "your-client-here"
   prompt #"
 	Data is in TOON format (2-space indent, arrays show length and fields).
-	```toon
+	<toon>
 	{{ input|format(type="toon") }}
-	```
+    </toon>
 	Task: Return only users with role "user" as TOON. Use the same header. Set [N] to match the row count. Output only the code block.
   "#
 }
