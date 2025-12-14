@@ -105,7 +105,7 @@
     "ws": "8.18.3",
     "yargs": "18.0.0",
     "zod": "4.0.10",
-    "zx": "8.7.2"
+    "zx": "8.8.5"
   },
   "devDependencies": {
     "@boundaryml/baml-nextjs-plugin": "0.1.0",
