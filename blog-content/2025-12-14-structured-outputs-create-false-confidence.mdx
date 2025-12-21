@@ -1,3 +1,13 @@
+---
+title: "Structured Outputs Create False Confidence"
+description: Constrained decoding seems like the greatest thing since sliced bread, but it often forces models to prioritize output conformance over output quality.
+slug: structured-outputs-create-false-confidence
+date: December 14, 2025
+tags: ['Engineering']
+author:
+  name: Sam Lijin
+  imageUrl: /profile-sam.png
+---
 
 _Update (Dec 21): this post is now [on the Hacker News front
 page](https://news.ycombinator.com/item?id=46345333)! We've updated this post to
@@ -258,7 +268,7 @@ the error can propagate all the way up through your binary, without you having t
 In the same way that you often want to allow errors to just propagate up while writing software, and only explicitly handle _some_ errors, your LLM should be allowed to respond with errors in whatever fashion it wants to.
 
 # Chain-of-thought is crippled by structured outputs
-"Explain your reasoning step by step" is a magic incantation that seemingly makes LLMs much smarter. It also turns out that this trick doesn't work nearly as well when using structured outputs~~, and [we've known this since Aug 2024](https://arxiv.org/abs/2408.02442)~~. (Edit: it turns out the "Let Me Speak Freely" paper is fundamentally flawed, but we do still [believe the claim to be true](#clarifications).)
+"Explain your reasoning step by step" is a magic incantation that seemingly makes LLMs much smarter. It also turns out that this trick doesn't work nearly as well when using structured outputs<s>, and [we've known this since Aug 2024](https://arxiv.org/abs/2408.02442)</s> (edit: it turns out the "Let Me Speak Freely" paper is fundamentally flawed, but we do still [believe the claim to be true](#clarifications)).
 
 To understand this finding, the intuition I like to use, is to think of every model of having an intelligence "budget", and that if you try to force an LLM to reason in a very specific format, you're making the LLM spend intelligence points on useless work.
 
@@ -330,24 +340,21 @@ Parsing the LLM's free-form output, by contrast, enables you to retain that outp
 
 Doing this parsing effectively, though, is rather involved:
 
-- you need a way to embed the output format in the prompt
-- you need a parser that can find JSON in your output and can handle case1, case2, case3
-- you need a parser that can coerce the JSON into your output schema, if the model, say, returns a float where you wanted an int
+- you need a way to embed the output format in the prompt, preferably something [less verbose than JSON schema](/blog/type-definition-prompting-baml);
+- you need a parser that can find JSON in your output and, when working with non-frontier models, can handle unquoted strings, key-value pairs without comma delimiters, unescaped quotes and newlines; and
+- you need a parser that can coerce the JSON into your output schema, if the model, say, returns a float where you wanted an int, or a `string` where you wanted a `string[]`.
 
-We call this [schema-aligned parsing](https://boundaryml.com/blog/schema-aligned-parsing#what-is-sap-and-why-does-it-work-so-well), and have made it available in BAML, our open-source, local-only DSL.
-
-This is [why BAML - our open-source, local-only DSL - uses schema-aligned parsing](https://docs.boundaryml.com/guide/introduction/why-baml#3-schema-aligned-parsing-sap): we believe letting the LLM respond in as natural a fashion as possible is the most effective way to get the highest quality response from it. For an example of this in action, take a look at this writeup from Kevin Madura about [improving extraction 
-quality by 20%](https://kmad.ai/DSPy-Optimization).
+It turns out that not only are these individually pretty hard problems to solve, but it's also really hard to wrap these in an ergonomic API. That's how we ended up with the implementation of [schema-aligned parsing](https://boundaryml.com/blog/schema-aligned-parsing#what-is-sap-and-why-does-it-work-so-well) that we've made available in BAML, our open-source, local-only DSL.
 
 # Clarifications
 
 In response to a lot of the comments we've gotten so far:
 
-To be more precise about my claim, it's not that constrained decoding _always_ gives definitively bad outputs (I went a little too click-baitey with my original tagline, I admit it), so much as that it's really easy, with constrained decoding, to create the illusion that you're getting good responses.
+To be more precise about my claim, it's not that constrained decoding _always_ gives definitively bad outputs (I went too clickbait with my original tagline, I admit it), so much as that it's really easy, with constrained decoding, to create the illusion that you're getting good responses.
 
 Because it forces the LLM to prioritize conforming to your output schema (and in particular forces conforming to JSON), without giving the LLM an escape hatch, it's really easy when using constrained decoding to shift errors from very visible "JSON.parse failed" quantitative errors to very subtle "my users are complaining that I give them crappy results" quality errors.
 
-(This is a very hard message to convey at the start of an article, and depends on a lot of nuance that needs to first be explained with examples.)
+(This is a very hard message to convey at the start of an article, and depends on a lot of nuance that needs to first be explained with examples, which is why I wrote it the way I did.)
 
 In response to more specific points:
 
@@ -361,7 +368,7 @@ In response to more specific points:
 
 - "Let Me Speak Freely" is a fundamentally flawed paper.
   
-  I hadn't seen dottxt's ["Say What You Mean"](https://blog.dottxt.ai/say-what-you-mean.html) response to the "Let Me Speak Freely" paper before, and their critique that the "Let Me Speak Freely" paper compares apples to oranges is entirely valid.
+  I hadn't seen dottxt's ["Say What You Mean"](https://blog.dottxt.ai/say-what-you-mean.html) response to the "Let Me Speak Freely" paper before, and their critique of the "Let Me Speak Freely" paper's methodology is entirely valid.
   
   I still believe that combining reasoning with structured outputs can really mess with your final response quality, because putting reasoning fields in JSON forces the model to escape tokens, which as [Aider documented last year](https://aider.chat/2024/08/14/code-in-json.html), causes models to perform substantially worse. Sure, if your reasoning doesn't need to escape text, then this isn't an issue, but now this is another thing that everyone on your team has to remember while they're iterating on prompts.
 
