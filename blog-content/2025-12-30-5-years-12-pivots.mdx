@@ -22,9 +22,9 @@ Our (current) 12th pivot is making BAML, a programming language for using LLMs �
 
 The general theme of this entire timeframe can be summarized by us using our $$$ jobs as a safety net and attempting to throw spaghetti at the wall hoping it would stick. We were looking for signal BEFORE we committed. Ideas we pursued:
 
-* 6 months - **An online coding bootcamp with Income-share-Agreements.** Motivated by wanting to make the world a better place. 15 users, but I pivoted cause no one would pay.
+* 6 months - **An online coding bootcamp paid for by income share agreements.** Motivated by wanting to make the world a better place. 15 users, but I pivoted cause no one would pay.
 
-* 6 months - **Interactive Twitch ads.** Motivated by making $$ on ads and Aaron being a YouTuber in some past life. We had 0 users, did a lot of outbound and got 1 larger League of Legends streamer to want to use us, but didn't actually. (As a founder, I now know "want" is the most pointless word). We pivoted after our W22 **YC interview ended in 6 minutes...** (Michael Seibel)[https://www.ycombinator.com/people/michael-seibel] (a YC partner and co-founder of Twitch) straight up asked
+* 6 months - **Interactive Twitch ads.** Motivated by making $$ on ads and Aaron being a YouTuber in some past life. We had 0 users, did a lot of outbound and got 1 larger League of Legends streamer to want to use us, but didn't actually. (As a founder, I now know "want" is the most pointless word). We pivoted after our W22 **YC interview ended in 6 minutes...** [Michael Seibel](https://www.ycombinator.com/people/michael-seibel) (a YC partner and co-founder of Twitch) straight up asked
 
 > Do you guys even watch twitch?
 
@@ -55,7 +55,7 @@ What went right:
 
 ## Entering YC with a bad idea
 
-We spent 11 months building Gloo, a voice-first Slack/Discord competitor. We loved using Gloo so much, we each logged over 1,000 hours of calls (thats 22 hours / week!). In hindsight, (1) we lacked founder-market fit and (2) it wasn't a problem people cared about.
+We spent 11 months building Gloo, a voice-first Slack/Discord competitor. We loved using Gloo so much, we each logged over 1,000 hours of calls (that's 22 hours / week!). In hindsight, (1) we lacked founder-market fit and (2) it wasn't a problem people cared about.
 
 Our journey with Gloo:
 
@@ -71,7 +71,7 @@ Our journey with Gloo:
 
 * **Dogfooding blinded us**. Using our product daily was exhilarating but created an echo chamber, ignoring negative signals
 
-* **"Why are you guys making UIs?"** [Dalton](https://www.ycombinator.com/people/dalton) (Our YC partner) asked us during office hours. Aaron spent over 7 years building out core parts of EC2 and I spend 7 years writing CV/ML algorithms in assembly… we had the worst possible founder market fit for anything which depended on UX.
+* **"Why are you guys making UIs?"** [Dalton](https://www.ycombinator.com/people/dalton) (Our YC partner) asked us during office hours. Aaron spent over 7 years building out core parts of EC2 and I spent 7 years writing CV/ML algorithms in assembly… we had the worst possible founder market fit for anything which depended on UX.
 
 > I can't stress this enough: caring about a problem is not enough to win.
 
@@ -97,14 +97,14 @@ However, we found a silver lining in **classification and extraction**. Narrowin
 
 Yet, every SDK we built felt clunky. Existing libraries (Langchain, LlamaIndex, Marvin, Instructor) had the same problem. They worked for prototypes but lacked essentials like type safety or easy ways to control the entire prompt.
 
-As engineer, I couldn't help but feel that every snippet just felt ugly. It felt like the old days of writing HTML. Strings everywhere are horribly unmaintainable.
+As an engineer, I couldn't help but feel that every snippet just felt ugly. It felt like the old days of writing HTML. Strings everywhere are horribly unmaintainable.
 
 It felt like abstraction for the sake of abstraction. Importing things like "HumanMessage" and "SystemMessage". Code is supposed to be artistic. And for me, this wasn't a medium I enjoyed writing in.
 
 ![Langchain Example](/blog/2025-12-30-5-years-12-pivots/langchain.png)
 
 
-## BAML: Lets make a programming language? 🤔
+## BAML: Let's make a programming language? 🤔
 
 I remember the Thursday night (Aug 10, 2023) very clearly. We were starting to burn out again. I dropped by Aaron's place at like 9 pm, and while sitting on the couch asked:
 
@@ -112,33 +112,33 @@ I remember the Thursday night (Aug 10, 2023) very clearly. We were starting to b
 
 ![what-if](/blog/2025-12-30-5-years-12-pivots/what-if.png)
 
-We laughed and joking spent the night sketching a new hypothetical syntax out. Who in their right mind would actually make a new language? By sunday night, we wrote a compiler in C++ and by Monday we started migrating our customers over from the library.
+We laughed and joking spent the night sketching a new hypothetical syntax out. Who in their right mind would actually make a new language? By Sunday night, we wrote a compiler in C++ and by Monday we started migrating our customers over from the library.
 
 
 This was slightly harder than we imagined. A month in, one customer asked us “Can we just stick to python?” That evening Aaron and I went on a three-hour walk arguing if we should pivot. We had theories about why a new language for LLMs made sense (after all, Prisma, Terraform and CUDA exist for a reason), but our customers weren't happy. In fact, I'm pretty sure the only thing they liked about our company was us.
 
 ![language](/blog/2025-12-30-5-years-12-pivots/language.png)
 
-Lets briefly review the minimum set of things you need to make a new language usable:
+Let's briefly review the minimum set of things you need to make a new language usable:
 
 * A syntax you can understand
 * A compiler
 * A compiler with error messages that you can understand
 * Syntax highlighting
-* Jump to definition / On hover effects
+* Jump-to-definition and on-hover effects
 * Linter
 * Supporting every LLM, today and forever
 * Not break version to version
-* Co-pilot/Cursor needs to understand it
+* Copilot and Cursor integration
 
 
 Our syntax was barely understandable, and we lacked all of these features. I'm not sure why we didn't pivot that evening — signal was nonexistent, but the theory felt so solid. We gave ourselves until the end of the year. Three months of building later, we had built some more of those capabilities. We finally saw a shift in how our customers felt.
 
 
 
-## Its not not working (2024)
+## It's not not working (2024)
 
-Early 2024, Aaron was very directly with me.
+Early 2024, Aaron was very direct with me.
 
 ![ugly](/blog/2025-12-30-5-years-12-pivots/ugly.png)
 
@@ -149,9 +149,9 @@ Regardless, we added ~10 more customers by March 2024 (shout out to [GovEagle](h
 ![feedback-3](/blog/2025-12-30-5-years-12-pivots/feedback/3.png)
 ![feedback-4](/blog/2025-12-30-5-years-12-pivots/feedback/4.png)
 
-> Learning: Basically, dont think *too* hard. Or you'll lose all motivation. Just keep building, learning, and gathering feedback.
+> Learning: Basically, don't think *too* hard. Or you'll lose all motivation. Just keep building, learning, and gathering feedback.
 
-We were starting to see an interesting pattern: once someone used BAML, they never used anything else; Instead they asked "can BAML do ____?" We added evals, support for every LLM, retries, fallbacks. The biggest breakthrough came when we made BAML work with every existing programming language with less than 1 minute of installation (Python, Typescript, Java, Go, Ruby, C++, Haskel, etc.).
+We were starting to see an interesting pattern: once someone used BAML, they never used anything else; Instead they asked "can BAML do ____?" We added evals, support for every LLM, retries, fallbacks. The biggest breakthrough came when we made BAML work with every existing programming language with less than 1 minute of installation (Python, Typescript, Java, Go, Ruby, C++, Haskell, etc.).
 
 One of the funniest quotes was David from [VetRec](https://www.vetrec.io/), alluding to us having more users.
 
@@ -203,7 +203,7 @@ I haven't yet had time to fully reflect on this year, but here are some highligh
 - Went from 1k stars -> 7k stars on GitHub
 - Got the coolest haircut ever
 ![haircut](/blog/2025-12-30-5-years-12-pivots/haircut.png)
-- Ran ~400 peopple through 8 hour workshops on Saturdays
+- Ran ~400 people through 8 hour workshops on Saturdays
 ![workshop](/blog/2025-12-30-5-years-12-pivots/workshop.png)
 - Started a podcast with [Dexter Horothy](https://x.com/dexhorthy)
 - 100k+ views on our youtube channel for 1 hour long episodes
@@ -223,7 +223,7 @@ It may seem like I'm only sharing some highlights and everything was smooth sail
 (oops I forgot to pay for posthog...)
 ![people-know-us](/blog/2025-12-30-5-years-12-pivots/stats.png)
 
-We still have a long way to go with BAML. Building a programming language is likely one of the worst start up ideas, but in someways, that might be the reason why it might just work.
+We still have a long way to go with BAML. Building a programming language is likely one of the worst startup ideas, but in someways, that might be the reason why it might just work.
 
 | Before | Now |
 |--------|-----|
@@ -244,7 +244,7 @@ At least we're done pivoting (for now🤞). Next, onwards to 10,000 Weekly Activ
 We have some fun news coming up in January, stay tuned for more details (spoiler: turing completeness with some interesting tooling)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xvYpklKd1YI?si=CBE7yjAKR7yEaUoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-If your curious about BAML, here's a youtube video what it feels like to code in BAML:
+If you're curious about BAML, here's a youtube video what it feels like to code in BAML:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/wD3zieaV0Yc?si=Nijzw_eERxiIbgNA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Docs: [https://docs.boundaryml.com](https://docs.boundaryml.com)
