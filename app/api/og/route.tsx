@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import fs from 'node:fs/promises';
-import path from 'node:path';
 import { ImageResponse } from 'next/og';
 import type { NextRequest } from 'next/server';
 import { getPost } from '@/app/blog/_lib/get-posts';
@@ -9,28 +7,16 @@ import { Title } from '@/components/shared-images/title';
 
 export const runtime = 'nodejs';
 
-async function getImageAsDataUrl(imagePath: string): Promise<string | null> {
-  try {
-    const fullPath = path.join(process.cwd(), 'public', imagePath);
-    const imageBuffer = await fs.readFile(fullPath);
-    const base64 = imageBuffer.toString('base64');
-    const ext = path.extname(imagePath).slice(1).toLowerCase();
-    const mimeType = ext === 'jpg' ? 'jpeg' : ext;
-    return `data:image/${mimeType};base64,${base64}`;
-  } catch {
-    return null;
-  }
-}
-
 export async function GET(request: NextRequest) {
-  const { searchParams } = request.nextUrl;
+  const { searchParams, origin } = request.nextUrl;
   const slug = searchParams.get('slug');
 
-  // Pre-load static images as data URLs
-  const [bgImage, logoImage] = await Promise.all([
-    getImageAsDataUrl('baml-og-background.png'),
-    getImageAsDataUrl('baml-logo-with-lamb.png'),
-  ]);
+  // Use production URL or request origin for images
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+    || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : origin);
+
+  const bgImage = `${baseUrl}/baml-og-background.png`;
+  const logoImage = `${baseUrl}/baml-logo-with-lamb.png`;
 
   if (!slug) {
     return new ImageResponse(
@@ -73,7 +59,7 @@ export async function GET(request: NextRequest) {
   // Priority: og.image > firstImage > null
   const featuredImagePath = post.og?.image || post.firstImage || null;
   const featuredImage = featuredImagePath
-    ? await getImageAsDataUrl(featuredImagePath.replace(/^\//, ''))
+    ? `${baseUrl}${featuredImagePath.startsWith('/') ? '' : '/'}${featuredImagePath}`
     : null;
 
   // Layout with featured image as large background
