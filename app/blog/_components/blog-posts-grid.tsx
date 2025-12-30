@@ -13,36 +13,39 @@ interface BlogPostsGridProps {
 export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-      {posts.map((post) => (
+      {posts.map((post) => {
+        // Use og.image, then firstImage, then fallback to default
+        const postImage = post.og?.image || post.firstImage;
+
+        return (
         <Link href={`/blog/${post.slug}`} key={post.slug}>
           <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-80 relative group">
             {/* Background Image */}
             <div className="absolute inset-0">
-              {post.og?.image ? (
+              {postImage ? (
                 <>
                   <Image
                     alt={post.title}
-                    className="object-cover w-full h-full blur-sm group-hover:blur-none transition-all duration-300"
+                    className="object-cover w-full h-full blur-[2px] group-hover:blur-none transition-all duration-300"
                     fill
                     priority
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    src={
-                      post.og.image.startsWith('/blog/')
-                        ? post.og.image
-                        : `/blog${post.og.image}`
-                    }
+                    src={postImage}
                   />
-                  <div className="absolute inset-0 bg-black/50 group-hover:bg-black/70 transition-all duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 transition-all duration-300" />
                 </>
               ) : (
-                <Image
-                  alt="BAML Background"
-                  className="object-cover w-full h-full"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  src="/baml-og-background.png"
-                />
+                <>
+                  <Image
+                    alt="BAML Background"
+                    className="object-cover w-full h-full"
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    src="/baml-og-background.png"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                </>
               )}
               {/* Dark overlay */}
             </div>
@@ -112,7 +115,8 @@ export function BlogPostsGrid({ posts }: BlogPostsGridProps) {
             </div>
           </Card>
         </Link>
-      ))}
+        );
+      })}
     </div>
   );
 }

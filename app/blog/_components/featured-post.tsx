@@ -11,23 +11,22 @@ interface FeaturedPostProps {
 }
 
 export function FeaturedPost({ post }: FeaturedPostProps) {
+  // Use og.image, then firstImage, then fallback to default
+  const postImage = post.og?.image || post.firstImage;
+
   return (
     <Link href={`/blog/${post.slug}`}>
       <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow h-96 pt-0 relative group">
         {/* Background Image */}
         <div className="absolute inset-0">
-          {post.og?.image ? (
+          {postImage ? (
             <Image
               alt={post.title}
-              className="object-cover w-full h-full blur-sm group-hover:blur-none transition-all duration-300"
+              className="object-cover w-full h-full blur-[2px] group-hover:blur-none transition-all duration-300"
               fill
               priority
               sizes="100vw"
-              src={
-                post.og.image.startsWith('/blog/')
-                  ? post.og.image
-                  : `/blog${post.og.image}`
-              }
+              src={postImage}
             />
           ) : (
             <Image
@@ -39,8 +38,8 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
               src="/baml-og-background.png"
             />
           )}
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-black/70 transition-all duration-300" />
+          {/* Gradient overlay - darker at bottom for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 transition-all duration-300" />
         </div>
 
         {/* Glassmorphism Card Content */}

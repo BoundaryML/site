@@ -41,8 +41,8 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   // Enhanced title with site branding
   const fullTitle = `${post.title} | BAML Blog`;
 
-  // Use provided OG image or fallback to default
-  const ogImage = post.og?.image || `${baseUrl}/baml-og-background.png`;
+  // Use the dynamic OG image API route
+  const ogImage = `${baseUrl}/api/og?slug=${encodeURIComponent(post.slug)}`;
 
   // Build comprehensive keywords
   const keywords = [

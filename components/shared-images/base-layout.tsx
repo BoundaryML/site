@@ -9,14 +9,18 @@ interface BaseLayoutProps {
   children: React.ReactNode;
   backgroundImage?: string;
   bamlImage?: string;
+  featuredImage?: string | null;
+  baseUrl?: string;
 }
 
 export function BaseLayout({
   children,
   backgroundImage = 'baml-og-background.png',
   bamlImage = 'baml-logo-with-lamb.png',
+  featuredImage,
+  baseUrl: baseUrlProp,
 }: BaseLayoutProps) {
-  const baseUrl =
+  const baseUrl = baseUrlProp ??
     process.env.NEXT_PUBLIC_BASE_URL ??
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
@@ -87,6 +91,37 @@ export function BaseLayout({
         }}
         width="385px"
       />
+      {/* Featured image on the right side */}
+      {featuredImage && (
+        <div
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            height: '100%',
+            justifyContent: 'center',
+            padding: '40px',
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            width: '45%',
+            zIndex: 2,
+          }}
+        >
+          <img
+            alt="Featured"
+            src={featuredImage.startsWith('http') ? featuredImage : `${baseUrl}${featuredImage}`}
+            style={{
+              border: '4px solid rgba(255,255,255,0.15)',
+              borderRadius: 16,
+              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              height: 'auto',
+              maxHeight: '85%',
+              maxWidth: '100%',
+              objectFit: 'contain',
+            }}
+          />
+        </div>
+      )}
       {/* Content wrapper */}
       <div
         style={{
@@ -94,7 +129,7 @@ export function BaseLayout({
           display: 'flex',
           flexDirection: 'column',
           height: '100%',
-          maxWidth: '90%',
+          maxWidth: featuredImage ? '50%' : '90%',
           padding: '40px 40px 40px 40px',
           position: 'relative',
           width: '100%',

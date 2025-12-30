@@ -25,6 +25,26 @@ export interface Post {
   author?: Author;
   featured?: boolean;
   readingTime?: string;
+  firstImage?: string | null;
+}
+
+function extractFirstImage(content: string): string | null {
+  // Match markdown image syntax: ![alt](url)
+  const markdownImageRegex = /!\[.*?\]\(([^)]+)\)/;
+  const markdownMatch = content.match(markdownImageRegex);
+  if (markdownMatch?.[1]) {
+    return markdownMatch[1];
+  }
+
+  // Match JSX/HTML image syntax: <img src="url" or <Image src="url"
+  // Only match paths that start with / (local images)
+  const jsxImageRegex = /<(?:img|Image)[^>]*\ssrc=["']([^"']+)["']/i;
+  const jsxMatch = content.match(jsxImageRegex);
+  if (jsxMatch?.[1]?.startsWith('/')) {
+    return jsxMatch[1];
+  }
+
+  return null;
 }
 
 function calculateReadingTime(content: string): string {
@@ -106,6 +126,7 @@ export const getPosts = async () => {
             isPublished,
             lastModified: 0,
             readingTime: calculateReadingTime(matterContent.content),
+            firstImage: extractFirstImage(matterContent.content),
           } satisfies Post;
         }),
     );
