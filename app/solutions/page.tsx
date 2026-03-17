@@ -170,8 +170,9 @@ export default function SolutionsPage() {
               Solutions for Every AI Use Case
             </h1>
             <p className="max-w-2xl text-lg text-muted-foreground">
-              From autonomous agents to production workflows, BAML provides the
-              foundation for building reliable AI applications at any scale.
+              From autonomous agents to production workflows, BAML—the language
+              for AI—gives you the foundation for building reliable AI at any
+              scale.
             </p>
             <div className="flex gap-4">
               <Button asChild>

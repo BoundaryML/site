@@ -8,15 +8,16 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
       className={cn(
         // color
         '[--color:var(--secondary)]',
-        'pointer-events-none relative -z-[2] mx-auto h-[50rem] overflow-hidden',
+        'pointer-events-none relative -z-[2] mx-auto overflow-hidden',
+
+        // smaller height and gentler overlap so hero/company-showcase don't get covered
+        'h-[28rem]',
+        reverse
+          ? 'my-[-6rem] rotate-180 md:my-[-8rem]'
+          : 'my-[-4rem] md:my-[-6rem]',
 
         // sphere mask
         '[mask-image:radial-gradient(ellipse_at_center_center,#000,transparent_50%)]',
-
-        // reverse
-        reverse
-          ? 'my-[-22rem] rotate-180 md:mt-[-30rem]'
-          : 'my-[-10rem] md:my-[-21.8rem]',
 
         // before
         'before:absolute before:inset-0 before:h-full before:w-full before:opacity-40 before:[background-image:radial-gradient(circle_at_bottom_center,var(--color),transparent_70%)]',
@@ -38,7 +39,7 @@ export const SphereMask = ({ reverse = false }: { reverse?: boolean }) => {
             ease: 'backInOut',
           }}
         >
-          <div className="size-32 rounded-full flex items-center justify-center flex flex-col w-full">
+          <div className="flex size-32 w-full flex-col items-center justify-center rounded-full">
             <Image
               alt="BAML Lamb Logo"
               className="size-24 object-contain"

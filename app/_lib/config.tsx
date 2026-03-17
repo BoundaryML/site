@@ -124,7 +124,7 @@ export const siteConfig = {
   ],
   bentoSection: {
     description:
-      'Build AI applications with type safety, generate TypeScript types, and validate your schemas.',
+      'Cognitive functions for AI: type-safe interfaces, generated types, and validation—built for the future of software.',
     items: [
       {
         content: <FirstBentoAnimation />,
@@ -143,9 +143,9 @@ export const siteConfig = {
       {
         content: <ThirdBentoAnimation />,
         description:
-          'Test your agents in CI/CD pipelines to ensure they are working as expected.',
+          'Test your AI functions in CI/CD pipelines to ensure they are working as expected.',
         id: 3,
-        title: 'Test Your Agents in CI/CD',
+        title: 'Test Your AI Functions in CI/CD',
       },
       {
         content: <FourthBentoAnimation once={false} />,
@@ -155,7 +155,7 @@ export const siteConfig = {
         title: 'Automatic Retry and Fallback',
       },
     ],
-    title: 'Empower Your AI Development',
+    title: 'Built for the Future of AI',
   },
   companyShowcase: {
     companyLogos: [
@@ -189,23 +189,24 @@ export const siteConfig = {
       text: 'Book a meeting with us',
     },
     id: 'cta',
-    subtext: 'Start building type-safe AI applications in minutes',
-    title: 'Build AI Applications with Confidence',
+    subtext: 'Start with cognitive coding in minutes',
+    title: 'Software that humans trust',
   },
-  description: 'Type-safe AI application development platform.',
+  description:
+    'BAML is the first language designed with LLMs in mind. Cognitive coding for AI—code that agents write, software that humans trust.',
   faqSection: {
     description:
       "Answers to common questions about BAML and its features. If you have any other questions, please don't hesitate to contact us.",
     faQitems: [
       {
         answer:
-          'BAML is a modern AI application development platform that enables developers to build type-safe AI applications. It provides schema definition, TypeScript type generation, and runtime validation to streamline AI development.',
+          'BAML is the first language designed with LLMs in mind. It enables cognitive coding: cognitive functions that encapsulate LLM capabilities in classic programming functions. Code that agents write. Software that humans trust. You get schema definition, TypeScript type generation, and runtime validation so AI fits the same toolchain as the rest of your stack.',
         id: 1,
         question: 'What is BAML?',
       },
       {
         answer:
-          'BAML works by defining AI interfaces using a declarative schema language. These schemas automatically generate TypeScript types and runtime validation, ensuring type safety throughout your AI application development process.',
+          'BAML works by letting you define cognitive functions—AI interfaces as first-class language constructs. These compile to native code in your language of choice and generate TypeScript types and runtime validation, ensuring type safety and reliability throughout your AI application.',
         id: 2,
         question: 'How does BAML work?',
       },
@@ -256,7 +257,7 @@ export const siteConfig = {
   },
   featureSection: {
     description:
-      'Discover how BAML transforms AI development in four easy steps',
+      'From idea to production—define, test, call, and deploy cognitive functions.',
     items: [
       {
         content: (
@@ -396,7 +397,7 @@ export const siteConfig = {
         id: 4,
         title: (
           <div>
-            Deploy your <span className="text-secondary">Agent</span>
+            Deploy your <span className="text-secondary">AI</span>
           </div>
         ),
       },
@@ -408,7 +409,7 @@ export const siteConfig = {
       //   title: '4. Iterate & Test',
       // },
     ],
-    title: 'Complete Development Workflow',
+    title: 'Complete workflow for cognitive coding',
   },
   footerLinks: [
     {
@@ -520,7 +521,49 @@ export const siteConfig = {
         title: 'Universal Compatibility',
       },
     ],
-    title: 'Built for Type-Safe AI Development',
+    title: 'Built for the Future of AI',
+  },
+  storySection: {
+    ctaHref: '/#story',
+    ctaText: 'Explore the timeline',
+    teaser:
+      'Every era of computing got a language that fit. C for the machine. Java and JavaScript for the network. TypeScript for scale. Now LLMs are a new kind of compute—and we’re still gluing them in with strings. BAML is the first language designed with LLMs in mind.',
+    title: 'A language for the future of AI',
+    timeline: [
+      { era: '1970s–80s', label: 'C, Unix' },
+      { era: '1990s–2000s', label: 'Java, JavaScript' },
+      { era: '2010s', label: 'TypeScript' },
+      { era: 'Now', label: 'BAML' },
+    ],
+  },
+  storyPage: {
+    mission:
+      'We believe AI needs a language of its own—not strings and APIs, but cognitive functions that fit the way software is built. Code that agents write. Software that humans trust.',
+    timeline: [
+      {
+        era: '1970s–80s',
+        body: 'C and Unix gave us languages for the machine and the system.',
+        label: 'C, Unix',
+      },
+      {
+        era: '1990s–2000s',
+        body: 'Java and JavaScript gave us languages for the network and the browser.',
+        label: 'Java, JavaScript',
+      },
+      {
+        era: '2010s',
+        body: 'TypeScript gave us a language for scale and safety when JavaScript wasn’t enough.',
+        label: 'TypeScript',
+      },
+      {
+        era: 'Today',
+        body: 'LLMs are a new kind of compute. We’re still gluing them in with strings and hope. BAML is the first language designed with LLMs in mind—cognitive coding for the future of software.',
+        label: 'BAML',
+      },
+    ],
+    title: 'Our story',
+    whyItMatters:
+      'Cognitive coding means LLM capabilities become first-class functions: same repo, same toolchain, same reliability you expect from the rest of your stack. That’s how we get to software that humans trust.',
   },
   hero: {
     badge: 'Free During Beta',
@@ -538,8 +581,8 @@ export const siteConfig = {
       },
     },
     description:
-      'Open source toolkit for AI development. Build type-safe AI applications with your team - all with confidence and reliability.',
-    title: 'Type-Safe AI Development',
+      'Cognitive coding: LLM capabilities as classic functions. Code that agents write. Software that humans trust.',
+    title: 'The language for cognitive coding',
   },
   keywords: [
     'AI Development',
@@ -557,7 +600,6 @@ export const siteConfig = {
   nav: {
     links: [
       { href: '/', id: 1, name: 'Home' },
-      // { href: '/cloud', id: 2, name: 'Cloud' },
       { href: '/blog', id: 3, name: 'Blog' },
       { href: '/podcast', id: 4, name: 'Podcast' },
       { href: '/who-are-we', id: 5, name: 'Team' },

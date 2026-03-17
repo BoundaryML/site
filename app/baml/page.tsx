@@ -1,8 +1,9 @@
 import { type Metadata } from 'next';
 import { redirect } from 'next/navigation';
 export const metadata: Metadata = {
-  title: 'BAML - A programming language for defining AI functions',
-  description: 'Build, test, monitor and improve LLM applications with ease.',
+  title: 'BAML - The language for cognitive coding',
+  description:
+    'Cognitive coding for AI—code that agents write, software that humans trust.',
 };
 
 export default function Home() {

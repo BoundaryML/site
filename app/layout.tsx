@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     canonical: `${baseUrl}/`,
   },
   description:
-    'BAML is a tool for developers to build AI applications with type safety and reliability',
+    'BAML is the first language designed with LLMs in mind. Cognitive coding for AI—code that agents write, software that humans trust.',
   icons: {
     icon: '/favico.ico',
   },
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ),
   openGraph: {
     description:
-      'BAML is a tool for developers to build AI applications with type safety and reliability',
+      'BAML is the first language designed with LLMs in mind. Cognitive coding for AI—code that agents write, software that humans trust.',
     locale: 'en_US',
     siteName: 'BAML',
     title: 'BAML',
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     creator: '@boundaryml',
     description:
-      'Boundary makes it easy to build, test, and develop LLM applications.',
+      'Code that agents write. Software that humans trust. The first language designed with LLMs in mind.',
     site: '@boundaryml',
-    title: 'Boundary | The best way to get structured data with LLMs',
+    title: 'BAML | The language for AI in the future',
   },
 };
 

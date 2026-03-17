@@ -124,11 +124,12 @@ export default function WhoAreWePage() {
             </h1>
             <div className="space-y-6">
               <p className="text-xl md:text-2xl text-muted-foreground">
-                We hate the current DX of building agents. So we're building a{' '}
+                We believe AI needs its own language—the first designed with
+                LLMs in mind. So we're building it:{' '}
                 <span className="text-foreground font-semibold">
-                  whole new programming language
+                  cognitive coding for the future of software
                 </span>
-                !
+                .
               </p>
               <p className="text-xl md:text-2xl text-muted-foreground">
                 Yes, we're that crazy.

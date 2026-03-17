@@ -27,13 +27,13 @@ export function BentoSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 overflow-hidden">
           {items.map((item) => (
             <div
-              className="flex flex-col items-start justify-end min-h-[600px] md:min-h-[500px] p-0.5 relative before:absolute before:-left-0.5 before:top-0 before:z-10 before:h-screen before:w-px before:bg-border before:content-[''] after:absolute after:-top-0.5 after:left-0 after:z-10 after:h-px after:w-screen after:bg-border after:content-[''] group"
+              className="flex min-h-[500px] flex-col rounded-lg border border-border bg-card/30 p-0.5 md:min-h-[480px]"
               key={item.id}
             >
-              <div className="relative flex size-full items-center justify-center h-full">
+              <div className="relative flex min-h-[280px] flex-1 items-center justify-center overflow-hidden md:min-h-[260px]">
                 {item.content}
               </div>
-              <div className="flex-1 flex-col gap-2 p-6">
+              <div className="flex flex-shrink-0 flex-col gap-2 p-6">
                 <h3 className="text-lg tracking-tighter font-semibold">
                   {item.title}
                 </h3>

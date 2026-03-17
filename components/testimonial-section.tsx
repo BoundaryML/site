@@ -17,7 +17,7 @@ export function TestimonialSection() {
           People love BAML
         </h2>
         <p className="text-muted-foreground text-center text-balance font-medium">
-          And so do agents
+          Code that agents write. Software that humans trust.
         </p>
       </SectionHeader>
       <SocialProofTestimonials testimonials={testimonials} />

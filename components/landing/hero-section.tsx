@@ -2,18 +2,15 @@
 /** biome-ignore-all lint/performance/noImgElement: we need to use img for the images */
 'use client';
 
-import { useInView } from 'framer-motion';
 import { useTheme } from 'next-themes';
-import { useRef } from 'react';
-import { BorderBeam } from '@/components/magicui/border-beam';
-import { Button } from '@/components/ui/button';
 import type { LumaEvent } from '@/lib/luma';
 import { ScriptCopyBtn } from '../magicui/script-copy-btn';
 import { SphereMask } from '../magicui/sphere-mask';
+import { HeroPlaygroundMockup } from './hero-playground-mockup';
 import { NextEpisodeLink } from './next-episode-link';
 
-// Logo section component
-function LogoSection() {
+// Logo section component - exported for use after FeatureSection on homepage
+export function LogoSection() {
   const theme = useTheme();
   const isDark = theme.theme === 'dark';
 
@@ -135,9 +132,6 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ nextEvent }: HeroSectionProps) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { margin: '-100px', once: true });
-
   // biome-ignore assist/source/useSortedKeys: needs to be in this order
   const commandMap = {
     python: 'uv add baml-py && uv run baml-cli init',
@@ -145,112 +139,65 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
     ruby: 'bundle add baml && bundle exec baml-cli init',
     go: 'go install github.com/boundaryml/baml/baml-cli@latest && baml-cli init',
     other: (
-      <Button asChild variant="outline">
-        <a
-          href="https://docs.boundaryml.com/guide/installation-language/rest-api-other-languages"
-          // target="_blank"
-        >
-          Install BAML
-        </a>
-      </Button>
+      <a
+        className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium underline-offset-4 hover:bg-accent hover:text-accent-foreground"
+        href="https://docs.boundaryml.com/guide/installation-language/rest-api-other-languages"
+      >
+        Install BAML
+      </a>
     ),
-  };
-
-  const handleTryOnline = () => {
-    window.open('https://promptfiddle.com', '_blank');
   };
 
   return (
     <section
-      className="relative mx-auto mt-12 sm:mt-24 max-w-[80rem] px-4 sm:px-6 md:px-8 text-center"
+      className="relative mt-12 sm:mt-24 w-full text-left"
       id="hero"
     >
-      <NextEpisodeLink nextEvent={nextEvent} />
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mt-8 sm:mt-12">
-        {/* Left column - Text content */}
-        <div className="text-left">
+      {/* Content above the sphere mask - ensure it stacks in front */}
+      <div className="relative z-10">
+      {/* Intro block - left aligned, constrained width */}
+      <div className="mx-auto max-w-[80rem] px-4 sm:px-6 md:px-8">
+        {/* <NextEpisodeLink nextEvent={nextEvent} /> */}
+        <div className="mt-8 sm:mt-12">
           <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-4 sm:py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-            The First Language for Building Agents
+            The first language designed with LLMs in mind
           </h1>
           <p className="mb-6 sm:mb-8 text-base sm:text-lg tracking-tight text-muted-foreground md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-            Typescript made JavaScript 10x more reliable.
-            <br />
-            <span className="text-secondary font-bold">BAML</span> makes your ai
-            pipelines 10x more reliable.
+            The future of code is{' '}
+            <span className="text-secondary font-semibold">
+              cognitive.
+            </span>
           </p>
-          <div className="translate-y-[-1rem] animate-fade-in opacity-0 ease-in-out [--animation-delay:600ms] space-y-3">
-            <ScriptCopyBtn
-              className="block w-full"
-              codeLanguage="bash"
-              commandMap={commandMap}
-              darkTheme="none"
-              lightTheme="none"
-              showMultiplePackageOptions={true}
-            />
-            <div className="flex gap-4">
-              <Button
-                // className="bg-primary text-primary-foreground hover:bg-primary/90"
-                onClick={handleTryOnline}
-                size="lg"
-                variant="secondary"
-              >
-                Try BAML in your browser
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="https://docs.boundaryml.com/home">Get Started</a>
-              </Button>
-            </div>
-            {/* <span>Get Started for free </span>
-            <ArrowRightIcon className="ml-1 size-4 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /> */}
-          </div>
-        </div>
-
-        {/* Right column - Hero image */}
-        <div
-          className="relative animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px]"
-          ref={ref}
-        >
-          <div
-            className={`rounded-xl border border-border bg-white bg-opacity-[0.01] before:absolute before:bottom-1/2 before:left-0 before:top-0 before:h-full before:w-full before:opacity-0 before:[filter:blur(180px)] before:[background-image:linear-gradient(to_bottom,var(--secondary),var(--secondary),transparent_40%)] ${
-              inView ? 'before:animate-image-glow' : ''
-            }`}
-          >
-            <BorderBeam
-              colorFrom="var(--color-one)"
-              colorTo="var(--secondary)"
-              delay={11}
-              duration={12}
-              size={200}
-            />
-            <div className="w-full text-left relative z-10">
-              <div className="w-full max-w-full min-h-[280px] sm:min-h-[360px] rounded-lg overflow-hidden shadow-lg">
-                <iframe
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="w-full h-full min-h-[280px] sm:min-h-[360px] relative z-10"
-                  frameBorder="0"
-                  src="https://www.youtube.com/embed/gxckvkNg6KM"
-                  title="BoundaryML Demo"
-                />
-              </div>
-            </div>
-            {/* <img
-              alt="Hero Hero"
-              className="hidden relative w-full h-full rounded-[inherit] border object-contain dark:block"
-              src="/hero-dark.png"
-            />
-            <img
-              alt="Hero Hero"
-              className="block relative w-full h-full  rounded-[inherit] border object-contain dark:hidden"
-              src="/hero-light.png"
-            /> */}
-            {/* <HeroTerminalSection /> */}
-          </div>
         </div>
       </div>
 
-      <LogoSection />
+      {/* Playground - full width of viewport, consumes most of viewport height */}
+      <div className="mt-8 w-full sm:mt-10">
+        <div className="min-h-[75vh] w-full px-4 sm:px-6 md:px-8">
+          <HeroPlaygroundMockup />
+        </div>
+      </div>
+
+      {/* Installation - under playground */}
+      <div className="mx-auto max-w-[80rem] px-4 sm:px-6 md:px-8 mt-8 sm:mt-10">
+        <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] rounded-xl border-2 border-violet-500/50 bg-violet-500/5 px-5 py-4 ring-2 ring-violet-500/20 sm:px-6 sm:py-5 dark:border-violet-400/50 dark:ring-violet-400/20">
+          <p className="mb-3 text-sm font-medium text-foreground sm:mb-4 sm:text-base">
+            Install BAML in one command
+          </p>
+          <p className="mb-4 text-xs text-muted-foreground sm:text-sm">
+            Pick your language and run the command below. BAML runs in your repo and generates type-safe clients for your app.
+          </p>
+          <ScriptCopyBtn
+            className="block w-full max-w-xl"
+            codeLanguage="bash"
+            commandMap={commandMap}
+            darkTheme="none"
+            lightTheme="none"
+            showMultiplePackageOptions={true}
+          />
+        </div>
+      </div>
+      </div>
       <SphereMask />
     </section>
   );

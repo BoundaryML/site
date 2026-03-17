@@ -424,7 +424,7 @@ export function DeploymentStatus({
             Deployed Successfully!
           </h4>
           <p className="text-sm text-green-600 dark:text-green-400 mb-3">
-            Your BAML agent is now live across all cloud providers
+            Your BAML project is now live across all cloud providers
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {cloudProviders.map((provider) => (
@@ -493,7 +493,7 @@ export function CompactDeploymentStatus({ className }: { className?: string }) {
         <div className="text-xs text-muted-foreground">
           {isDeployed
             ? 'Works on any cloud provider'
-            : 'Building and deploying your agent'}
+            : 'Building and deploying your AI'}
         </div>
       </div>
     </motion.div>

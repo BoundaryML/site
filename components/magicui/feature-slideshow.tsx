@@ -1,6 +1,6 @@
 'use client';
 
-import { easeOut, motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
@@ -39,7 +39,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: easeOut,
+        ease: 'easeOut',
       },
       // y: 0,
     },
@@ -55,7 +55,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
       transition: {
         delay: 0.2,
         duration: 0.5,
-        ease: easeOut,
+        ease: 'easeOut',
       },
       x: 0,
     },
@@ -73,7 +73,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
       transition: {
         delay: 0.4,
         duration: 0.6,
-        ease: easeOut,
+        ease: 'easeOut',
       },
       // y: 0,
     },
@@ -83,7 +83,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
     <div className="w-full">
       <motion.div
         className="flex w-full flex-col items-center justify-center max-w-7xl mx-auto"
-        initial="hidden"
+        initial="visible"
         variants={containerVariants}
         viewport={{ margin: '-100px', once: true }}
         whileInView="visible"
@@ -98,6 +98,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                   'flex flex-col lg:flex-row gap-8 lg:gap-12 items-center',
                   isEven ? 'lg:flex-row' : 'lg:flex-row-reverse',
                 )}
+                initial="visible"
                 key={item.id}
                 variants={itemVariants}
               >
@@ -107,13 +108,13 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                     'flex flex-col gap-4 lg:w-1/2',
                     isEven ? 'lg:pr-8' : 'lg:pl-8',
                   )}
+                  initial="visible"
                   variants={textVariants(isEven)}
                 >
                   <div className="flex flex-col gap-3">
                     <motion.h2
                       className="text-2xl lg:text-3xl font-bold tracking-tight"
-                      initial={{ opacity: 0, y: 20 }}
-                      transition={{ delay: 0.3, duration: 0.5 }}
+                      initial={false}
                       viewport={{ once: true }}
                       whileInView={{ opacity: 1, y: 0 }}
                     >
@@ -121,8 +122,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                     </motion.h2>
                     <motion.div
                       className="text-base lg:text-lg text-muted-foreground leading-relaxed"
-                      initial={{ opacity: 0, y: 20 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
+                      initial={false}
                       viewport={{ once: true }}
                       whileInView={{ opacity: 1, y: 0 }}
                     >
@@ -133,15 +133,16 @@ export const Feature = ({ featureItems }: FeatureProps) => {
 
                 {/* Media Content */}
                 <motion.div
-                  className="lg:w-1/2 w-full"
+                  className="lg:w-1/2 w-full min-h-[240px]"
+                  initial="visible"
                   variants={mediaVariants}
                 >
-                  {item.component && (
-                    <motion.div className="w-full rounded-xl border border-border overflow-hidden bg-background shadow-lg">
+                  {item.component != null && (
+                    <motion.div className="w-full min-h-[220px] rounded-xl border border-border overflow-visible bg-background shadow-lg">
                       {item.component}
                     </motion.div>
                   )}
-                  {item.image && (
+                  {item.image != null && (
                     <motion.div className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg">
                       <Image
                         alt={typeof item.title === 'string' ? item.title : ''}
@@ -152,7 +153,7 @@ export const Feature = ({ featureItems }: FeatureProps) => {
                       />
                     </motion.div>
                   )}
-                  {item.video && (
+                  {item.video != null && !item.component && (
                     <motion.div className="w-full aspect-video rounded-xl border border-border overflow-hidden shadow-lg">
                       <video
                         autoPlay

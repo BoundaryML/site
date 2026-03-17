@@ -13,7 +13,7 @@ import { GithubStars } from './GithubStars';
 // import { Icons } from '../todo/(marketing)/_components/icons';
 
 const INITIAL_WIDTH = '70rem';
-const MAX_WIDTH = '900px';
+const MAX_WIDTH = '70rem'; /* keep same so nav never shrinks and clips links */
 
 // Animation variants
 const overlayVariants = {
@@ -287,28 +287,26 @@ function NavbarHeader({
 }) {
   return (
     <motion.header
-      animate={{ opacity: 1 }}
       className={cn(
-        'sticky z-50 mx-4 flex justify-center transition-all duration-300 md:mx-0',
-        hasScrolled ? 'top-6' : 'top-4 mx-0',
+        'sticky top-0 z-50 mx-4 flex justify-center transition-all duration-300 md:mx-0',
+        hasScrolled ? 'top-4' : 'top-0',
       )}
-      initial={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
     >
       <motion.div
         animate={{ width: hasScrolled ? MAX_WIDTH : INITIAL_WIDTH }}
+        className="min-w-0 max-w-full"
         initial={{ width: INITIAL_WIDTH }}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <div
           className={cn(
-            'mx-auto max-w-7xl rounded-2xl transition-all duration-300  xl:px-0',
+            'mx-auto w-full max-w-7xl rounded-2xl transition-all duration-300 xl:px-0',
             hasScrolled
-              ? 'px-2 border border-border backdrop-blur-lg bg-background/75'
-              : 'shadow-none px-7',
+              ? 'px-4 border border-border backdrop-blur-lg bg-background/75'
+              : 'px-7 backdrop-blur-md bg-background/80 border border-transparent',
           )}
         >
-          <div className="flex h-[56px] items-center justify-between pl-1 md:pl-2 pr-4">
+          <div className="flex h-[56px] min-w-0 items-center justify-between gap-4 pl-1 md:pl-2 pr-4">
             <Logo />
             <NavigationMenuSection />
             <RightSideControls
@@ -386,7 +384,7 @@ export function Navbar() {
 
 function NavigationMenuSection() {
   return (
-    <nav className="hidden md:flex items-center gap-6">
+    <nav className="hidden md:flex items-center gap-6 shrink-0">
       {siteConfig.nav.links.map((link) => (
         <Link
           className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"

@@ -58,7 +58,7 @@ export const TechniqueTitle: React.FC<{
     notes: string | React.ReactNode;
   };
   children?: React.ReactNode;
-}> = ({ type, title, count, children, takeaways }) => {
+}> = ({ type, title, count, children, takeaways = { score: 0, notes: '' } }) => {
   const renderTypeBadge = (type: 'prompt' | 'model' | 'parser') => (
     <div
       className={`flex rounded-md px-2 py-1 text-xs font-semibold text-white ${
@@ -126,9 +126,9 @@ export const TechniqueTitle: React.FC<{
       )}
       <div>
         <div>
-          <b>My Personal Rating:</b> {takeaways.score} / 5
+          <b>My Personal Rating:</b> {takeaways?.score ?? 0} / 5
         </div>
-        <div>{takeaways.notes}</div>
+        <div>{takeaways?.notes}</div>
       </div>
       {/* <table className="min-w-full divide-y divide-gray-200">
         <tbody className="divide-y divide-gray-200 bg-white">
