@@ -1,9 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import ReactMarkdown from 'react-markdown';
-import { createHighlighter } from 'shiki';
 import './everything.css';
-import { bamlJinjaTextmate, bamlTextmate } from '@/lib/mdx/shiki-grammars';
 
 interface NavSection {
   chapter: string;
@@ -39,25 +37,6 @@ function parseNavigation(content: string): NavSection[] {
   return navigation;
 }
 
-let highlighterPromise: Promise<any> | null = null;
-
-async function getHighlighter() {
-  if (!highlighterPromise) {
-    highlighterPromise = createHighlighter({
-      langs: [
-        'javascript',
-        'typescript',
-        'python',
-        'rust',
-        bamlTextmate,
-        bamlJinjaTextmate,
-      ],
-      themes: ['github-light'],
-    });
-  }
-  return highlighterPromise;
-}
-
 export default async function EverythingPage() {
   // Read the markdown file at build time
   const markdownPath = path.join(process.cwd(), 'lessons', 'everything.md');
@@ -65,9 +44,6 @@ export default async function EverythingPage() {
 
   // Parse navigation from content
   const navigation = parseNavigation(content);
-
-  // Get the highlighter
-  const highlighter = await getHighlighter();
 
   return (
     <div className="learn-baml-container">
@@ -105,51 +81,14 @@ export default async function EverythingPage() {
                   );
                 }
 
-                // Extract language from className (e.g., "language-baml")
-                const match = /language-(\w+)/.exec(className || '');
-                let lang = 'text';
-                if (match?.[1]) {
-                  lang = match[1];
-                } else {
-                  console.log('No language found for code block:', className);
-                }
-
-                // Map common language names
-                const langMap: Record<string, string> = {
-                  baml: 'baml',
-                  'baml-jinja': 'baml-jinja',
-                  js: 'javascript',
-                  py: 'python',
-                  rs: 'rust',
-                  ts: 'typescript',
-                };
-
-                const mappedLang = langMap[lang] || lang;
-                const codeString = String(children).replace(/\n$/, '');
-
-                try {
-                  const html = highlighter.codeToHtml(codeString, {
-                    lang: mappedLang,
-                    theme: 'github-light',
-                  });
-
-                  return (
-                    <div
-                      className="learn-baml-code-block"
-                      // biome-ignore lint/security/noDangerouslySetInnerHtml: we're using a trusted source
-                      dangerouslySetInnerHTML={{ __html: html }}
-                    />
-                  );
-                } catch (e) {
-                  // Fallback if highlighting fails
-                  return (
-                    <div className="learn-baml-code-block">
-                      <pre>
-                        <code>{children}</code>
-                      </pre>
-                    </div>
-                  );
-                }
+                // Render plain code blocks without Shiki
+                return (
+                  <div className="learn-baml-code-block">
+                    <pre>
+                      <code>{children}</code>
+                    </pre>
+                  </div>
+                );
               },
               h1: ({ children }) => {
                 const text = String(children);

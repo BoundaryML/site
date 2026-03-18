@@ -3,12 +3,7 @@
 import { Check, Copy } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTheme } from 'next-themes';
-import {
-  type HTMLAttributes,
-  type ReactElement,
-  useEffect,
-  useState,
-} from 'react';
+import { type HTMLAttributes, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -17,7 +12,7 @@ interface ScriptCopyBtnProps extends HTMLAttributes<HTMLDivElement> {
   codeLanguage: string;
   lightTheme: string;
   darkTheme: string;
-  commandMap: Record<string, ReactElement | string>;
+  commandMap: Record<string, string>;
   className?: string;
 }
 
@@ -34,42 +29,11 @@ export function ScriptCopyBtn({
     packageManagers[0] ?? '',
   );
   const [copied, setCopied] = useState(false);
-  const [highlightedCode, setHighlightedCode] = useState<
-    ReactElement | string
-  >();
   const { theme } = useTheme();
   const command = commandMap[packageManager] ?? '';
 
-  useEffect(() => {
-    async function loadHighlightedCode() {
-      try {
-        const { codeToHtml } = await import('shiki');
-        if (typeof command === 'string') {
-          const highlighted = await codeToHtml(command, {
-            defaultColor: theme === 'dark' ? 'dark' : 'light',
-            lang: codeLanguage,
-            themes: {
-              dark: darkTheme,
-              light: lightTheme,
-            },
-          });
-          setHighlightedCode(highlighted);
-        } else {
-          setHighlightedCode(command);
-        }
-      } catch (error) {
-        console.error('Error highlighting code:', error);
-        setHighlightedCode(`<pre>${command}</pre>`);
-      }
-    }
-
-    loadHighlightedCode();
-  }, [command, theme, codeLanguage, lightTheme, darkTheme]);
-
   const copyToClipboard = () => {
-    if (typeof command === 'string') {
-      navigator.clipboard.writeText(command);
-    }
+    navigator.clipboard.writeText(command);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -123,39 +87,31 @@ export function ScriptCopyBtn({
         </div>
         <div className="relative flex items-center">
           <div className="w-full grow font-mono">
-            {highlightedCode && typeof highlightedCode === 'string' ? (
-              <div
-                className={`[&>pre]:overflow-x-auto [&>pre]:rounded-md [&>pre]:p-1.5 [&>pre]:px-4 [&>pre]:font-mono [&>pre]:text-sm sm:[&>pre]:text-base bg-background border border-border rounded ${
-                  theme === 'dark' ? 'dark' : 'light'
-                }`}
-                // biome-ignore lint/security/noDangerouslySetInnerHtml: ok
-                dangerouslySetInnerHTML={{ __html: highlightedCode }}
-              />
-            ) : (
-              command
-            )}
+            <div className="h-10 rounded border border-border bg-background px-3 text-[11px] sm:text-xs flex items-center">
+              <span className="block w-full overflow-x-auto whitespace-pre">
+                {command}
+              </span>
+            </div>
           </div>
-          {typeof highlightedCode === 'string' && (
-            <Button
-              aria-label={copied ? 'Copied' : 'Copy to clipboard'}
-              className="relative ml-2 rounded-md hidden md:block"
-              onClick={copyToClipboard}
-              size="icon"
-              variant="outline"
-            >
-              <span className="sr-only">{copied ? 'Copied' : 'Copy'}</span>
-              <Copy
-                className={`h-4 w-4 m-auto inset-0 transition-all duration-300 ${
-                  copied ? 'scale-0' : 'scale-100'
-                }`}
-              />
-              <Check
-                className={`absolute inset-0 m-auto h-4 w-4 transition-all duration-300 ${
-                  copied ? 'scale-100' : 'scale-0'
-                }`}
-              />
-            </Button>
-          )}
+          <Button
+            aria-label={copied ? 'Copied' : 'Copy to clipboard'}
+            className="relative ml-2 hidden rounded-md md:block"
+            onClick={copyToClipboard}
+            size="icon"
+            variant="outline"
+          >
+            <span className="sr-only">{copied ? 'Copied' : 'Copy'}</span>
+            <Copy
+              className={`m-auto h-4 w-4 inset-0 transition-all duration-300 ${
+                copied ? 'scale-0' : 'scale-100'
+              }`}
+            />
+            <Check
+              className={`absolute inset-0 m-auto h-4 w-4 transition-all duration-300 ${
+                copied ? 'scale-100' : 'scale-0'
+              }`}
+            />
+          </Button>
         </div>
       </div>
     </div>

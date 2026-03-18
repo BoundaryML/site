@@ -1,10 +1,8 @@
 'use client';
 
 import clsx from 'clsx';
-import { useTheme } from 'next-themes';
 import type React from 'react';
 import { useEffect, useState } from 'react';
-import { codeToHtml } from 'shiki';
 
 type FileData = {
   code: string;
@@ -50,8 +48,6 @@ export const VSCodeMock: React.FC<VSCodeMockProps> = ({
   const activeFile = fileList[activeFileIndex];
 
   const lines = activeFile.code.split('\n');
-  const { theme, systemTheme } = useTheme();
-  const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
 
   const bg = dark ? 'bg-[#1e1e1e]' : 'bg-white';
   const fg = dark ? 'text-[#d4d4d4]' : 'text-[#111827]';
@@ -62,25 +58,6 @@ export const VSCodeMock: React.FC<VSCodeMockProps> = ({
   const gutter = dark ? 'bg-[#252526]' : 'bg-gray-100';
   // const terminalBg = dark ? 'bg-[#1e1e1e]' : 'bg-gray-900';
   // const terminalFg = dark ? 'text-[#d4d4d4]' : 'text-gray-100';
-
-  // Determine the theme for syntax highlighting
-  const selectedTheme = dark ? 'github-dark' : 'github-light';
-
-  useEffect(() => {
-    async function highlightCode() {
-      try {
-        const html = await codeToHtml(activeFile.code, {
-          lang: activeFile.language.toLowerCase(),
-          theme: selectedTheme,
-        });
-        setHighlightedCode(html);
-      } catch (error) {
-        console.error('Error highlighting code:', error);
-        setHighlightedCode(null);
-      }
-    }
-    highlightCode();
-  }, [activeFile.code, activeFile.language, selectedTheme]);
 
   return (
     <div
@@ -188,17 +165,9 @@ export const VSCodeMock: React.FC<VSCodeMockProps> = ({
             </div>
           )}
           <div className="flex-1 overflow-auto px-4 py-2">
-            {highlightedCode ? (
-              <div
-                className="syntax-highlighted-code"
-                // biome-ignore lint/security/noDangerouslySetInnerHtml: pre-processed code highlighting
-                dangerouslySetInnerHTML={{ __html: highlightedCode }}
-              />
-            ) : (
-              <pre className="whitespace-pre">
-                <code>{activeFile.code}</code>
-              </pre>
-            )}
+            <pre className="whitespace-pre">
+              <code>{activeFile.code}</code>
+            </pre>
           </div>
         </div>
       </div>

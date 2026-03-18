@@ -11,7 +11,7 @@ export function HeroPlaygroundMockup() {
 
   return (
     <div
-      className="relative animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px] w-full"
+      className="relative w-full animate-fade-up opacity-0 [--animation-delay:400ms] [perspective:2000px]"
       ref={ref}
     >
       <div
@@ -22,11 +22,11 @@ export function HeroPlaygroundMockup() {
         )}
       >
         <BorderBeam
-          colorFrom="var(--color-one)"
-          colorTo="var(--secondary)"
+          colorFrom="var(--secondary)"
+          colorTo="var(--primary)"
           delay={11}
           duration={12}
-          size={200}
+          size={260}
         />
 
         <div className="relative z-10 flex min-h-[60vh] w-full flex-col sm:min-h-[65vh] lg:min-h-[72vh]">
@@ -35,12 +35,12 @@ export function HeroPlaygroundMockup() {
             <div className="flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
               <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+              <span className="h-2.5 w-2.5 rounded-full bg-violet-500/80" />
               <span className="ml-2 text-xs font-medium text-muted-foreground">
                 BAML Playground
               </span>
             </div>
-            <span className="rounded-full border border-secondary/50 bg-secondary/10 px-2 py-0.5 text-[10px] font-medium text-secondary">
+            <span className="rounded-full border border-primary/60 bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
               Turing complete
             </span>
           </div>
@@ -152,7 +152,7 @@ export function HeroPlaygroundMockup() {
                 <span className="text-[10px] font-medium text-muted-foreground">
                   Output
                 </span>
-                <span className="text-[10px] text-green-600 dark:text-green-400">
+                <span className="text-[10px] text-violet-600 dark:text-violet-300">
                   ✓ Run completed
                 </span>
               </div>
@@ -160,12 +160,12 @@ export function HeroPlaygroundMockup() {
                 <pre className="font-mono text-[10px] leading-relaxed text-foreground/90 sm:text-[11px]">
                   <span className="text-muted-foreground">{`{`}</span>
                   {'\n  '}
-                  <span className="text-emerald-600 dark:text-emerald-400">"goal"</span>
+                  <span className="text-violet-600 dark:text-violet-300">"goal"</span>
                   <span className="text-muted-foreground">: </span>
-                  <span className="text-green-600 dark:text-green-400">"Deploy API"</span>
+                  <span className="text-violet-500 dark:text-violet-200">"Deploy API"</span>
                   <span className="text-muted-foreground">,</span>
                   {'\n  '}
-                  <span className="text-emerald-600 dark:text-emerald-400">"steps"</span>
+                  <span className="text-violet-600 dark:text-violet-300">"steps"</span>
                   <span className="text-muted-foreground">: [</span>
                   {'\n    '}
                   <span className="text-muted-foreground">{`{ "action": "Write tests", "result": "..." },`}</span>

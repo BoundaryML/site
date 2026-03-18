@@ -1,29 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 /** biome-ignore-all lint/performance/noImgElement: we need to use img for the images */
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useTheme } from 'next-themes';
 import type { LumaEvent } from '@/lib/luma';
 import { ScriptCopyBtn } from '../magicui/script-copy-btn';
-import { SphereMask } from '../magicui/sphere-mask';
-import { HeroPlaygroundMockup } from './hero-playground-mockup';
-import { NextEpisodeLink } from './next-episode-link';
 
 // Logo section component - exported for use after FeatureSection on homepage
 export function LogoSection() {
-  const theme = useTheme();
-  const isDark = theme.theme === 'dark';
-
   const logos = [
     {
       alt: 'OpenAI',
       name: 'OpenAI',
-      url: `https://cdn.brandfetch.io/openai.com/w/512/h/512/theme/${isDark ? 'light' : 'dark'}/symbol?c=1idQbe1D_SxVi_WjGRi`,
+      url: 'https://cdn.brandfetch.io/openai.com/w/512/h/512/logo?c=1idQbe1D_SxVi_WjGRi',
     },
     {
       alt: 'Anthropic',
       name: 'Anthropic',
-      url: `https://cdn.brandfetch.io/anthropic.com/w/512/h/512/theme/${isDark ? 'light' : 'dark'}/symbol?c=1idQbe1D_SxVi_WjGRi`,
+      url: 'https://cdn.brandfetch.io/anthropic.com/w/512/h/512/logo?c=1idQbe1D_SxVi_WjGRi',
     },
     {
       alt: 'Google',
@@ -150,55 +144,134 @@ export default function HeroSection({ nextEvent }: HeroSectionProps) {
 
   return (
     <section
-      className="relative mt-12 sm:mt-24 w-full text-left"
+      className="grid min-h-[80vh] w-full border-b border-border bg-background md:grid-cols-2"
       id="hero"
     >
-      {/* Content above the sphere mask - ensure it stacks in front */}
-      <div className="relative z-10">
-      {/* Intro block - left aligned, constrained width */}
-      <div className="mx-auto max-w-[80rem] px-4 sm:px-6 md:px-8">
-        {/* <NextEpisodeLink nextEvent={nextEvent} /> */}
-        <div className="mt-8 sm:mt-12">
-          <h1 className="bg-gradient-to-br dark:from-white from-black from-30% dark:to-white/40 to-black/40 bg-clip-text py-4 sm:py-6 text-5xl font-medium leading-none tracking-tighter text-transparent text-balance sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-            The first language designed with LLMs in mind
-          </h1>
-          <p className="mb-6 sm:mb-8 text-base sm:text-lg tracking-tight text-muted-foreground md:text-xl text-balance translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-            The future of code is{' '}
-            <span className="text-secondary font-semibold">
-              cognitive.
+      {/* Left column - system outline and CTA */}
+      <div className="flex flex-col justify-between border-r border-border px-8 py-12 md:px-12 md:py-16">
+        <div>
+          <div className="mb-16 flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+            <span>System Outline</span>
+            <span>
+              10.1 <sup>)</sup>
             </span>
+          </div>
+          <h1 className="mb-6 text-balance text-[clamp(2.5rem,5vw,4rem)] font-medium leading-[1.1] tracking-[-0.04em]">
+            The first language
+            <br />
+            designed with
+            <br />
+            LLMs in mind.
+          </h1>
+          <p className="mb-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+            Build robust AI agents with a programming language that treats LLM
+            prompts, schemas, and non-deterministic logic as first-class
+            citizens.
           </p>
+          <div className="mt-8 flex items-center gap-3">
+            <a
+              className="inline-flex items-center text-[15px] font-medium tracking-tight transition-colors hover:text-primary"
+              href="https://docs.boundaryml.com/?utm_source=marketing-site&utm_medium=hero-cta"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Explore documentation
+              <svg
+                className="ml-3 transition-transform group-hover:translate-x-1"
+                height="24"
+                stroke="currentColor"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+                width="24"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <svg
+              className="text-[#059669]/60"
+              height="20"
+              viewBox="0 0 24 24"
+              width="20"
+            >
+              <path d="M12 2C12 2 10 6 10 10C10 14 12 18 12 18C12 18 14 14 14 10C14 6 12 2 12 2ZM12 4.5C13.2 6.5 13.5 8.5 13.5 10C13.5 11.5 13.2 13.5 12 15.5C10.8 13.5 10.5 11.5 10.5 10C10.5 8.5 10.8 6.5 12 4.5ZM6 8C6 8 4 11 4 14C4 17 6 20 6 20C6 20 8 17 8 14C8 11 6 8 6 8ZM18 8C18 8 16 11 16 14C16 17 18 20 18 20C18 20 20 17 20 14C20 11 18 8 18 8Z" />
+            </svg>
+          </div>
+        </div>
+        <div className="mt-12 flex items-center justify-between text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+          <span>Origin // 2024</span>
+          <span>Open Source</span>
         </div>
       </div>
 
-      {/* Playground - full width of viewport, consumes most of viewport height */}
-      <div className="mt-8 w-full sm:mt-10">
-        <div className="min-h-[75vh] w-full px-4 sm:px-6 md:px-8">
-          <HeroPlaygroundMockup />
+      {/* Right column - BAML code window */}
+      <div
+        className="flex items-center justify-center px-6 py-10 md:px-12 md:py-16"
+        style={{
+          backgroundColor: 'rgba(255,255,255,0.3)',
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 5c0 0-5 5-5 10s5 10 5 10 5-5 5-10-5-10-5-10zm0 2c2 2 3 6 3 8s-1 6-3 8-3-6-3-8 1-6 3-8z' fill='%23059669' fill-opacity='0.04'/%3E%3C/svg%3E\")",
+        }}
+      >
+        <div className="flex w-full max-w-xl flex-col overflow-hidden rounded-md border border-border bg-card shadow-[0_20px_40px_rgba(0,0,0,0.05)]">
+          <div className="grid grid-cols-[80px_1fr_80px] items-center border-b border-border bg-muted px-4 py-3">
+            <div className="flex gap-1.5">
+              <span className="inline-block h-2.5 w-2.5 rounded-full border border-black/10 bg-[#FF5F56]" />
+              <span className="inline-block h-2.5 w-2.5 rounded-full border border-black/10 bg-[#FFBD2E]" />
+              <span className="inline-block h-2.5 w-2.5 rounded-full border border-black/10 bg-[#27C93F]" />
+            </div>
+            <div className="text-center text-[11px] text-muted-foreground">
+              extract_receipt.baml
+            </div>
+            <div />
+          </div>
+          <div className="flex bg-card">
+            <div className="border-r border-border bg-muted px-3 py-4 text-right text-[11px] text-muted-foreground/80 leading-[1.6]">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((n) => (
+                <div key={n}>{n}</div>
+              ))}
+            </div>
+            <div className="w-full overflow-x-auto px-4 py-4 text-[13px] leading-relaxed">
+              <pre className="m-0 whitespace-pre">
+                <code>
+                  <span className="text-[#8B5CF6] font-medium">class</span>{' '}
+                  <span className="text-[#059669]">Receipt</span> {'{'}
+                  {'\n'}  total <span className="text-[#059669]">float</span>{' '}
+                  @description(
+                  <span className="text-[#B45309]">
+                    "Final amount paid"
+                  </span>
+                  )
+                  {'\n'}  items <span className="text-[#059669]">Item[]</span>
+                  {'\n'}  date{'  '}
+                  <span className="text-[#059669]">string</span> @description(
+                  <span className="text-[#B45309]">"YYYY-MM-DD"</span>)
+                  {'\n'}
+                  {'}'}
+                  {'\n'}
+                  {'\n'}
+                  <span className="text-[#8B5CF6] font-medium">function</span>{' '}
+                  <span className="text-[#0D9488]">ExtractReceipt</span>(img:{' '}
+                  <span className="text-[#059669]">Image</span>) -&gt;{' '}
+                  <span className="text-[#059669]">Receipt</span> {'{'}
+                  {'\n'}  <span className="text-[#8B5CF6] font-medium">client</span>{' '}
+                  GPT4o
+                  {'\n'}  <span className="text-[#8B5CF6] font-medium">prompt</span>{' '}
+                  #"
+                  {'\n'}    Extract the items and total from this receipt.
+                  {'\n'}    {'{{ ctx.output_format }}'}
+                  {'\n'}
+                  {'\n'}    Receipt: {'{{ img }}'}
+                  {'\n'}  "#
+                  {'\n'}
+                  {'}'}
+                </code>
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Installation - under playground */}
-      <div className="mx-auto max-w-[80rem] px-4 sm:px-6 md:px-8 mt-8 sm:mt-10">
-        <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] rounded-xl border-2 border-violet-500/50 bg-violet-500/5 px-5 py-4 ring-2 ring-violet-500/20 sm:px-6 sm:py-5 dark:border-violet-400/50 dark:ring-violet-400/20">
-          <p className="mb-3 text-sm font-medium text-foreground sm:mb-4 sm:text-base">
-            Install BAML in one command
-          </p>
-          <p className="mb-4 text-xs text-muted-foreground sm:text-sm">
-            Pick your language and run the command below. BAML runs in your repo and generates type-safe clients for your app.
-          </p>
-          <ScriptCopyBtn
-            className="block w-full max-w-xl"
-            codeLanguage="bash"
-            commandMap={commandMap}
-            darkTheme="none"
-            lightTheme="none"
-            showMultiplePackageOptions={true}
-          />
-        </div>
-      </div>
-      </div>
-      <SphereMask />
     </section>
   );
 }

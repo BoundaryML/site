@@ -10,12 +10,12 @@ const customerLogos = [
   { alt: 'PMMI', src: '/testimonials/logos/pmmi.png', type: 'local' as const },
   { alt: 'Product Hunt', src: '/testimonials/logos/product-hunt.png', type: 'local' as const },
   { alt: 'SAP', src: '/testimonials/logos/sapLogo.png', type: 'local' as const },
-  { alt: 'EY', src: '', type: 'brandfetch' as const, domain: 'ey.com' },
+  { alt: 'EY', src: '/testimonials/logos/ey.png', type: 'local' as const },
   { alt: 'AI Tinkerers', src: '/testimonials/logos/ai-tinkerers.png', type: 'local' as const },
   { alt: 'Cerebral Valley', src: '/testimonials/logos/cerebral.png', type: 'local' as const },
-  { alt: 'AMD', src: '', type: 'brandfetch' as const, domain: 'amd.com' },
+  { alt: 'AMD', src: '/testimonials/logos/amd.png', type: 'local' as const },
   { alt: 'Vetrec', src: '/testimonials/logos/vetrec.png', type: 'local' as const },
-  { alt: 'AWS', src: '', type: 'brandfetch' as const, domain: 'aws.amazon.com' },
+  { alt: 'AWS', src: '/testimonials/logos/aws.png', type: 'local' as const },
 ];
 
 function LogoCell({ alt, src }: { alt: string; src: string }) {

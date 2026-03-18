@@ -1,7 +1,5 @@
 // @ts-expect-error no types
 import remarkA11yEmoji from '@fec/remark-a11y-emoji';
-import rehypeShiki from '@shikijs/rehype';
-import { bundledLanguages } from 'shiki';
 import { type CompileMDXResult, compileMDX } from 'next-mdx-remote/rsc';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
@@ -12,10 +10,6 @@ import remarkToc from 'remark-toc';
 import { mdxComponents } from '../../../lib/mdx';
 import rehypePreserveCodeProps from '../../../lib/mdx/rehype-preserve-code-props';
 import remarkCodeMetadata from '../../../lib/mdx/remark-code-metadata';
-import {
-  bamlJinjaTextmate,
-  bamlTextmate,
-} from '../../../lib/mdx/shiki-grammars';
 
 // Rehype plugin to fix invalid HTML nesting (e.g., <ol> inside <p>)
 function rehypeFixInvalidNesting() {
@@ -69,17 +63,6 @@ export async function PostBody({ children }: { children: string }) {
           rehypeAutolinkHeadings,
           [rehypePreserveCodeProps, { tagName: 'pre' }],
           rehypeFixInvalidNesting,
-          [
-            rehypeShiki,
-            {
-              themes: {
-                dark: 'github-dark',
-                light: 'github-light',
-              },
-              defaultColor: 'dark',
-              langs: [...Object.values(bundledLanguages), bamlTextmate, bamlJinjaTextmate],
-            },
-          ],
           [rehypeStringify as () => void, { allowDangerousHtml: true }],
         ],
         remarkPlugins: [

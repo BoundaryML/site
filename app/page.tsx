@@ -1,11 +1,10 @@
-import { CompanyShowcase } from '@/components/company-showcase';
 import { FooterSection } from '@/components/footer-section';
 import { BentoSection } from '@/components/landing/bento-section';
 import { CTASection } from '@/components/landing/cta-section';
 import { FeatureSection } from '@/components/landing/feature-section';
 import HeroSection, { LogoSection } from '@/components/landing/hero-section';
+import { VariantHome } from '@/components/landing/variant-home';
 import { StoryTimeline } from '@/components/landing/story-timeline';
-import { Navbar } from '@/components/navbar';
 import { TestimonialSection } from '@/components/testimonial-section';
 import { getNextEvent } from '@/lib/luma';
 
@@ -14,15 +13,12 @@ export default async function Page() {
   const nextEvent = await getNextEvent();
 
   return (
-    <>
-      <div className="max-w-7xl mx-auto border-x relative">
-        <Navbar />
-      </div>
-      <main className="flex flex-col items-center min-h-screen w-full gap-12 sm:gap-20">
-        <HeroSection nextEvent={nextEvent} />
-      </main>
-      <div className="relative z-10 max-w-7xl mx-auto border-x flex flex-col items-center w-full gap-12 sm:gap-20">
-        <CompanyShowcase />
+    <div className="w-full bg-background text-foreground">
+      {/* Variant UI shell (Nav + Hero + Statement + Exhibit) */}
+      <VariantHome />
+
+      {/* Existing marketing sections appended after Variant layout */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[100rem] flex-col items-center gap-12 border-x border-border bg-background sm:gap-20">
       {/* Story timeline - history of languages (scroll to explore) */}
         <section
           className="w-full relative"
@@ -45,6 +41,6 @@ export default async function Page() {
         <CTASection />
         <FooterSection />
       </div>
-    </>
+    </div>
   );
 }
