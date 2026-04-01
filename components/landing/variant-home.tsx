@@ -2,8 +2,19 @@
 
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { CompanyShowcase } from '@/components/company-showcase';
-import { HeroPlaygroundMockup } from './hero-playground-mockup';
+import dynamic from 'next/dynamic';
+
+const BamlPlayground = dynamic(
+  () => import('@/playground/BamlPlayground').then((m) => m.BamlPlayground),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center min-h-[400px] text-muted-foreground text-sm">
+        Loading playground...
+      </div>
+    ),
+  },
+);
 import { ScriptCopyBtn } from '../magicui/script-copy-btn';
 import { siteConfig } from '@/app/_lib/config';
 
@@ -32,8 +43,6 @@ const customStyles = {
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#E8E3DB',
-    fontFamily:
-      "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
     color: '#141414',
     fontSize: '14px',
     lineHeight: '1.5',
@@ -67,11 +76,10 @@ const customStyles = {
   hero: {
     display: 'grid',
     gridTemplateColumns: '1fr 3fr',
-    minHeight: '80vh',
     borderBottom: '1px solid #C8C2B7',
   } as React.CSSProperties,
   heroLeft: {
-    padding: '48px',
+    padding: '48px 48px 64px',
     display: 'flex',
     flexDirection: 'column' as const,
     justifyContent: 'space-between',
@@ -95,21 +103,17 @@ const customStyles = {
     alignItems: 'center',
   },
   h1: {
-    fontSize: 'clamp(2.1rem, 4vw, 3.2rem)',
-    fontWeight: 700,
-    lineHeight: '1.1',
+    fontSize: 'clamp(1.6rem, 3vw, 2.4rem)',
+    fontWeight: 600,
+    lineHeight: '1.2',
     letterSpacing: '-0.02em',
     marginBottom: '2rem',
-    fontFamily:
-      "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   } as React.CSSProperties,
   h2: {
     fontSize: 'clamp(2rem, 4vw, 3.5rem)',
     fontWeight: 500,
     lineHeight: '1.2',
     letterSpacing: '-0.02em',
-    fontFamily:
-      "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   } as React.CSSProperties,
   p: {
     marginBottom: '1rem',
@@ -139,13 +143,14 @@ const customStyles = {
     opacity: 0.6,
   },
   heroRight: {
-    padding: '48px',
+    padding: '24px 32px',
     backgroundColor: 'rgba(255,255,255,0.3)',
     backgroundImage:
       "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 5c0 0-5 5-5 10s5 10 5 10 5-5 5-10-5-10-5-10zm0 2c2 2 3 6 3 8s-1 6-3 8-3-6-3-8 1-6 3-8z' fill='%237C3AED' fill-opacity='0.05'/%3E%3C/svg%3E\")",
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
+    overflow: 'hidden',
   } as React.CSSProperties,
   codeWindow: {
     width: '100%',
@@ -255,31 +260,20 @@ const customStyles = {
     color: '#141414',
   },
   statementSection: {
-    padding: '80px 48px',
+    padding: '48px 48px',
     borderBottom: '1px solid #C8C2B7',
   },
   statementText: {
-    maxWidth: '900px',
-    marginBottom: '80px',
+    maxWidth: '700px',
+    margin: '0 auto 48px',
+    textAlign: 'center' as const,
   },
   statementP: {
-    fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-    lineHeight: '1.3',
+    fontSize: 'clamp(1.1rem, 2vw, 1.6rem)',
+    lineHeight: '1.4',
     fontWeight: 300,
-    marginBottom: '1rem',
-    fontFamily:
-      "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+    marginBottom: '0.5rem',
   } as React.CSSProperties,
-  highlightPurple: {
-    backgroundColor: '#7C3AED',
-    color: '#E8E3DB',
-    padding: '0 0.2em',
-    borderRadius: '2px',
-    fontWeight: 600,
-  },
-  textPurple: {
-    color: '#7C3AED',
-  },
   featureIndex: {
     display: 'flex',
     flexDirection: 'column' as const,
@@ -316,13 +310,7 @@ const customStyles = {
   exhibitTitle: {
     fontSize: '2rem',
     fontWeight: 500,
-    fontFamily:
-      "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   } as React.CSSProperties,
-  exhibitLabel: {
-    fontSize: '12px',
-    textTransform: 'uppercase' as const,
-  },
   exhibitGrid: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
@@ -477,16 +465,24 @@ const HeroSection = () => {
                 lightTheme="none"
                 showMultiplePackageOptions={false}
               />
+              <p className="mt-4 text-[10px] uppercase tracking-[0.15em] text-muted-foreground/60 leading-relaxed">
+                Trusted by developers at
+                <br />
+                {['SAP', 'AWS', 'AMD', 'EY', 'Product Hunt', 'Aer Compliance', 'PMMI', 'Cerebral Valley'].join(' · ')}
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="hero-right-responsive"
+        className="hero-right-responsive relative"
         style={customStyles.heroRight}
       >
-        <div className="w-full max-w-3xl">
-          <HeroPlaygroundMockup />
+        <div className="absolute inset-0 p-6 flex flex-col">
+          <div className="flex-1 min-h-0">
+            <BamlPlayground compact />
+          </div>
+
         </div>
       </div>
     </section>
@@ -532,13 +528,10 @@ const StatementSection = () => (
   <section style={customStyles.statementSection}>
     <div style={customStyles.statementText}>
       <p style={customStyles.statementP}>
-        Python and Typescript were{' '}
-        <span style={customStyles.highlightPurple}>built for people.</span>
+        Python and Typescript were built for people.
       </p>
       <p style={customStyles.statementP}>
-        BAML is an{' '}
-        <strong style={customStyles.textPurple}>agent-optimized</strong>{' '}
-        programming language.
+        BAML is an <strong>agent-optimized</strong> programming language.
       </p>
     </div>
     <FeatureIndex />
@@ -643,10 +636,7 @@ const BamlCodeWindow = () => (
 const ExhibitSection = () => (
   <section>
     <div style={customStyles.exhibitHeader}>
-      <h2 style={customStyles.exhibitTitle}>Exhibit // Typescript → BAML</h2>
-      <div style={customStyles.exhibitLabel}>
-        Exhibit // <span style={customStyles.refMark}>01 )</span>
-      </div>
+      <h2 style={customStyles.exhibitTitle}>Typescript → BAML</h2>
     </div>
     <div
       className="exhibit-grid-responsive"
@@ -695,9 +685,6 @@ export function VariantHome() {
       <div style={customStyles.container}>
         <Nav />
         <HeroSection />
-        <div className="border-t border-border px-8 py-10">
-          <CompanyShowcase />
-        </div>
         <StatementSection />
         <ExhibitSection />
       </div>

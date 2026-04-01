@@ -30,7 +30,7 @@ export const Highlight = ({
   return (
     <span
       className={cn(
-        'p-1 py-0.5 font-medium dark:font-semibold text-secondary',
+        'p-1 py-0.5 font-medium dark:font-semibold text-purple-600 dark:text-purple-400',
         className,
       )}
     >
@@ -268,13 +268,7 @@ export const siteConfig = {
           </div>
         ),
         id: 1,
-        title: (
-          <div>
-            Define your{' '}
-            <span className="line-through text-destructive/80">prompts</span>{' '}
-            <span className="text-secondary">functions</span>
-          </div>
-        ),
+        title: 'Define your functions',
         // component: (
         //   <VSCodeMock
         //     className="w-full"
@@ -294,13 +288,7 @@ export const siteConfig = {
         content:
           'Do it in VSCode, or the editor of your choice. Or in CI/CD with baml-cli test',
         id: 2,
-        title: (
-          <div>
-            Test your{' '}
-            <span className="line-through text-destructive/80">prompts</span>{' '}
-            <span className="text-secondary">functions</span>
-          </div>
-        ),
+        title: 'Test your functions',
         video: '/test-agent.mp4',
       },
       {
@@ -366,21 +354,14 @@ export const siteConfig = {
             <div className="flex flex-row gap-1 items-center">
               converts BAML functions to native functions in{' '}
               <WordRotate
-                className="text-secondary"
+                className="text-purple-600 dark:text-purple-400"
                 words={['Python', 'TypeScript', 'Ruby', 'Go']}
               />
             </div>
           </div>
         ),
         id: 3,
-        title: (
-          <div>
-            Call your{' '}
-            <span className="line-through text-destructive/80">prompts</span>{' '}
-            <span className="text-secondary">functions</span> from any
-            programming language you love
-          </div>
-        ),
+        title: 'Call your functions from any language',
       },
       {
         component: (
@@ -395,11 +376,7 @@ export const siteConfig = {
           </div>
         ),
         id: 4,
-        title: (
-          <div>
-            Deploy your <span className="text-secondary">AI</span>
-          </div>
-        ),
+        title: 'Deploy your AI',
       },
       // {
       //   component: <IterateTestDemo />,

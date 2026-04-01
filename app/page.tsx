@@ -2,7 +2,7 @@ import { FooterSection } from '@/components/footer-section';
 import { BentoSection } from '@/components/landing/bento-section';
 import { CTASection } from '@/components/landing/cta-section';
 import { FeatureSection } from '@/components/landing/feature-section';
-import HeroSection, { LogoSection } from '@/components/landing/hero-section';
+import HeroSection from '@/components/landing/hero-section';
 import { VariantHome } from '@/components/landing/variant-home';
 import { StoryTimeline } from '@/components/landing/story-timeline';
 import { TestimonialSection } from '@/components/testimonial-section';
@@ -19,23 +19,13 @@ export default async function Page() {
 
       {/* Existing marketing sections appended after Variant layout */}
       <div className="relative z-10 mx-auto flex w-full max-w-[100rem] flex-col items-center gap-12 border-x border-border bg-background sm:gap-20">
-      {/* Story timeline - history of languages (scroll to explore) */}
-        <section
-          className="w-full relative"
-          id="story"
-          aria-label="A brief history of languages"
-        >
-          <div className="mx-auto max-w-5xl px-4 pb-1 pt-2 sm:px-8 md:px-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              A brief history of languages
-            </h2>
-          </div>
+        {/* Story timeline */}
+        <section className="w-full relative" id="story">
           <StoryTimeline />
         </section>
 
         <FeatureSection />
         <BentoSection />
-        <LogoSection />
         <TestimonialSection />
         {/* <FAQSection /> */}
         <CTASection />
