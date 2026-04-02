@@ -23,6 +23,8 @@ export interface ParticleImageProps {
   jitter?: number;
   /** Mouse repulsion radius in logical pixels. 0 to disable */
   hoverRepel?: number;
+  /** Spring acceleration toward target. Lower = slower drift. Default 0.055 */
+  spring?: number;
   className?: string;
   style?: CSSProperties;
 }
@@ -61,6 +63,7 @@ export default function ParticleImage({
   streamStyle = 'cascade',
   jitter = 0.5,
   hoverRepel = 80,
+  spring = 0.055,
   className,
   style,
 }: ParticleImageProps) {
@@ -239,15 +242,15 @@ export default function ParticleImage({
           const jy = Math.cos(t * 1.1 + p.phase + 1.57) * jitter;
 
           if (p.arrived) {
-            p.vx += (p.tx + jx - p.x) * SPRING * 0.4;
-            p.vy += (p.ty + jy - p.y) * SPRING * 0.4;
+            p.vx += (p.tx + jx - p.x) * spring * 0.4;
+            p.vy += (p.ty + jy - p.y) * spring * 0.4;
           } else {
             const dxT = p.tx - p.x;
             const dyT = p.ty - p.y;
             // Suppress jitter while still noticeably in-flight
             const jScale = dxT * dxT + dyT * dyT > 100 ? 0 : 0.35;
-            p.vx += (p.tx + jx * jScale - p.x) * SPRING;
-            p.vy += (p.ty + jy * jScale - p.y) * SPRING;
+            p.vx += (p.tx + jx * jScale - p.x) * spring;
+            p.vy += (p.ty + jy * jScale - p.y) * spring;
           }
 
           // Mouse repulsion
@@ -320,7 +323,7 @@ export default function ParticleImage({
       particlesRef.current = [];
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src, width, height, density, particleSize, streamDuration, streamStyle, jitter, hoverRepel]);
+  }, [src, width, height, density, particleSize, streamDuration, streamStyle, jitter, hoverRepel, spring]);
 
   return (
     <canvas

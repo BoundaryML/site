@@ -43,12 +43,75 @@ const ERA_IMAGES: Record<string, string> = {
 
 function EraCard({ node, index }: { node: (typeof timeline)[number]; index: number }) {
   const image = ERA_IMAGES[node.label];
-  const isEven = index % 2 === 0;
+  const isOdd = index % 2 !== 0;
   const isBaml = node.label === 'BAML';
-  return (
+
+  const textCol = (
     <div
-      className={`relative z-10 mx-auto w-full max-w-4xl py-10 flex flex-col gap-8 sm:flex-row sm:items-center ${isEven ? '' : 'sm:flex-row-reverse'}`}
+      style={{
+        flex: '0 0 60%',
+        maxWidth: '60%',
+        paddingLeft: isOdd ? (node.label === 'Java, JavaScript' || node.label === 'Python' ? 96 : 64) : 0,
+        paddingRight: isOdd ? 0 : 64,
+      }}
     >
+      <h2
+        className="font-bold tracking-tight"
+        style={{
+          fontSize: isBaml ? 'clamp(2rem, 5vw, 3rem)' : 'clamp(1.5rem, 3vw, 2.25rem)',
+          color: isBaml ? '#8b5cf6' : undefined,
+        }}
+      >
+        {node.label}
+      </h2>
+      <p
+        className="text-sm font-normal leading-loose text-muted-foreground"
+        style={{ marginTop: 12, maxWidth: 400 }}
+      >
+        {node.body}
+      </p>
+    </div>
+  );
+
+  const iconCol = (
+    <div
+      style={{
+        flex: '0 0 40%',
+        maxWidth: '40%',
+        paddingLeft: isOdd ? 0 : (node.label === 'C, Unix' || node.label === 'TypeScript' ? 36 : 64),
+        paddingRight: isOdd ? (node.label === 'C, Unix' || node.label === 'TypeScript' ? 36 : 64) : 0,
+        paddingTop: 40,
+        paddingBottom: 40,
+        display: 'flex',
+        justifyContent: 'center',
+        // bg-background color to mask the line behind it
+        backgroundColor: 'var(--background)',
+        marginTop: -20,
+      }}
+    >
+      {image && (
+        <div style={{ maxWidth: 400, width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div style={isBaml ? { filter: 'drop-shadow(0 0 12px rgba(139,92,246,0.45))' } : undefined}>
+            <LazyParticleImage
+              src={image}
+              width={350}
+              height={350}
+              jitter={0.15}
+              hoverRepel={5}
+              density={6}
+              particleSize={3}
+              streamDuration={1.2}
+              streamStyle={isBaml ? 'radial' : 'cascade'}
+              spring={0.02}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="relative z-10 mx-auto w-full max-w-4xl">
       {isBaml && (
         <div
           aria-hidden
@@ -58,22 +121,9 @@ function EraCard({ node, index }: { node: (typeof timeline)[number]; index: numb
           }}
         />
       )}
-      <div className="flex-1">
-        <h2
-          className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl"
-          style={isBaml ? { color: '#8b5cf6' } : undefined}
-        >
-          {node.label}
-        </h2>
-        <p className="mt-4 text-sm font-normal leading-loose text-muted-foreground">
-          {node.body}
-        </p>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+        {isOdd ? <>{iconCol}{textCol}</> : <>{textCol}{iconCol}</>}
       </div>
-      {image && (
-        <div className="shrink-0 flex justify-center">
-          <LazyParticleImage src={image} width={300} height={300} jitter={0.15} hoverRepel={5} density={5} particleSize={3} streamDuration={1.3} />
-        </div>
-      )}
     </div>
   );
 }
@@ -81,17 +131,25 @@ function EraCard({ node, index }: { node: (typeof timeline)[number]; index: numb
 export function StoryTimeline() {
   return (
     <div className="relative w-full px-4 sm:px-8 md:px-12">
-      {/* Vertical dashed center line */}
+      {/* Vertical line: 1px wide, gradient from near-transparent gray → BAML purple.
+          mask-image punches the dash pattern so spacing feels architectural. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-px"
+        className="pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2"
         style={{
-          backgroundImage: 'repeating-linear-gradient(to bottom, #d1d5db 0px, #d1d5db 6px, transparent 6px, transparent 14px)',
+          width: 1,
+          background: 'linear-gradient(to bottom, rgba(209,213,219,0.9) 0%, rgba(209,213,219,0.9) 55%, rgba(139,92,246,0.9) 80%, rgba(139,92,246,1) 100%)',
+          maskImage: 'repeating-linear-gradient(to bottom, black 0px, black 4px, transparent 4px, transparent 18px)',
+          WebkitMaskImage: 'repeating-linear-gradient(to bottom, black 0px, black 4px, transparent 4px, transparent 18px)',
         }}
       />
-      {timeline.map((node, i) => (
-        <EraCard key={node.era} node={node} index={i} />
-      ))}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 64 }}>
+        {timeline.map((node, i) => (
+          <div key={node.era} style={node.label === 'BAML' ? { marginTop: 36 } : undefined}>
+            <EraCard node={node} index={i} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
