@@ -527,7 +527,7 @@ export const siteConfig = {
     ctaHref: '/#story',
     ctaText: 'Explore the timeline',
     teaser:
-      'Every era of computing got a language that fit. C for the machine. Java and JavaScript for the network. TypeScript for scale. Now LLMs are a new kind of compute—and we’re still gluing them in with strings. BAML is the first language designed with LLMs in mind.',
+      'Every era of computing got a language that fit. C for the machine. Java and JavaScript for the network. TypeScript for scale. Now LLMs are a new kind of compute—and we\'re still gluing them in with strings. BAML is the first language designed with LLMs in mind.',
     title: 'A language for the future of AI',
     timeline: [
       { era: '1970s–80s', label: 'C, Unix' },
@@ -547,23 +547,28 @@ export const siteConfig = {
       },
       {
         era: '1990s–2000s',
-        body: 'Java and JavaScript gave us languages for the network and the browser.',
+        body: 'Java and JavaScript gave us languages for the network and the web.',
         label: 'Java, JavaScript',
       },
       {
         era: '2010s',
-        body: 'TypeScript gave us a language for scale and safety when JavaScript wasn’t enough.',
+        body: 'TypeScript gave us type safety at scale.',
         label: 'TypeScript',
       },
       {
-        era: 'Today',
-        body: 'LLMs are a new kind of compute. We’re still gluing them in with strings and hope. BAML is the first language designed with LLMs in mind—cognitive coding for the future of software.',
+        era: '2020s',
+        body: 'Python became the language of AI — but it was never designed for it.',
+        label: 'Python',
+      },
+      {
+        era: 'Now',
+        body: 'LLMs are a new kind of compute. We\u2019re still gluing them in with strings and hope. BAML is the first language designed with LLMs in mind.',
         label: 'BAML',
       },
     ],
     title: 'Our story',
     whyItMatters:
-      'Cognitive coding means LLM capabilities become first-class functions: same repo, same toolchain, same reliability you expect from the rest of your stack. That’s how we get to software that humans trust.',
+      'Cognitive coding means LLM capabilities become first-class functions: same repo, same toolchain, same reliability you expect from the rest of your stack. That\'s how we get to software that humans trust.',
   },
   hero: {
     badge: 'Free During Beta',
