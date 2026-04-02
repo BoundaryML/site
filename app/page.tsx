@@ -25,11 +25,6 @@ export default async function Page() {
           id="story"
           aria-label="A brief history of languages"
         >
-          <div className="mx-auto max-w-5xl px-4 pb-1 pt-2 sm:px-8 md:px-12">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              A brief history of languages
-            </h2>
-          </div>
           <StoryTimeline />
         </section>
 
