@@ -500,48 +500,6 @@ export const siteConfig = {
     ],
     title: 'Built for the Future of AI',
   },
-  storySection: {
-    ctaHref: '/#story',
-    ctaText: 'Explore the timeline',
-    teaser:
-      'Every era of computing got a language that fit. C for the machine. Java and JavaScript for the network. TypeScript for scale. Now LLMs are a new kind of compute—and we’re still gluing them in with strings. BAML is the first language designed with LLMs in mind.',
-    title: 'A language for the future of AI',
-    timeline: [
-      { era: '1970s–80s', label: 'C, Unix' },
-      { era: '1990s–2000s', label: 'Java, JavaScript' },
-      { era: '2010s', label: 'TypeScript' },
-      { era: 'Now', label: 'BAML' },
-    ],
-  },
-  storyPage: {
-    mission:
-      'We believe AI needs a language of its own—not strings and APIs, but cognitive functions that fit the way software is built. Code that agents write. Software that humans trust.',
-    timeline: [
-      {
-        era: '1970s–80s',
-        body: 'C and Unix gave us languages for the machine and the system.',
-        label: 'C, Unix',
-      },
-      {
-        era: '1990s–2000s',
-        body: 'Java and JavaScript gave us languages for the network and the browser.',
-        label: 'Java, JavaScript',
-      },
-      {
-        era: '2010s',
-        body: 'TypeScript gave us a language for scale and safety when JavaScript wasn’t enough.',
-        label: 'TypeScript',
-      },
-      {
-        era: 'Today',
-        body: 'LLMs are a new kind of compute. We’re still gluing them in with strings and hope. BAML is the first language designed with LLMs in mind—cognitive coding for the future of software.',
-        label: 'BAML',
-      },
-    ],
-    title: 'Our story',
-    whyItMatters:
-      'Cognitive coding means LLM capabilities become first-class functions: same repo, same toolchain, same reliability you expect from the rest of your stack. That’s how we get to software that humans trust.',
-  },
   hero: {
     badge: 'Free During Beta',
     badgeIcon: <span>🔥</span>,
@@ -659,6 +617,53 @@ export const siteConfig = {
       },
     ],
     title: 'Simple, transparent pricing',
+  },
+  storyPage: {
+    mission:
+      'We believe AI needs a language of its own—not strings and APIs, but cognitive functions that fit the way software is built. Code that agents write. Software that humans trust.',
+    timeline: [
+      {
+        body: 'C and Unix gave us languages for the machine and the system.',
+        era: '1970s–80s',
+        label: 'C, Unix',
+      },
+      {
+        body: 'Java and JavaScript gave us languages for the network and the web.',
+        era: '1990s–2000s',
+        label: 'Java, JavaScript',
+      },
+      {
+        body: 'TypeScript gave us type safety at scale.',
+        era: '2010s',
+        label: 'TypeScript',
+      },
+      {
+        body: 'Python became the language of AI — but it was never designed for it.',
+        era: '2020s',
+        label: 'Python',
+      },
+      {
+        body: 'LLMs are a new kind of compute. We\u2019re still gluing them in with strings and hope. BAML is the first language designed with LLMs in mind.',
+        era: 'Now',
+        label: 'BAML',
+      },
+    ],
+    title: 'Our story',
+    whyItMatters:
+      'Cognitive coding means LLM capabilities become first-class functions: same repo, same toolchain, same reliability you expect from the rest of your stack. That\u2019s how we get to software that humans trust.',
+  },
+  storySection: {
+    ctaHref: '/#story',
+    ctaText: 'Explore the timeline',
+    teaser:
+      'Every era of computing got a language that fit. C for the machine. Java and JavaScript for the network. TypeScript for scale. Now LLMs are a new kind of compute—and we\u2019re still gluing them in with strings. BAML is the first language designed with LLMs in mind.',
+    timeline: [
+      { era: '1970s–80s', label: 'C, Unix' },
+      { era: '1990s–2000s', label: 'Java, JavaScript' },
+      { era: '2010s', label: 'TypeScript' },
+      { era: 'Now', label: 'BAML' },
+    ],
+    title: 'A language for the future of AI',
   },
   testimonials: [
     {

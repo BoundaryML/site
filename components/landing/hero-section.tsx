@@ -65,56 +65,42 @@ export function LogoSection() {
   ];
 
   return (
-    <div className="mt-16 sm:mt-24 mb-8 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto px-4 sm:px-0">
-        {/* Effect works everywhere */}
-        <div className="text-center">
-          <p className="font-medium text-muted-foreground mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
+    <div className="mt-16 sm:mt-24 mb-8 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms] w-full px-4 sm:px-8">
+      <div className="flex flex-col gap-10 max-w-5xl mx-auto">
+        {/* LLM providers */}
+        <div>
+          <p className="font-medium text-muted-foreground mb-6 tracking-wide text-sm text-center">
             Works with every LLM provider
           </p>
-          <div className="flex justify-center items-center gap-3 sm:gap-6 flex-wrap">
+          <div className="flex justify-between items-center">
             {logos.map((logo, index) => (
-              <div
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-border flex items-center justify-center transition-all duration-300 hover:bg-border/50 hover:scale-110"
+              <img
                 key={logo.name}
-                style={{
-                  animationDelay: `${900 + index * 100}ms`,
-                }}
-              >
-                <img
-                  alt={logo.alt}
-                  className="w-5 h-5 sm:w-6 sm:h-6 object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                  src={logo.url}
-                />
-              </div>
+                alt={logo.alt}
+                src={logo.url}
+                className="h-7 sm:h-8 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                style={{ animationDelay: `${900 + index * 100}ms` }}
+              />
             ))}
           </div>
-          {/* <p className="text-sm text-gray-500 mt-4">and more</p> */}
         </div>
 
-        {/* And with everything */}
-        <div className="text-center">
-          <p className="font-medium text-muted-foreground mb-4 sm:mb-6 tracking-wide text-sm sm:text-base">
+        {/* Languages */}
+        <div>
+          <p className="font-medium text-muted-foreground mb-6 tracking-wide text-sm text-center">
             And every language
           </p>
-          <div className="flex justify-center items-center gap-3 sm:gap-6 flex-wrap">
+          <div className="flex justify-between items-center">
             {frameworks.map((framework, index) => (
-              <div
-                className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-border flex items-center justify-center transition-all duration-300 hover:bg-border/50 hover:scale-110"
+              <img
                 key={framework.name}
-                style={{
-                  animationDelay: `${900 + index * 100}ms`,
-                }}
-              >
-                <img
-                  alt={framework.alt}
-                  className="w-5 h-5 sm:w-6 sm:h-6 object-contain filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                  src={framework.url}
-                />
-              </div>
+                alt={framework.alt}
+                src={framework.url}
+                className="h-7 sm:h-8 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                style={{ animationDelay: `${900 + index * 100}ms` }}
+              />
             ))}
           </div>
-          {/* <p className="text-sm text-gray-500 mt-4">and more</p> */}
         </div>
       </div>
     </div>
