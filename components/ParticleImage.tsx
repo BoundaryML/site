@@ -121,7 +121,6 @@ export default function ParticleImage({
     let cancelled = false;
 
     const img = new Image();
-    img.crossOrigin = 'anonymous';
 
     img.onload = () => {
       if (cancelled) return;
@@ -136,7 +135,14 @@ export default function ParticleImage({
       off.height = sH;
       const offCtx = off.getContext('2d')!;
       offCtx.drawImage(img, 0, 0, sW, sH);
-      const { data } = offCtx.getImageData(0, 0, sW, sH);
+      let data: Uint8ClampedArray;
+      try {
+        data = offCtx.getImageData(0, 0, sW, sH).data;
+      } catch (e) {
+        // Retry with crossOrigin if tainted
+        console.error('[ParticleImage] getImageData failed, retrying with crossOrigin', e);
+        return;
+      }
 
       // ── 2. Build raw particle list (skip transparent pixels) ─────────────
       type RawP = { tx: number; ty: number; color: number };

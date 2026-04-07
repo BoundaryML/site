@@ -73,7 +73,7 @@ const DEFAULT_BAML = `// BAML Playground - Try editing and running!
 client StepFun {
   provider openai-generic
   options {
-    base_url "https://openrouter.ai/api"
+    base_url "https://openrouter.ai/api/v1"
     model "stepfun/step-3.5-flash:free"
     api_key env.OPENROUTER_API_KEY
   }
@@ -404,17 +404,17 @@ export function BamlPlayground({ compact }: BamlPlaygroundProps = {}) {
               notification = mapsToRecordsDeep(notification);
               if (notification.type === 'updateProject') {
                 projectPathRef.current = notification.project;
-                setFunctions(notification.update.functions);
-                setTests(notification.update.tests);
-                setDiagnostics(notification.update.diagnostics);
+                setFunctions(notification.update.functions ?? []);
+                setTests(notification.update.tests ?? []);
+                setDiagnostics(notification.update.diagnostics ?? []);
                 // Auto-select first function if nothing selected yet
                 setSelectedFn((prev) => {
                   if (prev) return prev;
-                  const fns = notification.update.functions;
+                  const fns = notification.update.functions ?? [];
                   if (fns.length === 0) return null;
                   const fn = fns[0]!;
                   // Also load test args if available
-                  const test = notification.update.tests.find(
+                  const test = (notification.update.tests ?? []).find(
                     (t: TestInfo) => t.functionName === fn.name,
                   );
                   if (test) {
