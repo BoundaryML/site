@@ -27,7 +27,7 @@ export function NextEpisodeLink({
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 w-full">
           <div className="bg-gray-800 text-white px-2 py-1 rounded-md text-xs font-medium whitespace-nowrap flex-shrink-0 text-center w-full sm:w-auto">
-            {isLiveEvent
+            {/* {isLiveEvent
               ? 'LIVE NOW'
               : nextEvent
                 ? new Date(nextEvent.start_at).toLocaleDateString('en-US', {
@@ -41,7 +41,7 @@ export function NextEpisodeLink({
                     minute: '2-digit',
                     timeZoneName: 'short',
                   })
-                : 'TH JUL 31 @ 9 AM PT'}
+                : 'TH JUL 31 @ 9 AM PT'} */}
           </div>
           <div className="flex-1 min-w-0 flex items-center justify-between sm:justify-start gap-2">
             <span className="text-sm font-medium leading-tight block">
