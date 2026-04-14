@@ -53,12 +53,17 @@ export const TechniqueTitle: React.FC<{
   type?: 'prompt' | 'model' | 'parser' | ('prompt' | 'model' | 'parser')[];
   title: string;
   count: number;
-  takeaways: {
+  takeaways?: {
     score: number | React.ReactNode;
     notes: string | React.ReactNode;
   };
   children?: React.ReactNode;
 }> = ({ type, title, count, children, takeaways }) => {
+  const safeTakeaways = takeaways ?? {
+    notes: 'No notes available.',
+    score: 'N/A',
+  };
+
   const renderTypeBadge = (type: 'prompt' | 'model' | 'parser') => (
     <div
       className={`flex rounded-md px-2 py-1 text-xs font-semibold text-white ${
@@ -126,9 +131,9 @@ export const TechniqueTitle: React.FC<{
       )}
       <div>
         <div>
-          <b>My Personal Rating:</b> {takeaways.score} / 5
+          <b>My Personal Rating:</b> {safeTakeaways.score} / 5
         </div>
-        <div>{takeaways.notes}</div>
+        <div>{safeTakeaways.notes}</div>
       </div>
       {/* <table className="min-w-full divide-y divide-gray-200">
         <tbody className="divide-y divide-gray-200 bg-white">
