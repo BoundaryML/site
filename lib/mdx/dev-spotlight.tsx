@@ -25,7 +25,7 @@ interface SpotlightUser {
 }
 
 interface DevSpotlightProps {
-  users: SpotlightUser[];
+  users?: SpotlightUser[];
 }
 
 const UserCard = ({ user }: { user: SpotlightUser }) => (
@@ -102,7 +102,7 @@ const UserCard = ({ user }: { user: SpotlightUser }) => (
   </div>
 );
 
-export function DevSpotlight({ users }: DevSpotlightProps) {
+export function DevSpotlight({ users = [] }: DevSpotlightProps) {
   const [currentSlide, setCurrentSlide] = React.useState(0);
 
   return (

@@ -1,5 +1,3 @@
-import { env } from './env';
-
 export interface LumaEvent {
   api_id: string;
   calendar_api_id: string;
@@ -32,29 +30,44 @@ interface LumaApiResponse {
   entries: LumaApiEntry[];
 }
 
+interface LumaClient {
+  listEvents: () => Promise<Response>;
+}
+
+function getLumaClient(): LumaClient | null {
+  const lumaApiKey = process.env.LUMA_API_KEY;
+
+  if (!lumaApiKey) {
+    console.warn('LUMA_API_KEY not found in environment variables');
+    return null;
+  }
+
+  return {
+    listEvents: async () =>
+      fetch(
+        'https://public-api.luma.com/v1/calendar/list-events?sort_direction=desc',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-luma-api-key': lumaApiKey,
+          },
+          method: 'GET',
+          // Cache for 60 minutes
+          next: { revalidate: 3600 },
+        },
+      ),
+  };
+}
+
 export async function getNextEvent(): Promise<LumaEvent | null> {
   try {
-    // Get the Luma API key from environment variables
-    const lumaApiKey = env.LUMA_API_KEY;
-
-    if (!lumaApiKey) {
-      console.warn('LUMA_API_KEY not found in environment variables');
+    const lumaClient = getLumaClient();
+    if (!lumaClient) {
       return null;
     }
 
     // Fetch events from Luma API with caching
-    const response = await fetch(
-      'https://public-api.luma.com/v1/calendar/list-events?sort_direction=desc',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-luma-api-key': lumaApiKey,
-        },
-        method: 'GET',
-        // Cache for 60 minutes
-        next: { revalidate: 3600 },
-      },
-    );
+    const response = await lumaClient.listEvents();
 
     if (!response.ok) {
       console.error('Luma API error:', response.status, response.statusText);
