@@ -28,20 +28,11 @@ export const metadata: Metadata = {
     url: 'https://boundaryml.com/podcast',
     siteName: 'BAML',
     type: 'website',
-    images: [
-      {
-        url: 'https://boundaryml.com/baml-og-background.png',
-        width: 1200,
-        height: 630,
-        alt: 'AI That Works - Weekly AI Development Sessions',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: '🦄 ai that works: Weekly AI Development Sessions',
     description: 'Join our weekly interactive sessions where we build real AI applications together.',
-    images: ['https://boundaryml.com/baml-og-background.png'],
     creator: '@boundaryml',
     site: '@boundaryml',
   },

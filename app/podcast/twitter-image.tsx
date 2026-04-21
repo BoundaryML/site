@@ -8,7 +8,8 @@ export { size, contentType };
 
 export default function Image() {
   return renderTitleImage({
-    title: 'BAML',
-    subtitle: 'Code that agents write. Software that humans trust.',
+    title: '🦄 ai that works',
+    subtitle:
+      'Weekly live coding with @hellovai & @dexhorthy · Tuesdays 10am PT',
   });
 }

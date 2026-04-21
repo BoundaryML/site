@@ -21,20 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
       url: blogUrl,
       siteName: 'BAML',
       type: 'website',
-      images: [
-        {
-          url: `${baseUrl}/baml-og-background.png`,
-          width: 1200,
-          height: 630,
-          alt: 'BAML Blog - AI Development Insights',
-        },
-      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: 'BAML Blog - Insights, Tutorials, and AI Development Updates',
       description: 'Explore the latest insights, tutorials, and updates from the BAML team.',
-      images: [`${baseUrl}/baml-og-background.png`],
       creator: '@boundaryml',
       site: '@boundaryml',
     },
