@@ -7,7 +7,7 @@ export default function Page() {
     { lang: 'assembly', who: 'for the machines' },
     { lang: 'c', who: 'for the humans' },
     { lang: 'java', who: 'for the OSs' },
-    { lang: 'javascript', who: 'for the browsers' },
+    { lang: 'javascript', who: 'for the webs' },
     { lang: 'python', who: 'for the newbies' },
     { lang: 'baml', who: 'for the agents' },
   ];
