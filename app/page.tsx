@@ -4,12 +4,12 @@ export const metadata = {
 
 export default function Page() {
   const timeline = [
-    { lang: 'assembly', who: 'for the machines' },
-    { lang: 'c', who: 'for the humans' },
-    { lang: 'java', who: 'for the OSs' },
-    { lang: 'javascript', who: 'for the webs' },
-    { lang: 'python', who: 'for the newbies' },
-    { lang: 'baml', who: 'for the agents' },
+    { lang: 'Assembly', who: 'for the machines' },
+    { lang: 'C', who: 'for the humans' },
+    { lang: 'Java', who: 'for the OSs' },
+    { lang: 'JavaScript', who: 'for the webs' },
+    { lang: 'Python', who: 'for the newbies' },
+    { lang: 'BAML', who: 'for the agents' },
   ];
 
   return (
@@ -62,7 +62,7 @@ export default function Page() {
           <ul className="timeline">
             {timeline.map((t) => (
               <li
-                className={t.lang === 'baml' ? 'now' : undefined}
+                className={t.lang === 'BAML' ? 'now' : undefined}
                 key={t.lang}
               >
                 <span className="lang">{t.lang}</span>
