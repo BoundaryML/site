@@ -32,17 +32,19 @@ export default function Page() {
             }
             .card {
               width: 100%;
-              max-width: 460px;
-              font-size: 16px;
+              max-width: 420px;
+              font-size: 13px;
               line-height: 1.6;
             }
             .lede { color: #111111; margin: 0 0 28px; }
             .timeline { list-style: none; margin: 0 0 28px; padding: 0; }
             .timeline li {
+              display: flex;
+              gap: 10px;
               padding: 2px 0;
             }
+            .timeline .lang { color: #111111; min-width: 96px; }
             .timeline .who { color: #999999; }
-            .timeline .lang { color: #111111; }
             .timeline li.now .who { color: #b794f4; }
             .timeline li.now .lang { color: #5b21b6; font-weight: 700; }
             .links { list-style: none; margin: 0; padding: 0; }
@@ -63,8 +65,8 @@ export default function Page() {
                 className={t.lang === 'baml' ? 'now' : undefined}
                 key={t.lang}
               >
-                <span className="who">{t.who},</span>{' '}
                 <span className="lang">{t.lang}</span>
+                <span className="who">{t.who}</span>
               </li>
             ))}
           </ul>
@@ -75,14 +77,18 @@ export default function Page() {
               <a href="https://boundaryml.com/discord">boundaryml.com/discord</a>
             </li>
             <li className="spaced">
-              Check out our github:{' '}
+              Check out our github:
+              <br />
               <a href="https://github.com/BoundaryML/baml">
                 github.com/BoundaryML/baml
               </a>
             </li>
             <li className="spaced">
-              Looking to use baml for structured outputs (current users), click
-              here: <a href="https://docs.boundaryml.com">docs.boundaryml.com</a>
+              Looking to use baml for structured
+              <br />
+              outputs (current users), click here:
+              <br />
+              <a href="https://docs.boundaryml.com">docs.boundaryml.com</a>
             </li>
           </ul>
         </div>
