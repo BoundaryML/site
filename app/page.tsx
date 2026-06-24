@@ -50,7 +50,7 @@ export default function Page() {
             .links { list-style: none; margin: 0; padding: 0; }
             .links li { padding: 2px 0; color: #999999; }
             .links li.spaced { margin-top: 18px; }
-            .links a { color: #111111; text-decoration: none; border-bottom: 1px solid #dddddd; }
+            .links a { color: #111111; text-decoration: none; border-bottom: 1px solid #dddddd; white-space: nowrap; }
             .links a:hover { border-bottom-color: #111111; }
           `,
         }}
@@ -73,7 +73,8 @@ export default function Page() {
 
           <ul className="links">
             <li>
-              Learn more about our new language:{' '}
+              Learn more about our new language:
+              <br />
               <a href="https://boundaryml.com/discord">boundaryml.com/discord</a>
             </li>
             <li className="spaced">
