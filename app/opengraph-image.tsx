@@ -1,25 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-import { ImageResponse } from 'next/og';
 import {
-  BaseLayout,
   contentType,
+  renderTitleImage,
   size,
-} from '@/components/shared-images/base-layout';
-import { Title } from '@/components/shared-images/title';
+} from '@/components/shared-images/render';
 
 export { size, contentType };
 
 export default function Image() {
-  const baseLayout = BaseLayout({
-    children: (
-      <Title
-        subtitle="Build, test, and develop LLM applications."
-        title="Boundary"
-      />
-    ),
-  });
-
-  return new ImageResponse(baseLayout, {
-    ...size,
+  return renderTitleImage({
+    title: 'Boundary',
+    subtitle: 'Build, test, and develop LLM applications.',
   });
 }

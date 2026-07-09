@@ -97,11 +97,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const baseUrl = process.env.SITE_URL || 'https://boundaryml.com';
   const episodeUrl = `${baseUrl}/podcast/${episode.slug}`;
 
-  // Extract YouTube thumbnail if available
+  // Use YouTube thumbnail when available; otherwise fall through to the
+  // generated opengraph-image.tsx in this route so each episode gets a
+  // titled, branded card instead of the default purple background.
   const videoId = episode.youtubeUrl ? getYouTubeVideoId(episode.youtubeUrl) : null;
-  const thumbnailUrl = videoId
+  const youtubeThumbnail = videoId
     ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-    : `${baseUrl}/baml-og-background.png`; // Fallback to default image
+    : null;
 
   const fullTitle = `🦄 ai that works: ${episode.title} | BAML Podcast`;
   const fullDescription = `${episode.episodeNumber}: ${episode.description}`;
@@ -120,14 +122,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       siteName: 'BAML',
       type: 'article',
       publishedTime: episode.date,
-      images: [
-        {
-          url: thumbnailUrl,
-          width: 1280,
-          height: 720,
-          alt: `${episode.title} - Episode ${episode.episodeNumber}`,
-        },
-      ],
+      ...(youtubeThumbnail && {
+        images: [
+          {
+            url: youtubeThumbnail,
+            width: 1280,
+            height: 720,
+            alt: `${episode.title} - Episode ${episode.episodeNumber}`,
+          },
+        ],
+      }),
       videos: videoId ? [
         {
           url: `https://www.youtube.com/watch?v=${videoId}`,
@@ -142,7 +146,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       card: 'summary_large_image',
       title: fullTitle,
       description: fullDescription,
-      images: [thumbnailUrl],
+      ...(youtubeThumbnail && { images: [youtubeThumbnail] }),
       creator: '@boundaryml',
       site: '@boundaryml',
     },

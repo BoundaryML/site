@@ -8,7 +8,7 @@ export { size, contentType };
 
 export default function Image() {
   return renderTitleImage({
-    title: 'BAML',
-    subtitle: 'Code that agents write. Software that humans trust.',
+    title: 'Solutions',
+    subtitle: 'Build AI agents, workflows, and production systems with BAML.',
   });
 }

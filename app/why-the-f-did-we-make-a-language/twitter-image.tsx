@@ -8,7 +8,7 @@ export { size, contentType };
 
 export default function Image() {
   return renderTitleImage({
-    title: 'BAML',
-    subtitle: 'Code that agents write. Software that humans trust.',
+    title: 'Why the f*** did we make a language?',
+    subtitle: 'Because prompt engineering hell had to end.',
   });
 }
